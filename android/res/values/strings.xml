@@ -5,4 +5,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <!-- sign in activity -->
+    <string name="usernameTextHintSignInActivity">Username</string>
+    <string name="passwordTextHintSignInActivity">Password</string>
+    <string name="signinButtonTextSignInActivity">Sign in</string>
+    <string name="registerButtonTextHintSignInActivity">Register</string>
+    
 </resources>
