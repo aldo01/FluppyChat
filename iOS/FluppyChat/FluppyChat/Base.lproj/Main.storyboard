@@ -51,6 +51,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="f4y-EL-pvI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -72,6 +75,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="zfh-Qp-O8S"/>
                     <connections>
+                        <outlet property="loginTextField" destination="CKi-4x-UGB" id="cJT-Cd-Kda"/>
+                        <outlet property="passwordField" destination="dpd-NM-lKh" id="K4R-Ee-oSQ"/>
                         <segue destination="9dV-BM-9I5" kind="show" identifier="loginSuccess" id="wSv-Zo-sWj"/>
                     </connections>
                 </viewController>
@@ -97,10 +102,10 @@
             </objects>
             <point key="canvasLocation" x="292" y="1043"/>
         </scene>
-        <!--View Controller-->
+        <!--Register View Controller-->
         <scene sceneID="sIv-Dp-6fq">
             <objects>
-                <viewController id="Q5z-g5-dbc" sceneMemberID="viewController">
+                <viewController id="Q5z-g5-dbc" customClass="RegisterViewController" customModule="FluppyChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mo5-dd-OuD"/>
                         <viewControllerLayoutGuide type="bottom" id="dPU-H6-b9I"/>
@@ -108,8 +113,39 @@
                     <view key="view" contentMode="scaleToFill" id="BjR-6E-N6M">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yyn-Zr-Br6">
+                                <rect key="frame" x="16" y="72" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcn-7j-EhW">
+                                <rect key="frame" x="16" y="110" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p4o-D6-3uQ">
+                                <rect key="frame" x="16" y="148" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-8y-QiF">
+                                <rect key="frame" x="272" y="186" width="57" height="30"/>
+                                <state key="normal" title="Register">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerAction" destination="Q5z-g5-dbc" eventType="touchUpInside" id="D2K-62-1iC"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="emailField" destination="qcn-7j-EhW" id="DHF-Gw-Zkp"/>
+                        <outlet property="loginField" destination="Yyn-Zr-Br6" id="WU8-Xv-8BE"/>
+                        <outlet property="passwordField" destination="p4o-D6-3uQ" id="MbM-dO-9Uu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="19B-2E-dSC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
