@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0CD3B1B0-C3F5-4E9A-8FEB-5F85AB63A194</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FluppyChat</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>16BBD380B10A7EEE5B302FE8FD3F0A0A7270B86B</key>
+		<string>https://github.com/Rommanski/FluppyChat.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iOS/FluppyChat/FluppyChat.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>16BBD380B10A7EEE5B302FE8FD3F0A0A7270B86B</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Rommanski/FluppyChat.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>16BBD380B10A7EEE5B302FE8FD3F0A0A7270B86B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>16BBD380B10A7EEE5B302FE8FD3F0A0A7270B86B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FluppyChat</string>
+		</dict>
+	</array>
+</dict>
+</plist>
