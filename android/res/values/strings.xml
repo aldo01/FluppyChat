@@ -4,6 +4,10 @@
     <string name="app_name">FluppyChat</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    <!-- PARSE CONSTATNTS -->
+    <string name="parseApplicationId">fYiaMJQcSGKjQB3AwhpGmpFoBvE8UiLJAAQMGKjh</string>
+    <string name="parseClientKey">t5lfmPcRZjfRHnBGlPYS984ahstd1nHriMdirpA9</string>
 
     <!-- sign in activity -->
     <string name="usernameTextHintSignInActivity">Username</string>
