@@ -1,5 +1,6 @@
 package com.painted.eggs.fluppychat;
 
+import com.painted.eggs.fluppychat.sinch.MessageService;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -75,8 +76,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			        if ( null != user ) {
 			        	Log.d("USER", "user is defined");
 			        	// open list view activity
-				    	Intent i = new Intent(MainActivity.this, ListFrendActivity.class);
-			        	Toast.makeText(getApplicationContext(), "login", Toast.LENGTH_SHORT).show();
+				    	final Intent i = new Intent(MainActivity.this, ListFrendActivity.class);
+			        	final Intent serviceIntent = new Intent(getApplicationContext(), MessageService.class);
+			        	
+			        	startService(serviceIntent);
 				    	startActivity(i);
 			        } else {
 			        	Log.d("USER", "user is not defined");
