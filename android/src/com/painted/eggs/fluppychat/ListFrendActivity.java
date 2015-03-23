@@ -17,12 +17,16 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class ListFrendActivity extends Activity {
 	private ListView frendsListView;
+	ParseUser [] userList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,14 @@ public class ListFrendActivity extends Activity {
 	
 	private void initUi() {
 		frendsListView = (ListView) findViewById(R.id.frendsListViewListFrendsActivity);
+		frendsListView.setOnItemClickListener( new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				openConversation( position );				
+			}	
+		} );
 		
 		final ProgressDialog progressDialog = new ProgressDialog(this);
 		progressDialog.setTitle("Loading");
@@ -67,13 +79,12 @@ public class ListFrendActivity extends Activity {
 			@Override
 			public void done(List<ParseObject> list, ParseException e) {
 		        if (e == null) {
-		        	ParseUser userList[] = new ParseUser[ list.size() ];
+		        	userList = new ParseUser[ list.size() ];
 		        	int i = 0;
 		            for ( ParseObject obj : list ) {
 		            	userList[i] = (ParseUser) obj.get("friend");
-		            			            	
-		            	i++;
-		            	Log.d("Object:", obj.toString() );
+		            	Log.d("Object:", userList[i].toString() );	            	
+		            	i++;		            	
 		            }
 		            
 		            updateFrendsList(userList);
@@ -88,9 +99,8 @@ public class ListFrendActivity extends Activity {
 	private void updateFrendsList( ParseUser [] userList ) {
 		String name[] = new String[ userList.length ];
 		for ( int i = 0; i < userList.length; i++ ) {
-			//name[i] = userList[i].getUsername();
-			name[i] = "123";
-			
+			name[i] = userList[i].getObjectId();
+			//name[i] = "123";
 		}
 		
 		// create adapter
@@ -99,5 +109,11 @@ public class ListFrendActivity extends Activity {
 
 	    // присваиваем адаптер списку
 	    frendsListView.setAdapter(adapter);
+	}
+	
+	public void openConversation( int pos ) {
+	    Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
+        intent.putExtra("RECIPIENT_ID", userList[pos].getObjectId() );
+        startActivity(intent);
 	}
 }
