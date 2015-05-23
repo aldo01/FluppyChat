@@ -12,6 +12,9 @@ import com.parse.ParseUser;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class SearchPeopleActivity extends Activity {
@@ -54,8 +57,40 @@ public class SearchPeopleActivity extends Activity {
 		
 		cellAdapter = new ParseUserAdapter( getApplicationContext(), userList);
 		myList.setAdapter( cellAdapter );
+		myList.setOnItemClickListener( clickListener );
 	}
 	
-	
+	/**
+	 * Create room with user
+	 */
+	AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            createRoom( userList.get(position) );
+        }
+    };
+    
+    /**
+     * Create new room and add to them 2 people: me and selected user
+     * 
+     * @param user - user for new message
+     */
+    private void createRoom( ParseUser user ) {
+    	ParseObject room = new ParseObject( "Room" );
+    	room.put( "Creator", ParseUser.getCurrentUser() );
+    	room.saveInBackground();
+    	
+    	ParseObject obj1 = new ParseObject( "PeopleInRoom" );
+    	obj1.put("people", ParseUser.getCurrentUser());
+    	obj1.put("room", room);
+    	obj1.saveInBackground();
+    	
+    	ParseObject obj2 = new ParseObject( "PeopleInRoom" );
+    	obj2.put("people", user );
+    	obj2.put("room", room);
+    	obj2.saveInBackground();
+    	
+    	finish();
+    }
 	
 }
