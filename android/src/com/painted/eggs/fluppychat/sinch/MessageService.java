@@ -1,5 +1,6 @@
 package com.painted.eggs.fluppychat.sinch;
 
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.sinch.android.rtc.ClientRegistration;
 import com.sinch.android.rtc.Sinch;
@@ -123,9 +124,25 @@ public class MessageService extends Service implements SinchClientListener {
     }
     //public interface for ListUsersActivity & MessagingActivity
     public class MessageServiceInterface extends Binder {
+    	private void saveMessageInParse( String userId, String body ) {
+    		
+    		ParseObject textMessage = new ParseObject("Message");
+    		textMessage.put( "text", body );
+    		textMessage.saveInBackground();
+    		
+    		ParseObject pigeon = new ParseObject("Pigeon");
+    		textMessage.put( "from", ParseUser.getCurrentUser() );
+    		textMessage.put( "to", userId );
+    		textMessage.put( "message", body );
+    		pigeon.saveInBackground();
+    		
+    	}
+    	
         public void sendMessage(String recipientUserId, String textBody) {
             MessageService.this.sendMessage(recipientUserId, textBody);
+            saveMessageInParse( recipientUserId, textBody ) ;
         }
+        
         public void addMessageClientListener(MessageClientListener listener) {
             MessageService.this.addMessageClientListener(listener);
         }

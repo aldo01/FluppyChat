@@ -10,11 +10,14 @@
 	    android:orientation="horizontal" >
 	    
         <EditText 
+            android:id="@+id/nameEditTextMyRoomsActivity"
             android:layout_width="0dp"
 	    	android:layout_height="wrap_content"
-	    	android:layout_weight="0.8"/>
+	    	android:layout_weight="0.8"
+	    	android:hint="Name"/>
         
         <Button
+            android:id="@+id/serchButtonMyRoomsActivity"
             android:layout_width="0dp"
 	    	android:layout_height="wrap_content"
 	    	android:layout_weight="0.2" />

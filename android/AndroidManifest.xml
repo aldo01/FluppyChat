@@ -37,6 +37,10 @@
             android:name=".MessagingActivity"
             android:label="@string/app_name"/>
         
+        <activity
+            android:name=".SearchPeopleActivity"
+            android:label="@string/app_name"/>
+        
         <service android:enabled="true" android:name="com.painted.eggs.fluppychat.sinch.MessageService" />
         
     </application>

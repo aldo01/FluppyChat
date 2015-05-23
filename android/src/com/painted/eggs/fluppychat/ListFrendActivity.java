@@ -21,12 +21,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ListFrendActivity extends Activity {
+public class ListFrendActivity extends Activity implements View.OnClickListener {
 	private ListView frendsListView;
 	ParseUser [] userList;
+	
+	private EditText loginEditText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,11 @@ public class ListFrendActivity extends Activity {
 				openConversation( position );				
 			}	
 		} );
+		
+		loginEditText = (EditText) findViewById(R.id.nameEditTextMyRoomsActivity);
+		
+		final Button serchButton = (Button) findViewById( R.id.serchButtonMyRoomsActivity );
+		serchButton.setOnClickListener( this );
 		
 		final ProgressDialog progressDialog = new ProgressDialog(this);
 		progressDialog.setTitle("Loading");
@@ -115,5 +124,20 @@ public class ListFrendActivity extends Activity {
 	    Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
         intent.putExtra("RECIPIENT_ID", userList[pos].getObjectId() );
         startActivity(intent);
+	}
+
+	@Override
+	public void onClick(View v) {
+		
+		switch( v.getId() ) {
+		case R.id.serchButtonMyRoomsActivity:
+			
+			final Intent searchPeopleIntent = new Intent( ListFrendActivity.this, SearchPeopleActivity.class );
+			searchPeopleIntent.putExtra("login", loginEditText.getText().toString() );
+			startActivity( searchPeopleIntent );
+			
+			break;
+		}
+		
 	}
 }
