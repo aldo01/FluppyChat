@@ -1,7 +1,10 @@
 package com.painted.eggs.fluppychat;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.painted.eggs.fluppychat.adapters.ParseUserAdapter;
+import com.painted.eggs.fluppychat.adapters.RoomAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -28,7 +31,8 @@ import android.widget.Toast;
 
 public class ListFrendActivity extends Activity implements View.OnClickListener {
 	private ListView frendsListView;
-	ParseUser [] userList;
+	List<ParseObject> roomList = new ArrayList<ParseObject>();
+	RoomAdapter cellAdapter;
 	
 	private EditText loginEditText;
 
@@ -38,19 +42,11 @@ public class ListFrendActivity extends Activity implements View.OnClickListener 
 		setContentView(R.layout.list_frends_activity);
 		
 		initUi();
+		initListView();
 		loadFrendList();
 	}
 	
 	private void initUi() {
-		frendsListView = (ListView) findViewById(R.id.frendsListViewListFrendsActivity);
-		frendsListView.setOnItemClickListener( new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				openConversation( position );				
-			}	
-		} );
 		
 		loginEditText = (EditText) findViewById(R.id.nameEditTextMyRoomsActivity);
 		
@@ -79,26 +75,47 @@ public class ListFrendActivity extends Activity implements View.OnClickListener 
 		LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("com.sinch.messagingtutorial.app.ListUsersActivity"));
 	}
 	
+	/**
+	 * Init list view.
+	 * Show all user rooms
+	 */			
+	private void initListView() {
+		ListView myList = (ListView) findViewById(R.id.frendsListViewListFrendsActivity);
+		
+		cellAdapter = new RoomAdapter( getApplicationContext(), roomList );
+		myList.setAdapter( cellAdapter );
+		myList.setOnItemClickListener( clickListener );
+	}
+	
+	/**
+	 * Create room with user
+	 */
+	AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            
+        }
+    };
+	
 	private void loadFrendList() {
-		ParseQuery<ParseObject> query = ParseQuery.getQuery("relationship");
-		query.whereEqualTo("owner", ParseUser.getCurrentUser());
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
+		query.whereEqualTo("people", ParseUser.getCurrentUser() );
 		
 		query.findInBackground(new FindCallback<ParseObject>() {
 			
 			@Override
 			public void done(List<ParseObject> list, ParseException e) {
 		        if (e == null) {
-		        	userList = new ParseUser[ list.size() ];
-		        	int i = 0;
+		        	
 		            for ( ParseObject obj : list ) {
-		            	userList[i] = (ParseUser) obj.get("friend");
-		            	Log.d("Object:", userList[i].toString() );	            	
-		            	i++;		            	
+		            	// roomList.add(obj);
+		            	cellAdapter.add(obj);	            	
 		            }
 		            
-		            updateFrendsList(userList);
+		            
 		        } else {
 		            Log.d("score", "Error: " + e.getMessage());
+		            e.printStackTrace();
 		        }
 			}
 		});
@@ -120,11 +137,11 @@ public class ListFrendActivity extends Activity implements View.OnClickListener 
 	    frendsListView.setAdapter(adapter);
 	}
 	
-	public void openConversation( int pos ) {
+/*	public void openConversation( int pos ) {
 	    Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
         intent.putExtra("RECIPIENT_ID", userList[pos].getObjectId() );
         startActivity(intent);
-	}
+	}*/
 
 	@Override
 	public void onClick(View v) {
