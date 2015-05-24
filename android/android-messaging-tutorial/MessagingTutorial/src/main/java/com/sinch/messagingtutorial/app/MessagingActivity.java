@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -23,10 +24,13 @@ import com.sinch.android.rtc.messaging.MessageDeliveryInfo;
 import com.sinch.android.rtc.messaging.MessageFailureInfo;
 import com.sinch.android.rtc.messaging.WritableMessage;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MessagingActivity extends Activity {
+    static public ParseObject room;
 
     private String recipientId;
     private EditText messageBodyField;
@@ -38,10 +42,13 @@ public class MessagingActivity extends Activity {
     private ServiceConnection serviceConnection = new MyServiceConnection();
     private MessageClientListener messageClientListener = new MyMessageClientListener();
 
+    private List<ParseUser> companionList = new ArrayList<ParseUser>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.messaging);
+        loadCompanions();
 
         bindService(new Intent(this, MessageService.class), serviceConnection, BIND_AUTO_CREATE);
 
@@ -60,6 +67,33 @@ public class MessagingActivity extends Activity {
             @Override
             public void onClick(View view) {
                 sendMessage();
+            }
+        });
+    }
+
+    /**
+     * Load all users from this room
+     */
+    private void loadCompanions() {
+        if ( null == room ) {
+            Log.d("MESSAGING", "room is null");
+        }
+        Log.d( "MESSAGING", "room not null" );
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
+        query.whereEqualTo("room", room );
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, com.parse.ParseException e) {
+                if (e == null) {
+                    for ( ParseObject o : list) {
+                        ParseUser u = o.getParseUser("people");
+                        companionList.add( u );
+                        Log.d( "MESSAGING", String.format( "Add people id:%s", u.getObjectId() ));
+                    }
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
             }
         });
     }
@@ -88,6 +122,8 @@ public class MessagingActivity extends Activity {
         });
     }
 
+
+
     private void sendMessage() {
         messageBody = messageBodyField.getText().toString();
         if (messageBody.isEmpty()) {
@@ -95,7 +131,18 @@ public class MessagingActivity extends Activity {
             return;
         }
 
-        messageService.sendMessage(recipientId, messageBody);
+        for ( ParseUser u : companionList ) {
+            Log.d("MESSAGE", String.format("%s to %s", messageBody, u.getObjectId()));
+            messageService.sendMessage(u.getObjectId(), messageBody);
+        }
+
+        // save message in parse
+        ParseObject gameScore = new ParseObject("Message");
+        gameScore.put("User", ParseUser.getCurrentUser() );
+        gameScore.put("Room", room );
+        gameScore.put("Text", messageBody );
+        gameScore.saveInBackground();
+
         messageBodyField.setText("");
     }
 
@@ -128,9 +175,11 @@ public class MessagingActivity extends Activity {
 
         @Override
         public void onIncomingMessage(MessageClient client, Message message) {
-            if (message.getSenderId().equals(recipientId)) {
-                WritableMessage writableMessage = new WritableMessage(message.getRecipientIds().get(0), message.getTextBody());
-                messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_INCOMING);
+            for ( ParseUser u : companionList ) {
+                if (message.getSenderId().equals(u.getObjectId())) {
+                    WritableMessage writableMessage = new WritableMessage(message.getRecipientIds().get(0), message.getTextBody());
+                    messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_INCOMING);
+                }
             }
         }
 
