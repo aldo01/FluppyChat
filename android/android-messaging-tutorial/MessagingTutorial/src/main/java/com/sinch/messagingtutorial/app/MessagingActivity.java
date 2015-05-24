@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -112,17 +113,15 @@ public class MessagingActivity extends Activity {
                     for (int i = 0; i < messageList.size(); i++) {
                         WritableMessage message = new WritableMessage(messageList.get(i).get("recipientId").toString(), messageList.get(i).get("messageText").toString());
                         if (messageList.get(i).get("senderId").toString().equals(currentUserId)) {
-                            messageAdapter.addMessage(message, MessageAdapter.DIRECTION_OUTGOING);
+                            // messageAdapter.addMessage(message, MessageAdapter.DIRECTION_OUTGOING);
                         } else {
-                            messageAdapter.addMessage(message, MessageAdapter.DIRECTION_INCOMING);
+                            // messageAdapter.addMessage(message, MessageAdapter.DIRECTION_INCOMING);
                         }
                     }
                 }
             }
         });
     }
-
-
 
     private void sendMessage() {
         messageBody = messageBodyField.getText().toString();
@@ -177,8 +176,16 @@ public class MessagingActivity extends Activity {
         public void onIncomingMessage(MessageClient client, Message message) {
             for ( ParseUser u : companionList ) {
                 if (message.getSenderId().equals(u.getObjectId())) {
+                    String name = "";
+                    try {
+                        name = u.fetchIfNeeded().getString("username");
+                    } catch (com.parse.ParseException e) {
+                        Log.v("PARSE_ERROR", e.toString());
+                        e.printStackTrace();
+                    }
+
                     WritableMessage writableMessage = new WritableMessage(message.getRecipientIds().get(0), message.getTextBody());
-                    messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_INCOMING);
+                    messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_INCOMING, name );
                 }
             }
         }
@@ -203,7 +210,7 @@ public class MessagingActivity extends Activity {
                             parseMessage.put("sinchId", writableMessage.getMessageId());
                             parseMessage.saveInBackground();
 
-                            messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_OUTGOING);
+                            messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_OUTGOING, ParseUser.getCurrentUser().getUsername() );
                         }
                     }
                 }
