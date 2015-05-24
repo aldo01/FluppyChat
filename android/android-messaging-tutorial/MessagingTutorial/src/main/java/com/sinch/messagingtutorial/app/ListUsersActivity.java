@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ import com.sinch.messagingtutorial.app.Adapters.RoomAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListUsersActivity extends Activity {
+public class ListUsersActivity extends Activity implements View.OnClickListener {
 
     private String currentUserId;
     private ArrayAdapter<String> namesArrayAdapter;
@@ -36,6 +37,7 @@ public class ListUsersActivity extends Activity {
     private ProgressDialog progressDialog;
     private BroadcastReceiver receiver = null;
 
+    private EditText loginEditText;
     List<ParseObject> roomList = new ArrayList<ParseObject>();
     RoomAdapter cellAdapter;
 
@@ -46,7 +48,15 @@ public class ListUsersActivity extends Activity {
 
         initListView();
         showSpinner();
+        initUI();
 
+    }
+
+    private void initUI() {
+        final Button serachButton = (Button) findViewById( R.id.findFriendButton );
+        serachButton.setOnClickListener( this );
+
+        loginEditText = (EditText) findViewById( R.id.userNameEditText );
         logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +162,21 @@ public class ListUsersActivity extends Activity {
         };
 
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("com.sinch.messagingtutorial.app.ListUsersActivity"));
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch( v.getId() ) {
+            case R.id.findFriendButton:
+
+                final Intent searchPeopleIntent = new Intent( ListUsersActivity.this, SearchPeopleActivity.class );
+                searchPeopleIntent.putExtra("login", loginEditText.getText().toString() );
+                startActivity( searchPeopleIntent );
+
+                break;
+        }
+
     }
 
     @Override

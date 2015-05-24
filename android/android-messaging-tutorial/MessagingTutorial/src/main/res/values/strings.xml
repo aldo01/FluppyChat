@@ -11,4 +11,7 @@
     <string name="message_elipses">Message...</string>
     <string name="logout">Logout</string>
 
+    <!-- SERACH FREND ACTIVITY -->
+    <string name="searchFriendTopButton">Touch For Create Room</string>
+
 </resources>

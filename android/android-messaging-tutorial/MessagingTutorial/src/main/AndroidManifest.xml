@@ -20,14 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity 
             android:name=".ListUsersActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"/>
+
         <service android:name=".MessageService"></service>
+
         <activity android:name=".MessagingActivity"
-                  android:screenOrientation="portrait">
-        </activity>
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".SearchPeopleActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
