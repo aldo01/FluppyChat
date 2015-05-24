@@ -70,9 +70,6 @@ public class RoomAdapter extends ArrayAdapter<ParseObject> {
             }
         });
 
-
-
-
         return rowView;
     }
 }

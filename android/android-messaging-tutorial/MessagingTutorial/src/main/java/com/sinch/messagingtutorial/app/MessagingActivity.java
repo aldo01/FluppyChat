@@ -33,13 +33,11 @@ import java.util.List;
 public class MessagingActivity extends Activity {
     static public ParseObject room;
 
-    private String recipientId;
     private EditText messageBodyField;
     private String messageBody;
     private MessageService.MessageServiceInterface messageService;
     private MessageAdapter messageAdapter;
     private ListView messagesList;
-    private String currentUserId;
     private ServiceConnection serviceConnection = new MyServiceConnection();
     private MessageClientListener messageClientListener = new MyMessageClientListener();
 
@@ -53,14 +51,10 @@ public class MessagingActivity extends Activity {
 
         bindService(new Intent(this, MessageService.class), serviceConnection, BIND_AUTO_CREATE);
 
-        Intent intent = getIntent();
-        recipientId = intent.getStringExtra("RECIPIENT_ID");
-        currentUserId = ParseUser.getCurrentUser().getObjectId();
-
         messagesList = (ListView) findViewById(R.id.listMessages);
         messageAdapter = new MessageAdapter(this);
         messagesList.setAdapter(messageAdapter);
-        populateMessageHistory();
+
 
         messageBodyField = (EditText) findViewById(R.id.messageBodyField);
 
@@ -92,6 +86,8 @@ public class MessagingActivity extends Activity {
                         companionList.add( u );
                         Log.d( "MESSAGING", String.format( "Add people id:%s", u.getObjectId() ));
                     }
+
+                    populateMessageHistory();
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
@@ -101,23 +97,46 @@ public class MessagingActivity extends Activity {
 
     //get previous messages from parse & display
     private void populateMessageHistory() {
-        String[] userIds = {currentUserId, recipientId};
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseMessage");
-        query.whereContainedIn("senderId", Arrays.asList(userIds));
-        query.whereContainedIn("recipientId", Arrays.asList(userIds));
+        String [] id = new String[ companionList.size() ];
+        int i = 0;
+        for ( ParseUser u : companionList ) {
+            id[i++] = u.getObjectId();
+        }
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Message");
+        query.whereContainedIn("User", companionList );
+        query.whereEqualTo("Room", room );
         query.orderByAscending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> messageList, com.parse.ParseException e) {
                 if (e == null) {
-                    for (int i = 0; i < messageList.size(); i++) {
-                        WritableMessage message = new WritableMessage(messageList.get(i).get("recipientId").toString(), messageList.get(i).get("messageText").toString());
-                        if (messageList.get(i).get("senderId").toString().equals(currentUserId)) {
-                            // messageAdapter.addMessage(message, MessageAdapter.DIRECTION_OUTGOING);
+                    String currentUserId = ParseUser.getCurrentUser().getObjectId();
+                    Log.d( "RESPONSE", String.format( "Get message history: %d", messageList.size() ) );
+
+                    for ( ParseObject obj : messageList ) {
+                        String name = "";
+                        String text = obj.getString("Text");
+
+                        try {
+                            ParseUser u = obj.getParseUser( "User" );
+                            name = u.fetchIfNeeded().getString("username");
+                        } catch (com.parse.ParseException er) {
+                            Log.v("PARSE_ERROR", e.toString());
+                            er.printStackTrace();
+                        }
+
+                        Log.d( "MESSAGE", String.format( "MESSAGE: %s by %s", text, name ) );
+                        WritableMessage message = new WritableMessage( obj.getObjectId(), text );
+                        if (  obj.getParseObject("User").getObjectId().equals(currentUserId)) {
+                            messageAdapter.addMessage(message, MessageAdapter.DIRECTION_OUTGOING, name);
                         } else {
-                            // messageAdapter.addMessage(message, MessageAdapter.DIRECTION_INCOMING);
+                            messageAdapter.addMessage(message, MessageAdapter.DIRECTION_INCOMING, name);
                         }
                     }
+                } else {
+                    e.printStackTrace();
+                    Log.e( "RESPONSE", "Incorrect response" );
                 }
             }
         });
@@ -196,6 +215,7 @@ public class MessagingActivity extends Activity {
             final WritableMessage writableMessage = new WritableMessage(message.getRecipientIds().get(0), message.getTextBody());
 
             //only add message to parse database if it doesn't already exist there
+           /*
             ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseMessage");
             query.whereEqualTo("sinchId", message.getMessageId());
             query.findInBackground(new FindCallback<ParseObject>() {
@@ -215,6 +235,7 @@ public class MessagingActivity extends Activity {
                     }
                 }
             });
+            */
         }
 
         @Override
