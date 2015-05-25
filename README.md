@@ -20,5 +20,5 @@ The main part of messaging app is messaging activity. Here you can see how he lo
 ![alt tag](https://lh3.googleusercontent.com/-a288vR51UYs/VWNoYVKijaI/AAAAAAAAETQ/KoDfv8DEVJo/w325-h520-no/Screenshot_2015-05-25-00-18-31.jpg)
 
 <p align="center">
-**By @Romanski 2015**
+By @Romanski 2015
 </p>
