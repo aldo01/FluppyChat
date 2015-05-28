@@ -25,13 +25,14 @@ public class SearchPeopleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.search_people_layout );
 
-        String login = "lera";
+        String login = " ";
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             login = extras.getString("login");
         }
 
         initListView();
+        // ask server about user with name "login"
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", login);
         query.findInBackground(new FindCallback<ParseUser>() {
@@ -74,6 +75,7 @@ public class SearchPeopleActivity extends Activity {
     private void createRoom( ParseUser user ) {
         ParseObject room = new ParseObject( "Room" );
         room.put( "Creator", ParseUser.getCurrentUser() );
+        room.put( "Name", String.format( "%s, %s", ParseUser.getCurrentUser().getUsername(), user.getUsername() ) );
         room.saveInBackground();
 
         ParseObject obj1 = new ParseObject( "PeopleInRoom" );

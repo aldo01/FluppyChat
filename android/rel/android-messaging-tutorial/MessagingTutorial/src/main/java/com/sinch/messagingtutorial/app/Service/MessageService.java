@@ -1,4 +1,4 @@
-package com.sinch.messagingtutorial.app;
+package com.sinch.messagingtutorial.app.Service;
 
 import android.app.Service;
 import android.content.Intent;

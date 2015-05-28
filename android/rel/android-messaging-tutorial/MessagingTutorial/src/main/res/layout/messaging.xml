@@ -4,6 +4,11 @@
                 android:layout_height="match_parent"
                 >
 
+    <com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
+        android:id="@+id/slidingmenulayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
     <ListView
             android:id="@+id/listMessages"
             android:layout_width="match_parent"

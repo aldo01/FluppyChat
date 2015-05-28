@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -38,37 +39,15 @@ public class RoomAdapter extends ArrayAdapter<ParseObject> {
 
         // set information in cell
         final TextView nameTextView = (TextView) rowView.findViewById( R.id.userListItem );
-        nameTextView.setText( "Friends" );
 
-        ParseObject obj = objLsit.get(position);
+        String name = "";
+        try {
+            name = objLsit.get(position).fetchIfNeeded().getString("Name");
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
-        query.whereEqualTo("room", obj);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, com.parse.ParseException e) {
-                if (e == null) {
-                    String title = "";
-
-                    for ( ParseObject o : list) {
-
-                        String name = "";
-                        try {
-                            ParseUser u = o.getParseUser("people");
-                            name = u.fetchIfNeeded().getString("username");
-                            title += name + ", ";
-                        } catch (com.parse.ParseException err) {
-                            Log.v("PARSE_ERROR", err.toString());
-                            e.printStackTrace();
-                        }
-                    }
-
-                    nameTextView.setText( title );
-                } else {
-                    Log.d("score", "Error: " + e.getMessage());
-                }
-            }
-        });
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        nameTextView.setText( name );
 
         return rowView;
     }

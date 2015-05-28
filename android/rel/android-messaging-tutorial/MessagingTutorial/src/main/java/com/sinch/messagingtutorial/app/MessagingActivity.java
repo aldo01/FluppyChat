@@ -13,10 +13,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.scottyab.aescrypt.AESCrypt;
 import com.sinch.android.rtc.PushPair;
 import com.sinch.android.rtc.messaging.Message;
 import com.sinch.android.rtc.messaging.MessageClient;
@@ -24,11 +24,14 @@ import com.sinch.android.rtc.messaging.MessageClientListener;
 import com.sinch.android.rtc.messaging.MessageDeliveryInfo;
 import com.sinch.android.rtc.messaging.MessageFailureInfo;
 import com.sinch.android.rtc.messaging.WritableMessage;
+import com.sinch.messagingtutorial.app.Adapters.MessageAdapter;
+import com.sinch.messagingtutorial.app.Feature.MyProgressDialog;
+import com.sinch.messagingtutorial.app.Service.MessageService;
 
-import java.text.ParseException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class MessagingActivity extends Activity {
     static public ParseObject room;
@@ -42,19 +45,20 @@ public class MessagingActivity extends Activity {
     private MessageClientListener messageClientListener = new MyMessageClientListener();
 
     private List<ParseUser> companionList = new ArrayList<ParseUser>();
+    String myName; // store current user name
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.messaging);
+
         loadCompanions();
 
         bindService(new Intent(this, MessageService.class), serviceConnection, BIND_AUTO_CREATE);
-
+        myName = ParseUser.getCurrentUser().getUsername();
         messagesList = (ListView) findViewById(R.id.listMessages);
         messageAdapter = new MessageAdapter(this);
         messagesList.setAdapter(messageAdapter);
-
 
         messageBodyField = (EditText) findViewById(R.id.messageBodyField);
 
@@ -74,6 +78,7 @@ public class MessagingActivity extends Activity {
             Log.d("MESSAGING", "room is null");
         }
         Log.d( "MESSAGING", "room not null" );
+        MyProgressDialog.start( this );
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
         query.whereEqualTo("room", room );
@@ -133,6 +138,8 @@ public class MessagingActivity extends Activity {
                         } else {
                             messageAdapter.addMessage(message, MessageAdapter.DIRECTION_INCOMING, name);
                         }
+
+                        MyProgressDialog.stop( );
                     }
                 } else {
                     e.printStackTrace();
@@ -149,16 +156,27 @@ public class MessagingActivity extends Activity {
             return;
         }
 
+        // encrypting message with AVC
+        String password = "password";
+        String encryptedMsg = "";
+        try {
+            encryptedMsg = AESCrypt.encrypt(password, messageBody);
+        }catch (GeneralSecurityException e){
+            e.printStackTrace();
+            Log.e( "ECNCRYPT_ERROR", "error ocqurence when encrypt message" );
+        //handle error
+        }
+
         for ( ParseUser u : companionList ) {
             Log.d("MESSAGE", String.format("%s to %s", messageBody, u.getObjectId()));
-            messageService.sendMessage(u.getObjectId(), messageBody);
+            messageService.sendMessage(u.getObjectId(), encryptedMsg );
         }
 
         // save message in parse
         ParseObject gameScore = new ParseObject("Message");
         gameScore.put("User", ParseUser.getCurrentUser() );
         gameScore.put("Room", room );
-        gameScore.put("Text", messageBody );
+        gameScore.put("Text", encryptedMsg );
         gameScore.saveInBackground();
 
         messageBodyField.setText("");
@@ -189,10 +207,20 @@ public class MessagingActivity extends Activity {
         public void onMessageFailed(MessageClient client, Message message,
                                     MessageFailureInfo failureInfo) {
             Toast.makeText(MessagingActivity.this, "Message failed to send.", Toast.LENGTH_LONG).show();
+            Log.e( "MESSAGE FAILED TO SEND", failureInfo.toString() );
         }
 
         @Override
         public void onIncomingMessage(MessageClient client, Message message) {
+
+            // get header and check room
+            Map<String, String> headers = message.getHeaders();
+            if ( headers.containsKey( "roomId" ) ) {
+                if ( !room.getObjectId().equals( headers.get( "roomId" ) ) ) {
+                    return;
+                }
+            }
+
             for ( ParseUser u : companionList ) {
                 if (message.getSenderId().equals(u.getObjectId())) {
                     String name = "";
@@ -211,35 +239,17 @@ public class MessagingActivity extends Activity {
 
         @Override
         public void onMessageSent(MessageClient client, Message message, String recipientId) {
-
             final WritableMessage writableMessage = new WritableMessage(message.getRecipientIds().get(0), message.getTextBody());
 
-            //only add message to parse database if it doesn't already exist there
-           /*
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseMessage");
-            query.whereEqualTo("sinchId", message.getMessageId());
-            query.findInBackground(new FindCallback<ParseObject>() {
-                @Override
-                public void done(List<ParseObject> messageList, com.parse.ParseException e) {
-                    if (e == null) {
-                        if (messageList.size() == 0) {
-                            ParseObject parseMessage = new ParseObject("ParseMessage");
-                            parseMessage.put("senderId", currentUserId);
-                            parseMessage.put("recipientId", writableMessage.getRecipientIds().get(0));
-                            parseMessage.put("messageText", writableMessage.getTextBody());
-                            parseMessage.put("sinchId", writableMessage.getMessageId());
-                            parseMessage.saveInBackground();
+            writableMessage.addHeader( "roomId", room.getObjectId() );
 
-                            messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_OUTGOING, ParseUser.getCurrentUser().getUsername() );
-                        }
-                    }
-                }
-            });
-            */
+            messageAdapter.addMessage( writableMessage, MessageAdapter.DIRECTION_OUTGOING, myName );
         }
 
         @Override
-        public void onMessageDelivered(MessageClient client, MessageDeliveryInfo deliveryInfo) {}
+        public void onMessageDelivered(MessageClient client, MessageDeliveryInfo deliveryInfo) {
+            Log.d( "MESSAGE", "onMessageDelivered" );
+        }
 
         @Override
         public void onShouldSendPushData(MessageClient client, Message message, List<PushPair> pushPairs) {}

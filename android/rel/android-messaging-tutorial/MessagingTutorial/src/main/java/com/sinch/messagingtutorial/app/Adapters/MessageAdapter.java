@@ -1,6 +1,7 @@
-package com.sinch.messagingtutorial.app;
+package com.sinch.messagingtutorial.app.Adapters;
 
 import android.app.Activity;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.scottyab.aescrypt.AESCrypt;
 import com.sinch.android.rtc.messaging.WritableMessage;
+import com.sinch.messagingtutorial.app.R;
 
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,8 +81,21 @@ public class MessageAdapter extends BaseAdapter {
 
         WritableMessage message = messages.get(i).first;
 
+        // decode message
+        String password = "password";
+        String messageAfterDecrypt = "";
+        try {
+            messageAfterDecrypt = AESCrypt.decrypt(password, message.getTextBody());
+        } catch (GeneralSecurityException e){
+            e.printStackTrace();
+            Log.e("DECODE_MESSAGE", "Error when decode message");
+        } catch ( Exception e ){
+            e.printStackTrace();
+            Log.e( "DECODE_MESSAGE", "Error when decode message" );
+        }
+
         TextView txtMessage = (TextView) convertView.findViewById(R.id.txtMessage);
-        txtMessage.setText(message.getTextBody());
+        txtMessage.setText( messageAfterDecrypt );
 
         TextView txtSender = (TextView) convertView.findViewById(R.id.txtSender);
         txtSender.setText( userName.get(i) );
