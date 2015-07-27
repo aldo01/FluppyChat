@@ -27,7 +27,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sinch.messagingtutorial.app.Adapters.RoomAdapter;
 import com.sinch.messagingtutorial.app.Feature.MyProgressDialog;
-import com.sinch.messagingtutorial.app.Service.MessageService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +43,7 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
 
     private EditText loginEditText;
     List<ParseObject> roomList = new ArrayList<ParseObject>();
+    List<ParseObject> converstationList = new ArrayList<ParseObject>();
     RoomAdapter cellAdapter;
 
     @Override
@@ -53,7 +53,6 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
 
         showSpinner();
         initUI();
-
     }
 
     private void initUI() {
@@ -65,7 +64,6 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopService(new Intent(getApplicationContext(), MessageService.class));
                 ParseUser.logOut();
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
@@ -92,7 +90,7 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
     AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            openConversation( roomList.get(position) );
+            openConversation( converstationList.get(position) );
         }
     };
 
@@ -180,9 +178,10 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
             cellAdapter.clear();
         }
 
-        MyProgressDialog.start( this );
+        MyProgressDialog.start(this);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
-        query.whereEqualTo("people", ParseUser.getCurrentUser() );
+        query.whereEqualTo("people", ParseUser.getCurrentUser());
+        query.include("room");
 
         query.findInBackground(new FindCallback<ParseObject>() {
 
@@ -190,8 +189,8 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
                     for ( ParseObject obj : list ) {
-                        ParseObject room = obj.getParseObject("room");
-                        roomList.add( room );
+                        roomList.add( obj );
+                        converstationList.add( obj.getParseObject("room") );
                     }
 
                     // init list
@@ -206,24 +205,7 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
     }
 
     //open a conversation with one person
-    public void openConversation( /*ArrayList<String> names, int pos, */ParseObject room) {
-        /*
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("username", names.get(pos));
-        query.findInBackground(new FindCallback<ParseUser>() {
-           public void done(List<ParseUser> user, com.parse.ParseException e) {
-               if (e == null) {
-                   Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
-                   intent.putExtra("RECIPIENT_ID", user.get(0).getObjectId());
-                   startActivity(intent);
-               } else {
-                   Toast.makeText(getApplicationContext(),
-                       "Error finding that user",
-                           Toast.LENGTH_SHORT).show();
-               }
-           }
-        });
-        */
+    public void openConversation( ParseObject room) {
 
         Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
         MessagingActivity.room = room;
@@ -254,7 +236,6 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
 
         switch( v.getId() ) {
             case R.id.findFriendButton:
-
                 final Intent searchPeopleIntent = new Intent( ListUsersActivity.this, SearchPeopleActivity.class );
                 searchPeopleIntent.putExtra("login", loginEditText.getText().toString() );
                 startActivity( searchPeopleIntent );

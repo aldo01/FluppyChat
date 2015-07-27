@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.scottyab.aescrypt.AESCrypt;
-import com.sinch.android.rtc.messaging.WritableMessage;
 import com.sinch.messagingtutorial.app.R;
+import com.sinch.messagingtutorial.app.Util.Decoder;
 
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -22,18 +22,18 @@ public class MessageAdapter extends BaseAdapter {
     public static final int DIRECTION_INCOMING = 0;
     public static final int DIRECTION_OUTGOING = 1;
 
-    private List<Pair<WritableMessage, Integer>> messages;
+    private List<Pair<String, Integer>> messages;
     private List<String> userName;
     private LayoutInflater layoutInflater;
 
     public MessageAdapter(Activity activity) {
         layoutInflater = activity.getLayoutInflater();
-        messages = new ArrayList<Pair<WritableMessage, Integer>>();
+        messages = new ArrayList<Pair<String, Integer>>();
         userName = new ArrayList<String>();
     }
 
-    public void addMessage(WritableMessage message, int direction, String name) {
-        messages.add(new Pair(message, direction));
+    public void addMessage(String text, int direction, String name) {
+        messages.add(new Pair(text, direction));
         userName.add( name );
         notifyDataSetChanged();
     }
@@ -79,20 +79,8 @@ public class MessageAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(res, viewGroup, false);
         }
 
-        WritableMessage message = messages.get(i).first;
-
-        // decode message
-        String password = "password";
-        String messageAfterDecrypt = "";
-        try {
-            messageAfterDecrypt = AESCrypt.decrypt(password, message.getTextBody());
-        } catch (GeneralSecurityException e){
-            e.printStackTrace();
-            Log.e("DECODE_MESSAGE", "Error when decode message");
-        } catch ( Exception e ){
-            e.printStackTrace();
-            Log.e( "DECODE_MESSAGE", "Error when decode message" );
-        }
+        String message = messages.get(i).first;
+        String messageAfterDecrypt = Decoder.decodeMessage(message  );
 
         TextView txtMessage = (TextView) convertView.findViewById(R.id.txtMessage);
         txtMessage.setText( messageAfterDecrypt );
