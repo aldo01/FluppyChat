@@ -38,8 +38,10 @@ public class RoomAdapter extends ArrayAdapter<ParseObject> {
         if ( pRoom.getBoolean("confirm") ) {
             rowView = inflater.inflate(R.layout.user_list_item, parent, false);
             // set information in cell
-            final TextView nameTextView = (TextView) rowView.findViewById( R.id.userListItem );
-//            nameTextView.setText( room.getString("Name") );
+            final TextView nameTextView = (TextView) rowView.findViewById( R.id.userListItemConfirmed );
+            if ( null != nameTextView ) {
+                nameTextView.setText( room.getString("Name") );
+            }
         } else {
             rowView = inflater.inflate(R.layout.user_list_confirm_item, parent, false);
 

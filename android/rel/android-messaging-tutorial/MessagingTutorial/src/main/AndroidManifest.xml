@@ -33,7 +33,7 @@
             android:value="id:53696595043" />;
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,16 +43,16 @@
         </activity>
 
         <activity 
-            android:name=".ListUsersActivity"
+            android:name=".Activity.ListUsersActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".MessagingActivity"
+        <activity android:name=".Activity.MessagingActivity"
                   android:screenOrientation="portrait"/>
 
-        <activity android:name=".SearchPeopleActivity"
+        <activity android:name=".Activity.SearchPeopleActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ShowPopUp"/>
+        <activity android:name=".Activity.ShowPopUp"/>
 
         <!-- NEED FOR PARSE GCM -->
 

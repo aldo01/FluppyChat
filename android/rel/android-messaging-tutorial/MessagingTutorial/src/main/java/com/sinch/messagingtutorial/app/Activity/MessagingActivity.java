@@ -1,8 +1,8 @@
-package com.sinch.messagingtutorial.app;
+package com.sinch.messagingtutorial.app.Activity;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -10,13 +10,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.scottyab.aescrypt.AESCrypt;
 import com.sinch.messagingtutorial.app.Adapters.MessageAdapter;
-import com.sinch.messagingtutorial.app.Feature.MyProgressDialog;
+import com.sinch.messagingtutorial.app.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,8 +43,12 @@ public class MessagingActivity extends Activity {
         super.onCreate(savedInstanceState);
         thisActivity = this;
         setContentView(R.layout.messaging);
-        loadCompanions();
 
+        initUI();
+        loadCompanions();
+    }
+
+    private void initUI() {
         myName = ParseUser.getCurrentUser().getUsername();
         ListView messagesList = (ListView) findViewById(R.id.listMessages);
         messageAdapter = new MessageAdapter(this);
@@ -63,12 +68,10 @@ public class MessagingActivity extends Activity {
      * Load all users from this room
      */
     private void loadCompanions() {
-        MyProgressDialog.start(this);
-
         ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
         query.whereEqualTo("room", room);
         query.include("people");
-        Log.d( "ROOM", room.toString() );
+        Log.d( "ROOM", room.getObjectId() );
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, com.parse.ParseException e) {
@@ -79,7 +82,7 @@ public class MessagingActivity extends Activity {
                         Log.d("MESSAGING", String.format("Add people id:%s", u.getObjectId()));
                     }
 
-                    populateMessageHistory();
+                    new DownloadMessageHistory().execute();
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
@@ -87,53 +90,12 @@ public class MessagingActivity extends Activity {
         });
     }
 
-    //get previous messages from parse & display
-    private void populateMessageHistory() {
-        String [] id = new String[ companionList.size() ];
-        int i = 0;
-        for ( ParseUser u : companionList ) {
-            id[i++] = u.getObjectId();
-        }
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Message");
-        query.whereContainedIn("User", companionList);
-        query.whereEqualTo("Room", room);
-        query.orderByAscending("createdAt");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> messageList, com.parse.ParseException e) {
-                if (e == null) {
-                    String currentUserId = ParseUser.getCurrentUser().getObjectId();
-
-                    for (ParseObject obj : messageList) {
-                        String name = "";
-                        String text = obj.getString("Text");
-
-                        try {
-                            ParseUser u = obj.getParseUser("User");
-                            name = u.fetchIfNeeded().getString("username");
-                        } catch (com.parse.ParseException er) {
-                            Log.v("PARSE_ERROR", e.toString());
-                            er.printStackTrace();
-                        }
-
-                        if (obj.getParseObject("User").getObjectId().equals(currentUserId)) {
-                            messageAdapter.addMessage(text, MessageAdapter.DIRECTION_OUTGOING, name);
-                        } else {
-                            messageAdapter.addMessage(text, MessageAdapter.DIRECTION_INCOMING, name);
-                        }
-
-                        MyProgressDialog.stop();
-                    }
-                } else {
-                    e.printStackTrace();
-                    Log.e("RESPONSE", "Incorrect response");
-                }
-            }
-        });
-    }
-
+    /**
+     * Save message in parse.
+     * Sent push notification to another user
+     */
     private void sendMessage() {
+        // detect message text
         String messageBody = messageBodyField.getText().toString();
         if (messageBody.isEmpty()) {
             Toast.makeText(this, "Please enter a message", Toast.LENGTH_LONG).show();
@@ -193,10 +155,62 @@ public class MessagingActivity extends Activity {
         }
     }
 
+    /**
+     * Download message history from parse and show them to user
+     */
+    private class DownloadMessageHistory extends AsyncTask {
+        private List<String> messageTextList = new ArrayList<String>();
+        private List<Integer> messageDirectionList = new ArrayList<Integer>();
+        private List<String> messageAuthorList = new ArrayList<String>();
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Message");
+            query.whereEqualTo("Room", room);
+            query.orderByAscending("createdAt");
+            try {
+                List<ParseObject> messageList = query.find();
+
+                String currentUserId = ParseUser.getCurrentUser().getObjectId();
+                // parse data from ParseObject and put them to list
+                for (ParseObject obj : messageList) {
+                    String name = "";
+                    String text = obj.getString("Text");
+
+                    try {
+                        ParseUser u = obj.getParseUser("User");
+                        name = u.fetchIfNeeded().getString("username");
+                    } catch (com.parse.ParseException er) {
+                        Log.v("PARSE_ERROR", "an error ocqurence");
+                        er.printStackTrace();
+                    }
+                    Log.d("message", "add messages");
+                    messageTextList.add(text);
+                    messageAuthorList.add(name);
+                    messageDirectionList.add(obj.getParseObject("User").getObjectId().equals(currentUserId) ? MessageAdapter.DIRECTION_OUTGOING : MessageAdapter.DIRECTION_INCOMING);
+                }
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+
+            // show messages
+            for (int i = 0; i < messageTextList.size(); i++) {
+                messageAdapter.addMessage(messageTextList.get(i), messageDirectionList.get(i), messageAuthorList.get(i));
+            }
+        }
+    }
+
     @Override
     protected void onStop() {
         thisActivity = null;
-
         super.onStop();
     }
 }

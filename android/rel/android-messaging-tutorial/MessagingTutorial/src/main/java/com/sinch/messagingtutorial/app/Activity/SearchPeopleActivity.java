@@ -1,4 +1,4 @@
-package com.sinch.messagingtutorial.app;
+package com.sinch.messagingtutorial.app.Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,12 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.sinch.messagingtutorial.app.Adapters.ParseUserAdapter;
+import com.sinch.messagingtutorial.app.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -80,15 +83,32 @@ public class SearchPeopleActivity extends Activity {
 
         ParseObject obj1 = new ParseObject( "PeopleInRoom" );
         obj1.put("people", ParseUser.getCurrentUser());
+        obj1.put("confirm", true);
         obj1.put("room", room);
-        obj1.saveInBackground();
+        obj1.saveEventually(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                // push success result
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("result", 1);
+                setResult(RESULT_OK, returnIntent);
+                finish();
+            }
+        });
 
         ParseObject obj2 = new ParseObject( "PeopleInRoom" );
         obj2.put("people", user );
+        obj2.put("confirm", false);
         obj2.put("room", room);
         obj2.saveInBackground();
 
-        finish();
+
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        setResult(RESULT_CANCELED, returnIntent);
+        finish();
+    }
 }

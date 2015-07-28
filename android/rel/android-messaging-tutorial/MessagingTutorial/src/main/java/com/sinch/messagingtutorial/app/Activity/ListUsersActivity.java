@@ -1,20 +1,14 @@
-package com.sinch.messagingtutorial.app;
+package com.sinch.messagingtutorial.app.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,20 +20,13 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.sinch.messagingtutorial.app.Adapters.RoomAdapter;
-import com.sinch.messagingtutorial.app.Feature.MyProgressDialog;
+import com.sinch.messagingtutorial.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListUsersActivity extends Activity implements View.OnClickListener {
-
-    private String currentUserId;
-    private ArrayAdapter<String> namesArrayAdapter;
-    private ArrayList<String> names;
-    private ListView usersListView;
-    private Button logoutButton;
-    private ProgressDialog progressDialog;
-    private BroadcastReceiver receiver = null;
+    static private final String TAG = "LIST_USER_ACTIVITY";
 
     private EditText loginEditText;
     List<ParseObject> roomList = new ArrayList<ParseObject>();
@@ -51,8 +38,15 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_users);
 
-        showSpinner();
         initUI();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if ( null == cellAdapter ) {
+            loadConversationsList();
+        }
     }
 
     private void initUI() {
@@ -60,7 +54,7 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
         serachButton.setOnClickListener( this );
 
         loginEditText = (EditText) findViewById( R.id.userNameEditText );
-        logoutButton = (Button) findViewById(R.id.logoutButton);
+        final Button logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,13 +166,10 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
     /**
      *  Display all room for user
      */
-    private void setConversationsList() {
-        if ( null != cellAdapter ) {
-            // clear list, if they was initialized before
-            cellAdapter.clear();
-        }
+    private void loadConversationsList() {
+        Log.d( TAG, "request for the friend list" );
+        if ( null != cellAdapter ) cellAdapter.clear();
 
-        MyProgressDialog.start(this);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
         query.whereEqualTo("people", ParseUser.getCurrentUser());
         query.include("room");
@@ -188,14 +179,13 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
             @Override
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
-                    for ( ParseObject obj : list ) {
-                        roomList.add( obj );
-                        converstationList.add( obj.getParseObject("room") );
+                    for (ParseObject obj : list) {
+                        roomList.add(obj);
+                        converstationList.add(obj.getParseObject("room"));
                     }
 
                     // init list
                     initListView();
-                    MyProgressDialog.stop();
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                     e.printStackTrace();
@@ -204,51 +194,39 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
         });
     }
 
-    //open a conversation with one person
+    /**
+     * Open converstation for room
+     *
+     * @param room - room that will be opened
+     */
     public void openConversation( ParseObject room) {
-
         Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
         MessagingActivity.room = room;
-        // intent.putExtra("RECIPIENT_ID", user.get(0).getObjectId());
         startActivity(intent);
     }
 
-    //show a loading spinner while the sinch client starts
-    private void showSpinner() {
-        MyProgressDialog.start( this );
-
-        receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Boolean success = intent.getBooleanExtra("success", false);
-                MyProgressDialog.stop( );
-                if (!success) {
-                    Toast.makeText(getApplicationContext(), "Messaging service failed to start", Toast.LENGTH_LONG).show();
-                }
-            }
-        };
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("com.sinch.messagingtutorial.app.ListUsersActivity"));
-    }
-
+    private final int OPEN_SEARCH_FRIEND_ACTIVITY = 1;
     @Override
     public void onClick(View v) {
-
         switch( v.getId() ) {
             case R.id.findFriendButton:
                 final Intent searchPeopleIntent = new Intent( ListUsersActivity.this, SearchPeopleActivity.class );
-                searchPeopleIntent.putExtra("login", loginEditText.getText().toString() );
-                startActivity( searchPeopleIntent );
+                searchPeopleIntent.putExtra("login", loginEditText.getText().toString());
+                startActivityForResult(searchPeopleIntent, OPEN_SEARCH_FRIEND_ACTIVITY);
 
                 break;
         }
-
     }
 
     @Override
-    public void onResume() {
-        setConversationsList();
-        super.onResume();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if ( OPEN_SEARCH_FRIEND_ACTIVITY == requestCode ) {
+            if ( RESULT_OK == resultCode ) {
+                loadConversationsList();
+            }
+        }
     }
 }
 

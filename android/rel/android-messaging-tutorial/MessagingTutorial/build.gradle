@@ -23,11 +23,12 @@ repositories {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:19.+'
     compile 'com.android.support:appcompat-v7:19.+'
-    compile files('libs/Parse-1.6.0.jar')
-    compile files('libs/sinch-android-rtc-3.3.5.jar')
     compile 'com.jeremyfeinstein.slidingmenu:library:1.3@aar'
     compile 'com.scottyab:aescrypt:0.0.1'
+    compile 'com.parse.bolts:bolts-android:1.+'
+    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
+    compile files('src/libs/Parse-1.9.4.jar')
 }

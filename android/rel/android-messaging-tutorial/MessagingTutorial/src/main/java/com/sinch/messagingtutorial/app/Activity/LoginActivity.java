@@ -1,4 +1,4 @@
-package com.sinch.messagingtutorial.app;
+package com.sinch.messagingtutorial.app.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.parse.LogInCallback;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.sinch.messagingtutorial.app.R;
 
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +16,6 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
-    private Button signUpButton;
-    private Button loginButton;
     private EditText usernameField;
     private EditText passwordField;
     private String username;
@@ -35,8 +34,8 @@ public class LoginActivity extends Activity {
 
         setContentView(R.layout.activity_login);
 
-        loginButton = (Button) findViewById(R.id.loginButton);
-        signUpButton = (Button) findViewById(R.id.signupButton);
+        Button loginButton = (Button) findViewById(R.id.loginButton);
+        Button signUpButton = (Button) findViewById(R.id.signupButton);
         usernameField = (EditText) findViewById(R.id.loginUsername);
         passwordField = (EditText) findViewById(R.id.loginPassword);
 
@@ -52,7 +51,7 @@ public class LoginActivity extends Activity {
                             startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(),
-                                "Wrong username/password combo",
+                                    "Wrong username/password combo",
                                     Toast.LENGTH_LONG).show();
                         }
                     }
@@ -77,7 +76,7 @@ public class LoginActivity extends Activity {
                             startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(),
-                                "There was an error signing up."
+                                    "There was an error signing up."
                                     , Toast.LENGTH_LONG).show();
                         }
                     }

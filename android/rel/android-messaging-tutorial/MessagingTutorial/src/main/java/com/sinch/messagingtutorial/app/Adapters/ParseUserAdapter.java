@@ -32,7 +32,7 @@ public class ParseUserAdapter extends ArrayAdapter<ParseUser> {
         ParseUser obj = userLsit.get(position);
         
         // set information in cell
-        final TextView nameTextView = (TextView) rowView.findViewById( R.id.userListItem );
+        final TextView nameTextView = (TextView) rowView.findViewById( R.id.userListItemConfirmed );
         nameTextView.setText( obj.getUsername() );
 
         return rowView;

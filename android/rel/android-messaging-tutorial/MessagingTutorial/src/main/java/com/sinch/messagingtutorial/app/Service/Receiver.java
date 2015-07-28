@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.parse.ParsePushBroadcastReceiver;
-import com.sinch.messagingtutorial.app.MessagingActivity;
+import com.sinch.messagingtutorial.app.Activity.MessagingActivity;
 import com.sinch.messagingtutorial.app.Util.Decoder;
 
 import org.json.JSONException;
