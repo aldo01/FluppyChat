@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A932A98B1B69761600291FCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A98A1B69761600291FCF /* AppDelegate.swift */; };
+		A932A98D1B69761600291FCF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A98C1B69761600291FCF /* ViewController.swift */; };
+		A932A9901B69761600291FCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A932A98E1B69761600291FCF /* Main.storyboard */; };
+		A932A9921B69761600291FCF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A932A9911B69761600291FCF /* Images.xcassets */; };
+		A932A9951B69761600291FCF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A932A9931B69761600291FCF /* LaunchScreen.xib */; };
+		A932A9A11B69761600291FCF /* FluppyChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A9A01B69761600291FCF /* FluppyChatTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A932A99B1B69761600291FCF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A932A97D1B69761600291FCF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A932A9841B69761600291FCF;
+			remoteInfo = FluppyChat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A932A9851B69761600291FCF /* FluppyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FluppyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A932A9891B69761600291FCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A932A98A1B69761600291FCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A932A98C1B69761600291FCF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A932A98F1B69761600291FCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A932A9911B69761600291FCF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A932A9941B69761600291FCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		A932A99A1B69761600291FCF /* FluppyChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FluppyChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A932A99F1B69761600291FCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A932A9A01B69761600291FCF /* FluppyChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluppyChatTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A932A9821B69761600291FCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A932A9971B69761600291FCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A932A97C1B69761600291FCF = {
+			isa = PBXGroup;
+			children = (
+				A932A9871B69761600291FCF /* FluppyChat */,
+				A932A99D1B69761600291FCF /* FluppyChatTests */,
+				A932A9861B69761600291FCF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A932A9861B69761600291FCF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A932A9851B69761600291FCF /* FluppyChat.app */,
+				A932A99A1B69761600291FCF /* FluppyChatTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A932A9871B69761600291FCF /* FluppyChat */ = {
+			isa = PBXGroup;
+			children = (
+				A932A98A1B69761600291FCF /* AppDelegate.swift */,
+				A932A98C1B69761600291FCF /* ViewController.swift */,
+				A932A98E1B69761600291FCF /* Main.storyboard */,
+				A932A9911B69761600291FCF /* Images.xcassets */,
+				A932A9931B69761600291FCF /* LaunchScreen.xib */,
+				A932A9881B69761600291FCF /* Supporting Files */,
+			);
+			path = FluppyChat;
+			sourceTree = "<group>";
+		};
+		A932A9881B69761600291FCF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A932A9891B69761600291FCF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A932A99D1B69761600291FCF /* FluppyChatTests */ = {
+			isa = PBXGroup;
+			children = (
+				A932A9A01B69761600291FCF /* FluppyChatTests.swift */,
+				A932A99E1B69761600291FCF /* Supporting Files */,
+			);
+			path = FluppyChatTests;
+			sourceTree = "<group>";
+		};
+		A932A99E1B69761600291FCF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A932A99F1B69761600291FCF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A932A9841B69761600291FCF /* FluppyChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A932A9A41B69761600291FCF /* Build configuration list for PBXNativeTarget "FluppyChat" */;
+			buildPhases = (
+				A932A9811B69761600291FCF /* Sources */,
+				A932A9821B69761600291FCF /* Frameworks */,
+				A932A9831B69761600291FCF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FluppyChat;
+			productName = FluppyChat;
+			productReference = A932A9851B69761600291FCF /* FluppyChat.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A932A9991B69761600291FCF /* FluppyChatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A932A9A71B69761600291FCF /* Build configuration list for PBXNativeTarget "FluppyChatTests" */;
+			buildPhases = (
+				A932A9961B69761600291FCF /* Sources */,
+				A932A9971B69761600291FCF /* Frameworks */,
+				A932A9981B69761600291FCF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A932A99C1B69761600291FCF /* PBXTargetDependency */,
+			);
+			name = FluppyChatTests;
+			productName = FluppyChatTests;
+			productReference = A932A99A1B69761600291FCF /* FluppyChatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A932A97D1B69761600291FCF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Dmytro Bohachevskyi";
+				TargetAttributes = {
+					A932A9841B69761600291FCF = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					A932A9991B69761600291FCF = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = A932A9841B69761600291FCF;
+					};
+				};
+			};
+			buildConfigurationList = A932A9801B69761600291FCF /* Build configuration list for PBXProject "FluppyChat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A932A97C1B69761600291FCF;
+			productRefGroup = A932A9861B69761600291FCF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A932A9841B69761600291FCF /* FluppyChat */,
+				A932A9991B69761600291FCF /* FluppyChatTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A932A9831B69761600291FCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A932A9901B69761600291FCF /* Main.storyboard in Resources */,
+				A932A9951B69761600291FCF /* LaunchScreen.xib in Resources */,
+				A932A9921B69761600291FCF /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A932A9981B69761600291FCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A932A9811B69761600291FCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A932A98D1B69761600291FCF /* ViewController.swift in Sources */,
+				A932A98B1B69761600291FCF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A932A9961B69761600291FCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A932A9A11B69761600291FCF /* FluppyChatTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A932A99C1B69761600291FCF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A932A9841B69761600291FCF /* FluppyChat */;
+			targetProxy = A932A99B1B69761600291FCF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A932A98E1B69761600291FCF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A932A98F1B69761600291FCF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A932A9931B69761600291FCF /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A932A9941B69761600291FCF /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A932A9A21B69761600291FCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A932A9A31B69761600291FCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A932A9A51B69761600291FCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = FluppyChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A932A9A61B69761600291FCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = FluppyChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A932A9A81B69761600291FCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FluppyChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluppyChat.app/FluppyChat";
+			};
+			name = Debug;
+		};
+		A932A9A91B69761600291FCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FluppyChatTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluppyChat.app/FluppyChat";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A932A9801B69761600291FCF /* Build configuration list for PBXProject "FluppyChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A932A9A21B69761600291FCF /* Debug */,
+				A932A9A31B69761600291FCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A932A9A41B69761600291FCF /* Build configuration list for PBXNativeTarget "FluppyChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A932A9A51B69761600291FCF /* Debug */,
+				A932A9A61B69761600291FCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A932A9A71B69761600291FCF /* Build configuration list for PBXNativeTarget "FluppyChatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A932A9A81B69761600291FCF /* Debug */,
+				A932A9A91B69761600291FCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A932A97D1B69761600291FCF /* Project object */;
+}
