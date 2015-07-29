@@ -115,7 +115,7 @@ public class MessagingActivity extends Activity {
 
         // send push
         ParsePush push = new ParsePush();
-        push.setChannel(room.getObjectId());
+        push.setChannel( getString(R.string.chanelPrefix) + room.getObjectId() );
         try {
             JSONObject data = new JSONObject();
             data.put( "Alert", encryptedMsg );
@@ -146,7 +146,7 @@ public class MessagingActivity extends Activity {
                                        final String authorId,
                                        final String authorName ) {
         if ( null != thisActivity ) {
-            if (room.getObjectId().equals(chanel)) {
+            if ( (thisActivity.getString(R.string.chanelPrefix) + room.getObjectId()).equals(chanel)) {
                 int direction = authorId.equals( ParseUser.getCurrentUser().getObjectId() ) ? 1 : 0;
                 thisActivity.messageAdapter.addMessage( msg, direction, authorName );
             } else {
@@ -168,6 +168,7 @@ public class MessagingActivity extends Activity {
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Message");
             query.whereEqualTo("Room", room);
             query.orderByAscending("createdAt");
+            query.setLimit(50);
             try {
                 List<ParseObject> messageList = query.find();
 

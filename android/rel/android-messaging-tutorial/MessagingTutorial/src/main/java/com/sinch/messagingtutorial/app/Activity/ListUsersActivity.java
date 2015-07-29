@@ -16,9 +16,12 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.sinch.messagingtutorial.app.Adapters.RoomAdapter;
 import com.sinch.messagingtutorial.app.R;
 
@@ -72,7 +75,7 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
     private void initListView() {
         ListView myList = (ListView) findViewById(R.id.usersListView);
 
-        cellAdapter = new RoomAdapter( getApplicationContext(), roomList );
+        cellAdapter = new RoomAdapter( getApplicationContext(), this, roomList );
         myList.setAdapter( cellAdapter );
         myList.setOnItemClickListener( clickListener );
         myList.setOnItemLongClickListener( longClickListener );
@@ -166,7 +169,7 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
     /**
      *  Display all room for user
      */
-    private void loadConversationsList() {
+    public void loadConversationsList() {
         Log.d( TAG, "request for the friend list" );
         if ( null != cellAdapter ) cellAdapter.clear();
 
@@ -179,9 +182,31 @@ public class ListUsersActivity extends Activity implements View.OnClickListener 
             @Override
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
+                    // get subscribe list
+                    List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
+                    if ( null == subscribedChannels ) subscribedChannels = new ArrayList<String>();
+                    Log.d( TAG, String.format( "Subscribed list %s", subscribedChannels.toString() ) );
+
                     for (ParseObject obj : list) {
                         roomList.add(obj);
-                        converstationList.add(obj.getParseObject("room"));
+                        ParseObject room = obj.getParseObject("room");
+                        converstationList.add( room );
+
+                        // if user not subscribet yet
+                        if ( !subscribedChannels.contains( "ROOM_" + room.getObjectId() ) ) {
+                            Log.d( TAG, String.format("subscribed added: %s", room.getObjectId()) );
+                            ParsePush.subscribeInBackground( "ROOM_" + room.getObjectId(), new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if ( null == e ) {
+                                        Log.d( TAG, "subscribe save success" );
+                                    } else {
+                                        Log.e( TAG, "subscribe save error" );
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
                     }
 
                     // init list

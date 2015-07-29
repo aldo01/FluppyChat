@@ -34,8 +34,7 @@
             android:textColor="@color/sinch_purple"
             android:background="@drawable/inputbox"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="dmytro">
+            android:layout_marginRight="30dp">
             <requestFocus/>
         </EditText>
 
@@ -60,8 +59,7 @@
             android:textColor="@color/sinch_purple"
             android:background="@drawable/inputbox"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="qwerty">
+            android:layout_marginRight="30dp">
         </EditText>
 
         <LinearLayout

@@ -6,6 +6,7 @@ import java.util.List;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -78,8 +79,10 @@ public class SearchPeopleActivity extends Activity {
     private void createRoom( ParseUser user ) {
         ParseObject room = new ParseObject( "Room" );
         room.put( "Creator", ParseUser.getCurrentUser() );
-        room.put( "Name", String.format( "%s, %s", ParseUser.getCurrentUser().getUsername(), user.getUsername() ) );
+        room.put( "Name", String.format("%s, %s", ParseUser.getCurrentUser().getUsername(), user.getUsername()) );
         room.saveInBackground();
+
+        ParsePush.subscribeInBackground("ROOM_" + room.getObjectId());
 
         ParseObject obj1 = new ParseObject( "PeopleInRoom" );
         obj1.put("people", ParseUser.getCurrentUser());
