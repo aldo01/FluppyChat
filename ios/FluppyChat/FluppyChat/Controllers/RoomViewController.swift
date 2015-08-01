@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class RoomViewController: UIViewController, UITableViewDataSource {
+class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     var roomList : [PFObject] = []{
@@ -61,5 +61,20 @@ class RoomViewController: UIViewController, UITableViewDataSource {
             return cell
         }
     }
+    
+    var selectedRoom : PFObject!
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //CODE TO BE RUN ON CELL TOUCH
+        selectedRoom = (roomList[indexPath.row]["room"] as? PFObject)!
+        self.performSegueWithIdentifier("showMessage", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        
+        // Create a new variable to store the instance of PlayerTableViewController
+        let destinationVC = segue.destinationViewController as! MessagingViewController
+        destinationVC.room = selectedRoom
+    }
+
     
 }

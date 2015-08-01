@@ -7,12 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A92024371B6CEDB300D1B85F /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = A92024301B6CEDB300D1B85F /* AESCrypt.m */; };
+		A92024381B6CEDB300D1B85F /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A92024321B6CEDB300D1B85F /* NSData+Base64.m */; };
+		A92024391B6CEDB300D1B85F /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = A92024341B6CEDB300D1B85F /* NSData+CommonCrypto.m */; };
+		A920243A1B6CEDB300D1B85F /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A92024361B6CEDB300D1B85F /* NSString+Base64.m */; };
+		A920243D1B6CF7E500D1B85F /* MyMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920243C1B6CF7E500D1B85F /* MyMessageTableViewCell.swift */; };
 		A932A98B1B69761600291FCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A98A1B69761600291FCF /* AppDelegate.swift */; };
 		A932A98D1B69761600291FCF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A98C1B69761600291FCF /* ViewController.swift */; };
 		A932A9901B69761600291FCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A932A98E1B69761600291FCF /* Main.storyboard */; };
 		A932A9921B69761600291FCF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A932A9911B69761600291FCF /* Images.xcassets */; };
 		A932A9951B69761600291FCF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A932A9931B69761600291FCF /* LaunchScreen.xib */; };
 		A932A9A11B69761600291FCF /* FluppyChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A9A01B69761600291FCF /* FluppyChatTests.swift */; };
+		A932A9AC1B6A4C8B00291FCF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A9AB1B6A4C8B00291FCF /* LoginViewController.swift */; };
+		A932A9B41B6A52D300291FCF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9B21B6A52D300291FCF /* Bolts.framework */; };
+		A932A9B51B6A52D300291FCF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9B31B6A52D300291FCF /* Parse.framework */; };
+		A932A9B71B6A52EC00291FCF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9B61B6A52EC00291FCF /* AudioToolbox.framework */; };
+		A932A9B91B6A587A00291FCF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9B81B6A587A00291FCF /* CFNetwork.framework */; };
+		A932A9BB1B6A588200291FCF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9BA1B6A588200291FCF /* CoreGraphics.framework */; };
+		A932A9BD1B6A589000291FCF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9BC1B6A589000291FCF /* CoreLocation.framework */; };
+		A932A9BF1B6A589600291FCF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9BE1B6A589600291FCF /* QuartzCore.framework */; };
+		A932A9C11B6A58A100291FCF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C01B6A58A100291FCF /* Security.framework */; };
+		A932A9C31B6A58A700291FCF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C21B6A58A700291FCF /* StoreKit.framework */; };
+		A932A9C51B6A58B800291FCF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C41B6A58B800291FCF /* SystemConfiguration.framework */; };
+		A932A9C71B6A58C200291FCF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C61B6A58C200291FCF /* libz.dylib */; };
+		A932A9C91B6A58DA00291FCF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C81B6A58DA00291FCF /* libsqlite3.dylib */; };
+		A95DD2841B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2831B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift */; };
+		A95DD2861B6AB987009AD795 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2851B6AB987009AD795 /* RoomViewController.swift */; };
+		A95DD2881B6AC1E3009AD795 /* MessagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2871B6AC1E3009AD795 /* MessagingViewController.swift */; };
+		A95DD28C1B6AC405009AD795 /* FriendMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD28B1B6AC405009AD795 /* FriendMessageTableViewCell.swift */; };
+		A95DD29A1B6B6998009AD795 /* Decrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2991B6B6998009AD795 /* Decrypt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +49,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A920242F1B6CEDB300D1B85F /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AESCrypt.h; path = AESCrypt/AESCrypt.h; sourceTree = "<group>"; };
+		A92024301B6CEDB300D1B85F /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AESCrypt.m; path = AESCrypt/AESCrypt.m; sourceTree = "<group>"; };
+		A92024311B6CEDB300D1B85F /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "AESCrypt/NSData+Base64.h"; sourceTree = "<group>"; };
+		A92024321B6CEDB300D1B85F /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "AESCrypt/NSData+Base64.m"; sourceTree = "<group>"; };
+		A92024331B6CEDB300D1B85F /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+CommonCrypto.h"; path = "AESCrypt/NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		A92024341B6CEDB300D1B85F /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+CommonCrypto.m"; path = "AESCrypt/NSData+CommonCrypto.m"; sourceTree = "<group>"; };
+		A92024351B6CEDB300D1B85F /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "AESCrypt/NSString+Base64.h"; sourceTree = "<group>"; };
+		A92024361B6CEDB300D1B85F /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "AESCrypt/NSString+Base64.m"; sourceTree = "<group>"; };
+		A920243B1B6CEE0700D1B85F /* FluppyChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FluppyChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		A920243C1B6CF7E500D1B85F /* MyMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyMessageTableViewCell.swift; path = Controllers/Cells/MyMessageTableViewCell.swift; sourceTree = "<group>"; };
 		A932A9851B69761600291FCF /* FluppyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FluppyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A932A9891B69761600291FCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A932A98A1B69761600291FCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +69,24 @@
 		A932A99A1B69761600291FCF /* FluppyChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FluppyChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A932A99F1B69761600291FCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A932A9A01B69761600291FCF /* FluppyChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluppyChatTests.swift; sourceTree = "<group>"; };
+		A932A9AB1B6A4C8B00291FCF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
+		A932A9B21B6A52D300291FCF /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../Bolts.framework; sourceTree = "<group>"; };
+		A932A9B31B6A52D300291FCF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
+		A932A9B61B6A52EC00291FCF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A932A9B81B6A587A00291FCF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A932A9BA1B6A588200291FCF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A932A9BC1B6A589000291FCF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A932A9BE1B6A589600291FCF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A932A9C01B6A58A100291FCF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A932A9C21B6A58A700291FCF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		A932A9C41B6A58B800291FCF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A932A9C61B6A58C200291FCF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A932A9C81B6A58DA00291FCF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		A95DD2831B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotConfirmedRoomTableViewCell.swift; path = Controllers/Cells/NotConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
+		A95DD2851B6AB987009AD795 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomViewController.swift; path = Controllers/RoomViewController.swift; sourceTree = "<group>"; };
+		A95DD2871B6AC1E3009AD795 /* MessagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagingViewController.swift; path = Controllers/MessagingViewController.swift; sourceTree = "<group>"; };
+		A95DD28B1B6AC405009AD795 /* FriendMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendMessageTableViewCell.swift; path = Controllers/Cells/FriendMessageTableViewCell.swift; sourceTree = "<group>"; };
+		A95DD2991B6B6998009AD795 /* Decrypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Decrypt.swift; path = Util/Decrypt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +94,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A932A9C91B6A58DA00291FCF /* libsqlite3.dylib in Frameworks */,
+				A932A9C71B6A58C200291FCF /* libz.dylib in Frameworks */,
+				A932A9C51B6A58B800291FCF /* SystemConfiguration.framework in Frameworks */,
+				A932A9C31B6A58A700291FCF /* StoreKit.framework in Frameworks */,
+				A932A9C11B6A58A100291FCF /* Security.framework in Frameworks */,
+				A932A9BF1B6A589600291FCF /* QuartzCore.framework in Frameworks */,
+				A932A9BD1B6A589000291FCF /* CoreLocation.framework in Frameworks */,
+				A932A9BB1B6A588200291FCF /* CoreGraphics.framework in Frameworks */,
+				A932A9B91B6A587A00291FCF /* CFNetwork.framework in Frameworks */,
+				A932A9B71B6A52EC00291FCF /* AudioToolbox.framework in Frameworks */,
+				A932A9B51B6A52D300291FCF /* Parse.framework in Frameworks */,
+				A932A9B41B6A52D300291FCF /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +140,10 @@
 		A932A9871B69761600291FCF /* FluppyChat */ = {
 			isa = PBXGroup;
 			children = (
+				A920243B1B6CEE0700D1B85F /* FluppyChat-Bridging-Header.h */,
+				A95DD2981B6B696F009AD795 /* Util */,
+				A932A9AD1B6A51EB00291FCF /* Framework */,
+				A932A9AA1B6A4BC300291FCF /* Controllers */,
 				A932A98A1B69761600291FCF /* AppDelegate.swift */,
 				A932A98C1B69761600291FCF /* ViewController.swift */,
 				A932A98E1B69761600291FCF /* Main.storyboard */,
@@ -110,6 +177,70 @@
 				A932A99F1B69761600291FCF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A932A9AA1B6A4BC300291FCF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A95DD2821B6AB59A009AD795 /* TableCells */,
+				A932A9AB1B6A4C8B00291FCF /* LoginViewController.swift */,
+				A95DD2851B6AB987009AD795 /* RoomViewController.swift */,
+				A95DD2871B6AC1E3009AD795 /* MessagingViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A932A9AD1B6A51EB00291FCF /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				A95DD29B1B6B71D8009AD795 /* AES */,
+				A932A9C81B6A58DA00291FCF /* libsqlite3.dylib */,
+				A932A9C61B6A58C200291FCF /* libz.dylib */,
+				A932A9C41B6A58B800291FCF /* SystemConfiguration.framework */,
+				A932A9C21B6A58A700291FCF /* StoreKit.framework */,
+				A932A9C01B6A58A100291FCF /* Security.framework */,
+				A932A9BE1B6A589600291FCF /* QuartzCore.framework */,
+				A932A9BC1B6A589000291FCF /* CoreLocation.framework */,
+				A932A9BA1B6A588200291FCF /* CoreGraphics.framework */,
+				A932A9B81B6A587A00291FCF /* CFNetwork.framework */,
+				A932A9B61B6A52EC00291FCF /* AudioToolbox.framework */,
+				A932A9B21B6A52D300291FCF /* Bolts.framework */,
+				A932A9B31B6A52D300291FCF /* Parse.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		A95DD2821B6AB59A009AD795 /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				A95DD2831B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift */,
+				A95DD28B1B6AC405009AD795 /* FriendMessageTableViewCell.swift */,
+				A920243C1B6CF7E500D1B85F /* MyMessageTableViewCell.swift */,
+			);
+			name = TableCells;
+			sourceTree = "<group>";
+		};
+		A95DD2981B6B696F009AD795 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A95DD2991B6B6998009AD795 /* Decrypt.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		A95DD29B1B6B71D8009AD795 /* AES */ = {
+			isa = PBXGroup;
+			children = (
+				A920242F1B6CEDB300D1B85F /* AESCrypt.h */,
+				A92024301B6CEDB300D1B85F /* AESCrypt.m */,
+				A92024311B6CEDB300D1B85F /* NSData+Base64.h */,
+				A92024321B6CEDB300D1B85F /* NSData+Base64.m */,
+				A92024331B6CEDB300D1B85F /* NSData+CommonCrypto.h */,
+				A92024341B6CEDB300D1B85F /* NSData+CommonCrypto.m */,
+				A92024351B6CEDB300D1B85F /* NSString+Base64.h */,
+				A92024361B6CEDB300D1B85F /* NSString+Base64.m */,
+			);
+			name = AES;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,8 +343,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A920243A1B6CEDB300D1B85F /* NSString+Base64.m in Sources */,
+				A932A9AC1B6A4C8B00291FCF /* LoginViewController.swift in Sources */,
+				A92024371B6CEDB300D1B85F /* AESCrypt.m in Sources */,
+				A92024381B6CEDB300D1B85F /* NSData+Base64.m in Sources */,
+				A95DD2841B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift in Sources */,
 				A932A98D1B69761600291FCF /* ViewController.swift in Sources */,
+				A95DD2861B6AB987009AD795 /* RoomViewController.swift in Sources */,
 				A932A98B1B69761600291FCF /* AppDelegate.swift in Sources */,
+				A920243D1B6CF7E500D1B85F /* MyMessageTableViewCell.swift in Sources */,
+				A92024391B6CEDB300D1B85F /* NSData+CommonCrypto.m in Sources */,
+				A95DD29A1B6B6998009AD795 /* Decrypt.swift in Sources */,
+				A95DD28C1B6AC405009AD795 /* FriendMessageTableViewCell.swift in Sources */,
+				A95DD2881B6AC1E3009AD795 /* MessagingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +417,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -295,6 +438,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -320,6 +464,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -333,6 +478,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -342,9 +488,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FluppyChat",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FluppyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -352,9 +506,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FluppyChat",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FluppyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -411,6 +572,7 @@
 				A932A9A61B69761600291FCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A932A9A71B69761600291FCF /* Build configuration list for PBXNativeTarget "FluppyChatTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +581,7 @@
 				A932A9A91B69761600291FCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
