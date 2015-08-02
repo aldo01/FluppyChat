@@ -11,16 +11,48 @@ import Parse
 
 class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
+    let ROOM_PREFIX = "ROOM_"
     
     var roomList : [PFObject] = []{
         didSet {
             tableView.reloadData()
+            
+            let currentInstallation = PFInstallation.currentInstallation()
+            let subscribedChannels = (PFInstallation.currentInstallation().channels as? [String])!
+            for r in self.roomList {
+                let roomId = ROOM_PREFIX + r.objectId!
+                var res : Bool = true
+                for c in subscribedChannels {
+                    if c == roomId {
+                        res = false
+                    }
+                }
+                
+                if ( res ) {
+                    println( "Add \(roomId)" )
+                    currentInstallation.addUniqueObject(roomId, forKey: "channels")
+                    currentInstallation.saveInBackgroundWithBlock { ( res : Bool, err : NSError?) -> Void in
+                        if ( nil != err ) {
+                            println("An error ocqurence when register device \(err)")
+                        }
+                    }
+                } else {
+                    println( "Exist \(roomId)" )
+                }
+            }
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // When users indicate they are Giants fans, we subscribe them to that channel.
+        
+        
 
+        obtainRoomList()
+    }
+    
+    private func obtainRoomList() {
         // download list of room
         let query = PFQuery(className: "PeopleInRoom")
         query.whereKey("people", equalTo: PFUser.currentUser()!)

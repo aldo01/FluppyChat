@@ -11,7 +11,6 @@ import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
 
@@ -20,7 +19,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.setApplicationId("fYiaMJQcSGKjQB3AwhpGmpFoBvE8UiLJAAQMGKjh", clientKey: "t5lfmPcRZjfRHnBGlPYS984ahstd1nHriMdirpA9")
         
+        let userNotificationTypes = (UIUserNotificationType.Alert |  UIUserNotificationType.Badge |  UIUserNotificationType.Sound);
+        
+        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
+        
         return true
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        // Store the deviceToken in the current Installation and save it to Parse
+        let installation = PFInstallation.currentInstallation()
+        installation.setDeviceTokenFromData(deviceToken)
+        installation.saveInBackgroundWithBlock { ( res : Bool, err : NSError?) -> Void in
+            if ( nil != err ) {
+                println("An error ocqurence when register device")
+            }
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

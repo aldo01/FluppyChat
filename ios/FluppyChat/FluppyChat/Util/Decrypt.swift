@@ -13,4 +13,8 @@ class Decrypt {
         return AESCrypt.decrypt(text, password: PASSWORD)
     }
     
+    func encrypt( text : String ) -> String {
+        return AESCrypt.encrypt(text, password: PASSWORD)
+    }
+    
 }
