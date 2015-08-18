@@ -11,6 +11,7 @@ import UIKit
 class FriendMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var textField: UILabel!
     @IBOutlet weak var authorTextView: UILabel!
+    @IBOutlet weak var userImage: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

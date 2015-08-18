@@ -31,11 +31,16 @@
 		A932A9C51B6A58B800291FCF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C41B6A58B800291FCF /* SystemConfiguration.framework */; };
 		A932A9C71B6A58C200291FCF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C61B6A58C200291FCF /* libz.dylib */; };
 		A932A9C91B6A58DA00291FCF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C81B6A58DA00291FCF /* libsqlite3.dylib */; };
+		A94478161B81E9E600AE8712 /* LeftRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94478151B81E9E600AE8712 /* LeftRoomViewController.swift */; };
 		A95DD2841B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2831B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift */; };
 		A95DD2861B6AB987009AD795 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2851B6AB987009AD795 /* RoomViewController.swift */; };
 		A95DD2881B6AC1E3009AD795 /* MessagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2871B6AC1E3009AD795 /* MessagingViewController.swift */; };
 		A95DD28C1B6AC405009AD795 /* FriendMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD28B1B6AC405009AD795 /* FriendMessageTableViewCell.swift */; };
 		A95DD29A1B6B6998009AD795 /* Decrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2991B6B6998009AD795 /* Decrypt.swift */; };
+		A9AF16901B81FA9E00F1A7A8 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AF168F1B81FA9E00F1A7A8 /* MyNavigationController.swift */; };
+		A9AF16941B81FB0500F1A7A8 /* ENSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AF16921B81FB0500F1A7A8 /* ENSideMenu.swift */; };
+		A9AF16951B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AF16931B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift */; };
+		A9AF16971B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AF16961B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,11 +87,16 @@
 		A932A9C41B6A58B800291FCF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A932A9C61B6A58C200291FCF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A932A9C81B6A58DA00291FCF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		A94478151B81E9E600AE8712 /* LeftRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftRoomViewController.swift; path = Controllers/LeftRoomViewController.swift; sourceTree = "<group>"; };
 		A95DD2831B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotConfirmedRoomTableViewCell.swift; path = Controllers/Cells/NotConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
 		A95DD2851B6AB987009AD795 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomViewController.swift; path = Controllers/RoomViewController.swift; sourceTree = "<group>"; };
 		A95DD2871B6AC1E3009AD795 /* MessagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagingViewController.swift; path = Controllers/MessagingViewController.swift; sourceTree = "<group>"; };
 		A95DD28B1B6AC405009AD795 /* FriendMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendMessageTableViewCell.swift; path = Controllers/Cells/FriendMessageTableViewCell.swift; sourceTree = "<group>"; };
 		A95DD2991B6B6998009AD795 /* Decrypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Decrypt.swift; path = Util/Decrypt.swift; sourceTree = "<group>"; };
+		A9AF168F1B81FA9E00F1A7A8 /* MyNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
+		A9AF16921B81FB0500F1A7A8 /* ENSideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSideMenu.swift; sourceTree = "<group>"; };
+		A9AF16931B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSideMenuNavigationController.swift; sourceTree = "<group>"; };
+		A9AF16961B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmedRoomTableViewCell.swift; path = Controllers/Cells/ConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,11 +154,9 @@
 				A95DD2981B6B696F009AD795 /* Util */,
 				A932A9AD1B6A51EB00291FCF /* Framework */,
 				A932A9AA1B6A4BC300291FCF /* Controllers */,
-				A932A98A1B69761600291FCF /* AppDelegate.swift */,
 				A932A98C1B69761600291FCF /* ViewController.swift */,
 				A932A98E1B69761600291FCF /* Main.storyboard */,
 				A932A9911B69761600291FCF /* Images.xcassets */,
-				A932A9931B69761600291FCF /* LaunchScreen.xib */,
 				A932A9881B69761600291FCF /* Supporting Files */,
 			);
 			path = FluppyChat;
@@ -157,6 +165,8 @@
 		A932A9881B69761600291FCF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A932A9931B69761600291FCF /* LaunchScreen.xib */,
+				A932A98A1B69761600291FCF /* AppDelegate.swift */,
 				A932A9891B69761600291FCF /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -182,10 +192,12 @@
 		A932A9AA1B6A4BC300291FCF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A9AF168F1B81FA9E00F1A7A8 /* MyNavigationController.swift */,
 				A95DD2821B6AB59A009AD795 /* TableCells */,
 				A932A9AB1B6A4C8B00291FCF /* LoginViewController.swift */,
 				A95DD2851B6AB987009AD795 /* RoomViewController.swift */,
 				A95DD2871B6AC1E3009AD795 /* MessagingViewController.swift */,
+				A94478151B81E9E600AE8712 /* LeftRoomViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -193,6 +205,7 @@
 		A932A9AD1B6A51EB00291FCF /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				A9AF16911B81FAEB00F1A7A8 /* SideMenu */,
 				A95DD29B1B6B71D8009AD795 /* AES */,
 				A932A9C81B6A58DA00291FCF /* libsqlite3.dylib */,
 				A932A9C61B6A58C200291FCF /* libz.dylib */,
@@ -216,6 +229,7 @@
 				A95DD2831B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift */,
 				A95DD28B1B6AC405009AD795 /* FriendMessageTableViewCell.swift */,
 				A920243C1B6CF7E500D1B85F /* MyMessageTableViewCell.swift */,
+				A9AF16961B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -241,6 +255,15 @@
 				A92024361B6CEDB300D1B85F /* NSString+Base64.m */,
 			);
 			name = AES;
+			sourceTree = "<group>";
+		};
+		A9AF16911B81FAEB00F1A7A8 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A9AF16921B81FB0500F1A7A8 /* ENSideMenu.swift */,
+				A9AF16931B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift */,
+			);
+			name = SideMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,12 +369,17 @@
 				A920243A1B6CEDB300D1B85F /* NSString+Base64.m in Sources */,
 				A932A9AC1B6A4C8B00291FCF /* LoginViewController.swift in Sources */,
 				A92024371B6CEDB300D1B85F /* AESCrypt.m in Sources */,
+				A9AF16901B81FA9E00F1A7A8 /* MyNavigationController.swift in Sources */,
 				A92024381B6CEDB300D1B85F /* NSData+Base64.m in Sources */,
 				A95DD2841B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift in Sources */,
 				A932A98D1B69761600291FCF /* ViewController.swift in Sources */,
+				A9AF16951B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift in Sources */,
 				A95DD2861B6AB987009AD795 /* RoomViewController.swift in Sources */,
+				A9AF16941B81FB0500F1A7A8 /* ENSideMenu.swift in Sources */,
+				A9AF16971B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift in Sources */,
 				A932A98B1B69761600291FCF /* AppDelegate.swift in Sources */,
 				A920243D1B6CF7E500D1B85F /* MyMessageTableViewCell.swift in Sources */,
+				A94478161B81E9E600AE8712 /* LeftRoomViewController.swift in Sources */,
 				A92024391B6CEDB300D1B85F /* NSData+CommonCrypto.m in Sources */,
 				A95DD29A1B6B6998009AD795 /* Decrypt.swift in Sources */,
 				A95DD28C1B6AC405009AD795 /* FriendMessageTableViewCell.swift in Sources */,

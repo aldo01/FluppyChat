@@ -9,9 +9,10 @@
 import UIKit
 import Parse
 
-class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RoomViewController: UIViewController, ENSideMenuDelegate, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     let ROOM_PREFIX = "ROOM_"
+    let userImages : NSMutableDictionary = [ "123" : UIImage() ]
     
     var roomList : [PFObject] = []{
         didSet {
@@ -45,10 +46,7 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // When users indicate they are Giants fans, we subscribe them to that channel.
-        
-        
-
+        self.sideMenuController()?.sideMenu?.delegate = self
         obtainRoomList()
     }
     
@@ -63,8 +61,7 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 for o in list! {
                     rList.append((o as? PFObject)!)
                 }
-                
-                println( "Room count: \(rList.count)" )
+
                 self.roomList = rList
             } else {
                 println(err)
@@ -73,7 +70,6 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println( "Room count: \(roomList.count)" )
         return roomList.count
     }
     
@@ -82,15 +78,54 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let people : PFObject = roomList[indexPath.row]
         println( "Room: \(people)" )
         if ( people["confirm"] as! Bool ) {
-            var cell : UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("confirmedRoomCell") as! UITableViewCell
+            var cell : ConfirmedRoomTableViewCell! = tableView.dequeueReusableCellWithIdentifier("confirmedCell") as! ConfirmedRoomTableViewCell
             let room : PFObject = (people["room"] as? PFObject)!
-            cell.textLabel!.text = room["Name"] as? String
+            
+            // get all people from this room
+            let query = PFQuery(className: "PeopleInRoom")
+            query.whereKey("room", equalTo: room)
+            query.includeKey("people")
+            query.findObjectsInBackgroundWithBlock { ( list : [AnyObject]?, err : NSError?) -> Void in
+                if ( nil == err ) {
+                    var lUser : [PFUser] = []
+                    
+                    for o in list! {
+                        let u : PFUser = (o["people"] as? PFUser)!
+                        if nil == self.userImages[u.objectId!] {
+                            
+                            // load image
+                            let imgQuery : PFFile? = u["profilepic"] as? PFFile
+                            if nil != imgQuery {
+                            imgQuery!.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
+                                println("Image loaded")
+                                if ( nil == error ) {
+                                    self.userImages[u.objectId!] = UIImage(data: imageData!)
+                                    self.showSmallImage(u, cell: cell)
+                                } else {
+                                    println( "Error: \(error)" )
+                                }
+                            })
+                            }
+                        } else {
+                            self.showSmallImage(u, cell: cell)
+                        }
+                    }
+                }
+            }
+            
             return cell
         } else {
             var cell : NotConfirmedRoomTableViewCell! = tableView.dequeueReusableCellWithIdentifier("notConfirmedCell") as! NotConfirmedRoomTableViewCell
             let room : PFObject = (people["room"] as? PFObject)!
             cell.titleTV.text = room["Name"] as? String
             return cell
+        }
+    }
+    
+    private func showSmallImage( u : PFUser, cell : ConfirmedRoomTableViewCell ) {
+        // add image to view
+        if var data : UIImage = self.userImages[u.objectId!] as? UIImage {
+            cell.addUserImage(data)
         }
     }
     
@@ -106,7 +141,6 @@ class RoomViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Create a new variable to store the instance of PlayerTableViewController
         let destinationVC = segue.destinationViewController as! MessagingViewController
         destinationVC.room = selectedRoom
-    }
-
-    
+        destinationVC.userImages = self.userImages
+    }    
 }

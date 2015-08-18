@@ -22,10 +22,12 @@ class MessagingViewController: UIViewController, UITableViewDataSource {
             obtainMessageHistory()
         }
     }
+    var userImages : NSMutableDictionary!
     var listUser : [PFObject] = []
     var listMessage : [PFObject] = [] {
         didSet {
             tableView.reloadData()
+            tableView.setContentOffset( CGPoint(x: 0, y: listMessage.count * 88 - Int(tableView.frame.height)), animated: true)
         }
     }
     
@@ -84,17 +86,25 @@ class MessagingViewController: UIViewController, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let message : PFObject = listMessage[indexPath.row]
         if ( PFUser.currentUser()?.objectId == (message["User"] as? PFUser)!.objectId  ) {
-            let cell : FriendMessageTableViewCell = (tableView.dequeueReusableCellWithIdentifier("friendMessage") as? FriendMessageTableViewCell)!
-            cell.textLabel!.text = decryptor.decrypt((message["Text"] as? String)!)
+            let cell : MyMessageTableViewCell = (tableView.dequeueReusableCellWithIdentifier("MyMessage") as? MyMessageTableViewCell)!
+            cell.messageTextTV!.text = decryptor.decrypt((message["Text"] as? String)!)
             let username = (message["User"] as? PFUser)?.username!
-            println( "1 Username: \(username!)" )
-            cell.authorTextView!.text = username!
+            cell.authorTextTV!.text = username!
+            var img : AnyObject? = userImages[ (message["User"] as? PFUser)!.objectId! ]
+            if nil != img {
+                cell.userImage.image = img as? UIImage
+            }
+            
             return cell
         } else {
             let cell : FriendMessageTableViewCell = (tableView.dequeueReusableCellWithIdentifier("friendMessage") as? FriendMessageTableViewCell)!
-            cell.textLabel!.text = decryptor.decrypt((message["Text"] as? String)!)
+            cell.textField!.text = decryptor.decrypt((message["Text"] as? String)!)
             cell.authorTextView!.text = (message["User"] as? PFUser)?.username!
-            println( "2" )
+            var img : AnyObject? = userImages[ (message["User"] as? PFUser)!.objectId! ]
+            if nil != img {
+                cell.userImage.image = img as? UIImage
+            }
+            
             return cell
         }
     }
