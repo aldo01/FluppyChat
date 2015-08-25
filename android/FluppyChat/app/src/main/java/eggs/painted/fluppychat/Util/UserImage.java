@@ -39,11 +39,19 @@ final public class UserImage {
     }
 
     static public void showImage( final ParseUser user, final CircleImageView img ) {
-        Log.d("IMAGE", "show");
+        Log.d( "SHOW_IMAGE", user.getObjectId() );
         if ( !userImages.containsKey(user.getObjectId()) ) {
             downloadImage( user, img );
         } else {
             img.setImageBitmap( userImages.get(user.getObjectId()) );
+        }
+    }
+
+    static public void showImage( final String userId, final CircleImageView img ) {
+        if ( null != userImages ) {
+            if (userImages.containsKey(userId)) {
+                img.setImageBitmap(userImages.get(userId));
+            }
         }
     }
 }

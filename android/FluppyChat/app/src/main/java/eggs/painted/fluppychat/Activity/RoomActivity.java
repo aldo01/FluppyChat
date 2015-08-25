@@ -22,12 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eggs.painted.fluppychat.Adapters.RoomAdapter;
+import eggs.painted.fluppychat.Interface.OpenChat;
 import eggs.painted.fluppychat.R;
 
 /**
  * Created by dmytro on 22.08.15.
  */
-public class RoomActivity extends Activity {
+public class RoomActivity extends Activity implements OpenChat {
     static private final String TAG = "ROOM_ACTIVITY";
 
     List<ParseObject> roomList = new ArrayList<ParseObject>();
@@ -88,7 +89,7 @@ public class RoomActivity extends Activity {
                         // if user not subscribet yet
                         if (!subscribedChannels.contains("ROOM_" + room.getObjectId())) {
                             Log.d(TAG, String.format("subscribed added: %s", room.getObjectId()));
-/*                            ParsePush.subscribeInBackground("ROOM_" + room.getObjectId(), new SaveCallback() {
+                            ParsePush.subscribeInBackground("ROOM_" + room.getObjectId(), new SaveCallback() {
                                 @Override
                                 public void done(ParseException e) {
                                     if (null == e) {
@@ -98,17 +99,24 @@ public class RoomActivity extends Activity {
                                         e.printStackTrace();
                                     }
                                 }
-                            });*/
+                            });
                         }
                     }
 
                     // init list
-                    recList.setAdapter( new RoomAdapter(getApplicationContext(), roomList) );
+                    recList.setAdapter( new RoomAdapter(RoomActivity.this, roomList) );
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    @Override
+    public void openChat(ParseObject room) {
+        final Intent chatIntent = new Intent( RoomActivity.this, ChatActivity.class );
+        ChatActivity.room = room;
+        startActivity( chatIntent );
     }
 }
