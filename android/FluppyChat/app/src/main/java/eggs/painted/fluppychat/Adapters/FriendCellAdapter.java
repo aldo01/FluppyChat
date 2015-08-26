@@ -21,6 +21,8 @@ import com.parse.ParseUser;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import eggs.painted.fluppychat.Activity.SearchFrindsActivity;
+import eggs.painted.fluppychat.Interface.CreateRoom;
 import eggs.painted.fluppychat.R;
 import eggs.painted.fluppychat.Util.UserImage;
 
@@ -30,10 +32,12 @@ import eggs.painted.fluppychat.Util.UserImage;
 public class FriendCellAdapter extends RecyclerView.Adapter<FriendCellAdapter.FriendViewHolder> {
     private Context context;
     private List<ParseUser> userList;
+    private static CreateRoom callback;
 
-    public FriendCellAdapter( Context context, List<ParseUser> userList) {
+    public FriendCellAdapter( SearchFrindsActivity a, List<ParseUser> userList) {
         this.userList = userList;
-        this.context = context;
+        this.context = a.getApplicationContext();
+        this.callback = (CreateRoom) a;
     }
 
     @Override
@@ -47,17 +51,21 @@ public class FriendCellAdapter extends RecyclerView.Adapter<FriendCellAdapter.Fr
         contactViewHolder.userTV.setText(u.getUsername());
 
         ParseFile file = u.getParseFile("profilepic");
-        file.getDataInBackground(new GetDataCallback() {
-            @Override
-            public void done(byte[] bytes, ParseException e) {
-                if (null == e) {
-                    contactViewHolder.userIV.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-                } else {
-                    Log.e("PARSE", "Load image error");
-                    e.printStackTrace();
+        if ( null != file ) {
+            file.getDataInBackground(new GetDataCallback() {
+                @Override
+                public void done(byte[] bytes, ParseException e) {
+                    if (null == e) {
+                        contactViewHolder.userIV.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                    } else {
+                        Log.e("PARSE", "Load image error");
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        }
+
+        contactViewHolder.initClick(u);
     }
 
     @Override
@@ -72,16 +80,27 @@ public class FriendCellAdapter extends RecyclerView.Adapter<FriendCellAdapter.Fr
     public static class FriendViewHolder extends RecyclerView.ViewHolder {
         protected CircleImageView userIV;
         protected TextView userTV;
+        protected View v;
 
         public FriendViewHolder(View v) {
             super(v);
             userIV = (CircleImageView) v.findViewById(R.id.userImageView);
             userTV = (TextView) v.findViewById(R.id.userNameTV);
+            this.v = v;
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d( "CLICK", "CLICK" );
+                }
+            });
+        }
+
+        public void initClick( final ParseUser u ) {
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callback.createRoom(u);
                 }
             });
         }

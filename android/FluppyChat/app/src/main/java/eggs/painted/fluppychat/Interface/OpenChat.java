@@ -7,4 +7,6 @@ import com.parse.ParseObject;
  */
 public interface OpenChat {
     void openChat( ParseObject room );
+    void acceptRoom();
+    void declineRoom();
 }

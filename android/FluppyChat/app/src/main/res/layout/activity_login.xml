@@ -4,12 +4,14 @@
     android:orientation="vertical"
     tools:context=".LoginActivity"
     android:gravity="center"
-    android:layout_margin="@dimen/activity_horizontal_margin">
+    android:padding="@dimen/activity_horizontal_margin"
+    android:background="@android:color/white">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
 
         <EditText
             android:id="@+id/loginUsername"
@@ -22,25 +24,29 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
 
         <EditText
             android:id="@+id/loginPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"/>
+            android:hint="Password"
+            android:inputType="textPassword"/>
 
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:orientation="horizontal"
         android:gravity="center">
 
         <Button
+            style="@style/buttonStyle"
             android:id="@+id/loginButton"
-            android:layout_width="wrap_content"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:text="Login"/>
 
@@ -49,10 +55,11 @@
             android:layout_height="0dp"/>
 
         <Button
+            style="@style/buttonStyle"
             android:id="@+id/signupButton"
-            android:layout_width="wrap_content"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:text="Register"/>
+            android:text="Sign in"/>
 
     </LinearLayout>
 

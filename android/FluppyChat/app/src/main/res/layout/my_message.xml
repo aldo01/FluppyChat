@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="4dp">
 
         <LinearLayout
             android:id="@+id/imageContainerLayout"
@@ -23,13 +24,13 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userImageViewMyMessageCell"
                 android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_height="48dp"/>
 
             <TextView
                 android:id="@+id/userNameTVMyMessageCell"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
+                android:layout_marginStart="8dp"
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:textColor="#000000"
@@ -43,7 +44,7 @@
             android:id="@+id/dateTVMyMessageCell"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:text="01/01/2015"
             android:padding="4dp"/>
 

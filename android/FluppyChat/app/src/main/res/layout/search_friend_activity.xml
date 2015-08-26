@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="4dp">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
@@ -15,7 +16,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="0dp"
-                android:layout_weight="0.8"
+                android:layout_weight="0.7"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -27,10 +28,12 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                style="@style/buttonStyle"
                 android:id="@+id/findFriendButton"
                 android:layout_width="0dp"
-                android:layout_weight="0.2"
+                android:layout_weight="0.3"
                 android:layout_height="wrap_content"
+                android:layout_margin="4dp"
                 android:text="Search"/>
 
         </LinearLayout>

@@ -2,6 +2,7 @@ package eggs.painted.fluppychat.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -81,7 +82,7 @@ public class ChatActivity extends Activity {
     private void obtainMessageHistory() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Message");
         query.whereEqualTo("Room", room);
-        query.orderByAscending("createdAt");
+        query.orderByDescending("createdAt");
         query.include("User");
         query.setLimit(50);
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -89,8 +90,10 @@ public class ChatActivity extends Activity {
             public void done(List<ParseObject> list, ParseException e) {
                 if ( null == e ) {
 
-                    Log.d("MESSAGE_INFO", "done");
-                    for (ParseObject o : list) {
+                    Log.d("MESSAGE_INFO", String.format( "done: %d", list.size()) );
+                    // for (ParseObject o : list) {
+                    for ( int i = list.size() - 1; i >= 0; i-- ) {
+                        ParseObject o = list.get(i);
                         ParseUser u = o.getParseUser("User");
                         if ( null != u ) {
                             Log.d( "USER", u.getObjectId() );
@@ -100,7 +103,6 @@ public class ChatActivity extends Activity {
                         m.date = o.getUpdatedAt();
                         m.text = o.getString("Text");
                         m.user = o.getParseUser("User");
-
                         messageList.add(m);
                     }
 

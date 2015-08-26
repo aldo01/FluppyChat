@@ -23,23 +23,25 @@ final public class UserImage {
 
     static private void downloadImage( final ParseUser user, final CircleImageView img ) {
         ParseFile file = user.getParseFile("profilepic");
-        file.getDataInBackground(new GetDataCallback() {
-            @Override
-            public void done(byte[] bytes, ParseException e) {
-                if ( null == e ) {
-                    Log.d("IMAGE", "loaded");
-                    userImages.put(user.getObjectId(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length) );
-                    img.setImageBitmap(userImages.get(user.getObjectId()));
-                } else {
-                    Log.e( "PARSE", "Load image error" );
-                    e.printStackTrace();
+        if ( null != file ) {
+            file.getDataInBackground(new GetDataCallback() {
+                @Override
+                public void done(byte[] bytes, ParseException e) {
+                    if (null == e) {
+                        Log.d("IMAGE", "loaded");
+                        userImages.put(user.getObjectId(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                        img.setImageBitmap(userImages.get(user.getObjectId()));
+                    } else {
+                        Log.e("PARSE", "Load image error");
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     static public void showImage( final ParseUser user, final CircleImageView img ) {
-        Log.d( "SHOW_IMAGE", user.getObjectId() );
+        Log.d("SHOW_IMAGE", user.getObjectId());
         if ( !userImages.containsKey(user.getObjectId()) ) {
             downloadImage( user, img );
         } else {
@@ -51,6 +53,20 @@ final public class UserImage {
         if ( null != userImages ) {
             if (userImages.containsKey(userId)) {
                 img.setImageBitmap(userImages.get(userId));
+            }
+        }
+    }
+
+    /**
+     * Remove photo from list
+     * Call when updated user photo
+     *
+     * @param userId
+     */
+    static public void removeImage( final String userId ) {
+        if ( null != userImages ) {
+            if (userImages.containsKey(userId)) {
+                userImages.remove(userId);
             }
         }
     }

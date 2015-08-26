@@ -8,7 +8,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Parse.initialize(this, "******", "******");
+        Parse.initialize(this, "fYiaMJQcSGKjQB3AwhpGmpFoBvE8UiLJAAQMGKjh", "t5lfmPcRZjfRHnBGlPYS984ahstd1nHriMdirpA9");
         ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 }

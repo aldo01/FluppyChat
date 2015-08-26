@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.parse.ParseUser;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -56,15 +58,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         if ( null != u ) {
             Log.d( "BIND_CELL", "user is not null" );
-            UserImage.showImage( u, contactViewHolder.userIV );
-            contactViewHolder.userNameTV.setText( u.getUsername() );
-            // contactViewHolder.dateTV.setText( u.getUpdatedAt().toString() );
+            UserImage.showImage(u, contactViewHolder.userIV);
+            contactViewHolder.userNameTV.setText(u.getUsername());
+            contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format(m.date) );
         } else {
 //            contactViewHolder.userNameTV.setText(u.getUsername());
             Log.d( "BIND_CELL", "user is null");
             UserImage.showImage(m.userId, contactViewHolder.userIV);
             contactViewHolder.userNameTV.setText( m.userName );
-            // contactViewHolder.dateTV.setText(m.date.toString());
+            contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format(new Date()) );
         }
 
         if ( animate && i == messageList.size() - 1 ) {
@@ -134,8 +136,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         public FriendMessageViewHolder(View v) {
             super(v);
             userIV = (CircleImageView) v.findViewById(R.id.userImageViewFriendMessageCell);
-            messageTV = (TextView) v.findViewById(R.id.dateTVFriendMessageCell);
-            dateTV = (TextView) v.findViewById(R.id.messageTVFriendMessageCell);
+            messageTV = (TextView) v.findViewById(R.id.messageTVFriendMessageCell);
+            dateTV = (TextView) v.findViewById(R.id.dateTVFriendMessageCell);
             userNameTV = (TextView) v.findViewById(R.id.userNameTVFriendMessageCell);
         }
     }
