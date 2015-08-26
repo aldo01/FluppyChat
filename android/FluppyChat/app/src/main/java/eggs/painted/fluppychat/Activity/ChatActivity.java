@@ -1,15 +1,22 @@
 package eggs.painted.fluppychat.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -26,21 +33,24 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import eggs.painted.fluppychat.Adapters.MessageAdapter;
 import eggs.painted.fluppychat.Model.Message;
 import eggs.painted.fluppychat.R;
+import eggs.painted.fluppychat.Util.UserImage;
 
 /**
  * Created by dmytro on 23.08.15.
  */
 public class ChatActivity extends Activity {
-    static public ParseObject room;
+    static public ParseObject room, peopleInRoom;
     static private ChatActivity thisActivity = null;
     static private String TAG = "MessagingActivity";
 
     String myName; // store current user name
     MessageAdapter adapter;
     List<Message> messageList;
+    public ActionBarDrawerToggle mDrawerToggle;
 
     // ui elements
     RecyclerView recList;
@@ -77,6 +87,23 @@ public class ChatActivity extends Activity {
                 sendMessage();
             }
         });
+
+        findViewById(R.id.cancelButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (null != peopleInRoom) {
+                    peopleInRoom.deleteInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Intent returnIntent = new Intent();
+                            setResult(RESULT_OK, returnIntent);
+                            finish();
+                        }
+                    });
+
+                }
+            }
+        });
     }
 
     private void obtainMessageHistory() {
@@ -88,15 +115,15 @@ public class ChatActivity extends Activity {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e) {
-                if ( null == e ) {
+                if (null == e) {
 
-                    Log.d("MESSAGE_INFO", String.format( "done: %d", list.size()) );
+                    Log.d("MESSAGE_INFO", String.format("done: %d", list.size()));
                     // for (ParseObject o : list) {
-                    for ( int i = list.size() - 1; i >= 0; i-- ) {
+                    for (int i = list.size() - 1; i >= 0; i--) {
                         ParseObject o = list.get(i);
                         ParseUser u = o.getParseUser("User");
-                        if ( null != u ) {
-                            Log.d( "USER", u.getObjectId() );
+                        if (null != u) {
+                            Log.d("USER", u.getObjectId());
                         }
 
                         Message m = new Message();
@@ -106,10 +133,9 @@ public class ChatActivity extends Activity {
                         messageList.add(m);
                     }
 
-                    adapter = new MessageAdapter( getApplicationContext(), messageList );
-                    recList.setAdapter( adapter );
-                    llm.scrollToPosition( messageList.size() - 1 );
-                    adapter.showAnimation();
+                    adapter = new MessageAdapter(getApplicationContext(), messageList);
+                    recList.setAdapter(adapter);
+                    llm.scrollToPosition(messageList.size() - 1);
                 }
             }
         });
@@ -178,12 +204,19 @@ public class ChatActivity extends Activity {
                 m.userId = authorId;
                 m.userName = authorName;
                 thisActivity.messageList.add(m);
+                thisActivity.adapter.showAnimation();
                 thisActivity.adapter.notifyDataSetChanged();
                 thisActivity.llm.scrollToPosition(thisActivity.messageList.size() - 1 );
             } else {
                 Log.d( TAG, String.format("chanel is not the same %s:%s", chanel, room.getObjectId() ) );
             }
         }
+    }
 
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        setResult(RESULT_CANCELED, returnIntent);
+        finish();
     }
 }

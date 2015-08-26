@@ -48,7 +48,9 @@ import eggs.painted.fluppychat.Util.UserImage;
  */
 public class RoomActivity extends Activity implements OpenChat {
     static private final String TAG = "ROOM_ACTIVITY";
+    private final int PICK_PHOTO_FOR_AVATAR = 1;
     static private final int SEARCH_FRIENDS = 2;
+    static private final int OPEN_CHAT = 3;
 
     List<ParseObject> roomList = new ArrayList<ParseObject>();
     List<ParseObject> converstationList = new ArrayList<ParseObject>();
@@ -81,6 +83,7 @@ public class RoomActivity extends Activity implements OpenChat {
         progressWheel = (ProgressWheel) findViewById(R.id.progress_wheel_room_activity);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_menu);
         NavigationView nv = (NavigationView) findViewById( R.id.navigationView );
         View header = getLayoutInflater().inflate(R.layout.drawer_header_layout, null);
         nv.addView(header);
@@ -184,6 +187,10 @@ public class RoomActivity extends Activity implements OpenChat {
                         subscribedChannels = new ArrayList<String>();
                     Log.d(TAG, String.format("Subscribed list %s", subscribedChannels.toString()));
 
+                    if ( subscribedChannels.contains( getString(R.string.new_room) + ParseUser.getCurrentUser().toString() ) ) {
+                        ParsePush.subscribeInBackground( getString(R.string.new_room) + ParseUser.getCurrentUser().toString() );
+                    }
+
                     for (ParseObject obj : list) {
                         ParseObject room = obj.getParseObject("room");
                         roomList.add(room);
@@ -223,10 +230,11 @@ public class RoomActivity extends Activity implements OpenChat {
     }
 
     @Override
-    public void openChat(ParseObject room) {
+    public void openChat(ParseObject room, ParseObject peopleInRoom ) {
         final Intent chatIntent = new Intent( RoomActivity.this, ChatActivity.class );
         ChatActivity.room = room;
-        startActivity( chatIntent );
+        ChatActivity.peopleInRoom = peopleInRoom;
+        startActivityForResult(chatIntent, OPEN_CHAT);
     }
 
     @Override
@@ -239,7 +247,7 @@ public class RoomActivity extends Activity implements OpenChat {
         adapter.notifyDataSetChanged();
     }
 
-    private final int PICK_PHOTO_FOR_AVATAR = 1;
+
     public void pickImage() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
@@ -293,6 +301,12 @@ public class RoomActivity extends Activity implements OpenChat {
         }
 
         if ( SEARCH_FRIENDS == requestCode ) {
+            if ( RESULT_OK == resultCode ) {
+                loadConversationsList();
+            }
+        }
+
+        if ( OPEN_CHAT == requestCode ) {
             if ( RESULT_OK == resultCode ) {
                 loadConversationsList();
             }

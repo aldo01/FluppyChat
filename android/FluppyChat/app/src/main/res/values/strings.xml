@@ -6,4 +6,6 @@
     <string name="chanelPrefix">ROOM_</string>
     <string name="drawer_open">open_drawable</string>
     <string name="drawer_close">drawer_close</string>
+    <string name="new_room">NEW_ROOM_</string>
+    <string name="roomInvite">You invited visit new room</string>
 </resources>

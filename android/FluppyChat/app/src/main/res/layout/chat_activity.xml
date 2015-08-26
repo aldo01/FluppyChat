@@ -6,53 +6,87 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/my_messaging_toolbar"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:background="@color/sinch_purple" />
+            android:background="@color/sinch_purple" >
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/cardMessageList"
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/cancelButton"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/ic_cancel"
+                    android:background="@android:color/transparent"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/my_messaging_toolbar"
-            android:layout_above="@+id/sendLayout"/>
+            android:layout_margin="8dp">
 
-        <LinearLayout
-            android:id="@+id/sendLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="64dp"
-            android:layout_alignParentBottom="true">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cardMessageList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/sendLayout"/>
 
-            <EditText
-                android:id="@+id/messageTextET"
-                android:layout_weight="0.8"
-                android:layout_width="0dp"
-                android:layout_height="64dp"/>
+            <LinearLayout
+                android:id="@+id/sendLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="64dp"
+                android:layout_alignParentBottom="true">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/sendMessageButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
-                android:src="@color/sinch_purple"/>
+                <EditText
+                    android:id="@+id/messageTextET"
+                    android:layout_weight="0.8"
+                    android:layout_width="0dp"
+                    android:layout_height="64dp"
+                    android:background="@android:color/white"/>
 
-        </LinearLayout>
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp">
 
-    </RelativeLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@color/sinch_purple"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/sendMessageButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:src="@mipmap/ic_send_white"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/messagingNavigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/drawer_header_layout"
-        app:menu="@menu/drawer"/>
-
-
+        android:layout_gravity="start"/>
 
 </android.support.v4.widget.DrawerLayout>

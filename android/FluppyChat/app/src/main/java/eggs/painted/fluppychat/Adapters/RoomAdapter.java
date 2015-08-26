@@ -179,7 +179,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
                 @Override
                 public void onClick(View v) {
                     Log.d( "ROOM_ID", room.getObjectId() );
-                    callback.openChat(room);
+                    callback.openChat(room, peopleInRoom);
                 }
             });
         }

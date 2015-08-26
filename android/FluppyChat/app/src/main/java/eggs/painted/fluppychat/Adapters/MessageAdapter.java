@@ -71,6 +71,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         if ( animate && i == messageList.size() - 1 ) {
             contactViewHolder.itemView.startAnimation(animToMiddle);
+            animate = false;
         }
     }
 

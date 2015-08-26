@@ -118,8 +118,20 @@ public class SearchFrindsActivity extends Activity implements CreateRoom {
             obj2.put("confirm", false);
             obj2.put("room", room);
             obj2.saveInBackground();
+
+            // send push with invite about new room
+            ParsePush push = new ParsePush();
+            push.setChannel(getString(R.string.new_room) + user.getObjectId());
+            push.setMessage( getString(R.string.roomInvite) );
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        setResult(RESULT_CANCELED, returnIntent);
+        finish();
     }
 }
