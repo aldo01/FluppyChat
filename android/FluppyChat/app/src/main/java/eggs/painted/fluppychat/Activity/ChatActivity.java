@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.parse.DeleteCallback;
@@ -35,6 +36,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import eggs.painted.fluppychat.Adapters.MessageAdapter;
+import eggs.painted.fluppychat.Adapters.UserHereAdapter;
 import eggs.painted.fluppychat.Model.Message;
 import eggs.painted.fluppychat.R;
 import eggs.painted.fluppychat.Util.UserImage;
@@ -56,6 +58,7 @@ public class ChatActivity extends Activity {
     RecyclerView recList;
     LinearLayoutManager llm;
     EditText messageBodyField;
+    View headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,7 @@ public class ChatActivity extends Activity {
 
         initUI();
         obtainMessageHistory();
+        obtainUserList();
     }
 
     private void initUI() {
@@ -79,6 +83,12 @@ public class ChatActivity extends Activity {
         llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
+
+        NavigationView nv = (NavigationView) findViewById( R.id.messagingNavigationView );
+        headerView = getLayoutInflater().inflate(R.layout.drawer_header_layout, null);
+        nv.addView(headerView);
+        CircleImageView ui = (CircleImageView) headerView.findViewById(R.id.userImageNavigationDrawer);
+        UserImage.showImage(ParseUser.getCurrentUser(), ui);
 
         messageBodyField = (EditText) findViewById(R.id.messageTextET);
         findViewById(R.id.sendMessageButton).setOnClickListener(new View.OnClickListener() {
@@ -136,6 +146,32 @@ public class ChatActivity extends Activity {
                     adapter = new MessageAdapter(getApplicationContext(), messageList);
                     recList.setAdapter(adapter);
                     llm.scrollToPosition(messageList.size() - 1);
+                }
+            }
+        });
+    }
+
+    private void obtainUserList() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
+        query.whereEqualTo("room", room);
+        query.include("people");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if ( null == e ) {
+                    List<ParseUser> listUser = new ArrayList<ParseUser>();
+                    Log.d( "USER_LIST", String.format("User count: %d %s", list.size(), list.toString()) );
+                    for ( ParseObject o : list ) {
+                    //for ( int i = 0; i < list.size(); i++ ) {
+                    //    ParseObject o = list.get(i);
+
+                        ParseUser u = o.getParseUser("people");
+                        listUser.add(u);
+                    }
+
+                    // show user list in listview from navigation drawer
+                    final ListView userLV = (ListView) headerView.findViewById(R.id.userHereList);
+                    userLV.setAdapter( new UserHereAdapter(getApplicationContext(), listUser) );
                 }
             }
         });

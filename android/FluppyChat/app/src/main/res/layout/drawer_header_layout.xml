@@ -12,11 +12,14 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImageNavigationDrawer"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
+            android:layout_height="fill_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
 
     <ListView
+        android:id="@+id/userHereList"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
 
