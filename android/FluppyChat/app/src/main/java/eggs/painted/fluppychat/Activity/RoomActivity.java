@@ -1,6 +1,8 @@
 package eggs.painted.fluppychat.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -14,10 +16,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -128,8 +133,7 @@ public class RoomActivity extends Activity implements OpenChat {
         findViewById( R.id.logoutButton ).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ParseUser.logOut();
-                finish();
+                logout();
             }
         });
     }
@@ -170,7 +174,6 @@ public class RoomActivity extends Activity implements OpenChat {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
         query.whereEqualTo("people", ParseUser.getCurrentUser());
         query.include("room");
-
         query.findInBackground(new FindCallback<ParseObject>() {
 
             @Override
@@ -187,7 +190,7 @@ public class RoomActivity extends Activity implements OpenChat {
                         subscribedChannels = new ArrayList<String>();
                     Log.d(TAG, String.format("Subscribed list %s", subscribedChannels.toString()));
 
-                    if ( subscribedChannels.contains( getString(R.string.new_room) + ParseUser.getCurrentUser().toString() ) ) {
+                    if ( !subscribedChannels.contains( getString(R.string.new_room) + ParseUser.getCurrentUser().toString() ) ) {
                         ParsePush.subscribeInBackground( getString(R.string.new_room) + ParseUser.getCurrentUser().toString() );
                     }
 
@@ -311,5 +314,29 @@ public class RoomActivity extends Activity implements OpenChat {
                 loadConversationsList();
             }
         }
+    }
+
+    private void logout() {
+        ParseUser.logOut();
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // create new alert dialog
+        AlertDialog.Builder mess = new AlertDialog.Builder( RoomActivity.this );
+        mess.setMessage("Do you want to logout?")
+                .setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        logout();
+                    }
+                })
+
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+        mess.show();
     }
 }

@@ -13,6 +13,8 @@ import com.parse.ParseUser;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import eggs.painted.fluppychat.Activity.ChatActivity;
+import eggs.painted.fluppychat.Interface.AddPeopleToRoom;
 import eggs.painted.fluppychat.R;
 import eggs.painted.fluppychat.Util.UserImage;
 
@@ -22,11 +24,13 @@ import eggs.painted.fluppychat.Util.UserImage;
 public class UserHereAdapter extends ArrayAdapter<ParseUser> {
     private Context myContext;
     private List<ParseUser> userLsit;
+    private AddPeopleToRoom callback;
 
-    public UserHereAdapter( Context context, List<ParseUser> _userList ) {
-        super( context, R.layout.friend_card, _userList );
+    public UserHereAdapter( ChatActivity activity, List<ParseUser> _userList ) {
+        super( activity.getApplicationContext(), R.layout.friend_card, _userList );
 
-        myContext = context;
+        callback = (AddPeopleToRoom) activity;
+        myContext = activity.getApplicationContext();
         userLsit = _userList;
     }
 
@@ -40,18 +44,24 @@ public class UserHereAdapter extends ArrayAdapter<ParseUser> {
         LayoutInflater inflater = (LayoutInflater) myContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.friend_card, parent, false);
+        final CircleImageView imageView = (CircleImageView) rowView.findViewById(R.id.userImageView);
         final TextView nameTextView = (TextView) rowView.findViewById(R.id.userNameTV);
         nameTextView.setTypeface(Typeface.DEFAULT);
         if ( position < userLsit.size() ) {
             ParseUser obj = userLsit.get(position);
 
             nameTextView.setText(obj.getUsername());
-            final CircleImageView imageView = (CircleImageView) rowView.findViewById(R.id.userImageView);
             UserImage.showImage(obj, imageView);
-
             return rowView;
         } else {
             nameTextView.setText( "Add people" );
+            imageView.setImageResource(R.mipmap.ic_add);
+            rowView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callback.addPeople();
+                }
+            });
             return rowView;
         }
     }

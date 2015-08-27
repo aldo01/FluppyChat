@@ -23,7 +23,7 @@
                     android:id="@+id/loginSerchET"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Login"/>
+                    android:hint="Username"/>
 
             </android.support.design.widget.TextInputLayout>
 

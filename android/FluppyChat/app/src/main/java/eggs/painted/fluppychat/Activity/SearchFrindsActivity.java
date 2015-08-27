@@ -64,7 +64,7 @@ public class SearchFrindsActivity extends Activity implements CreateRoom {
     private void searchPeople() {
         wheel.setVisibility(View.VISIBLE);
         ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("username", loginET.getText().toString() );
+        query.whereMatches("username", loginET.getText().toString() );
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {

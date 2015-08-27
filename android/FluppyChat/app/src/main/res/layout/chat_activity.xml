@@ -57,25 +57,14 @@
                     android:layout_weight="0.8"
                     android:layout_width="0dp"
                     android:layout_height="64dp"
-                    android:background="@android:color/white"/>
-
-                <FrameLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:src="@color/sinch_purple"/>
+                    android:hint="Message..."/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/sendMessageButton"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:src="@mipmap/ic_send_white"/>
-
-                </FrameLayout>
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:src="@mipmap/ic_send"/>
 
             </LinearLayout>
 

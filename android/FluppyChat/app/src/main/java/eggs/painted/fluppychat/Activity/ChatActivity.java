@@ -1,6 +1,9 @@
 package eggs.painted.fluppychat.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +29,7 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.scottyab.aescrypt.AESCrypt;
 
 import org.json.JSONException;
@@ -37,6 +42,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import eggs.painted.fluppychat.Adapters.MessageAdapter;
 import eggs.painted.fluppychat.Adapters.UserHereAdapter;
+import eggs.painted.fluppychat.Interface.AddPeopleToRoom;
 import eggs.painted.fluppychat.Model.Message;
 import eggs.painted.fluppychat.R;
 import eggs.painted.fluppychat.Util.UserImage;
@@ -44,7 +50,7 @@ import eggs.painted.fluppychat.Util.UserImage;
 /**
  * Created by dmytro on 23.08.15.
  */
-public class ChatActivity extends Activity {
+public class ChatActivity extends Activity implements AddPeopleToRoom {
     static public ParseObject room, peopleInRoom;
     static private ChatActivity thisActivity = null;
     static private String TAG = "MessagingActivity";
@@ -154,6 +160,7 @@ public class ChatActivity extends Activity {
     private void obtainUserList() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
         query.whereEqualTo("room", room);
+        query.whereEqualTo("confirm", true);
         query.include("people");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -171,7 +178,7 @@ public class ChatActivity extends Activity {
 
                     // show user list in listview from navigation drawer
                     final ListView userLV = (ListView) headerView.findViewById(R.id.userHereList);
-                    userLV.setAdapter( new UserHereAdapter(getApplicationContext(), listUser) );
+                    userLV.setAdapter( new UserHereAdapter( ChatActivity.this, listUser) );
                 }
             }
         });
@@ -254,5 +261,64 @@ public class ChatActivity extends Activity {
         Intent returnIntent = new Intent();
         setResult(RESULT_CANCELED, returnIntent);
         finish();
+    }
+
+    @Override
+    public void addPeople() {
+        // create new alert dialog
+        AlertDialog.Builder mess = new AlertDialog.Builder( ChatActivity.this );
+
+        // Get the layout inflater
+        LayoutInflater inflater = getLayoutInflater();
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        View dialogView = inflater.inflate(R.layout.add_people_dialog, null);
+        mess.setView(dialogView);
+
+        final EditText usernameET = (EditText) dialogView.findViewById(R.id.usernameForSearchET);
+        mess.setMessage("Add People")
+            .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    String username = usernameET.getText().toString();
+                    ParseQuery<ParseUser> query = ParseUser.getQuery();
+                    query.whereEqualTo("username", username);
+                    query.findInBackground(new FindCallback<ParseUser>() {
+                        @Override
+                        public void done(List<ParseUser> list, ParseException e) {
+                            if ( null == e ) {
+                                if ( 0 != list.size() ) {
+                                    ParseUser user = list.get(0);
+
+                                    ParseObject obj = new ParseObject("PeopleInRoom");
+                                    obj.put("people", user);
+                                    obj.put("confirm", false);
+                                    obj.put("room", room);
+                                    obj.saveInBackground(new SaveCallback() {
+                                        @Override
+                                        public void done(ParseException e) {
+                                            Toast.makeText(getApplicationContext(), "Invitation sent", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                                    // send push with invite about new room
+                                    ParsePush push = new ParsePush();
+                                    push.setChannel(getString(R.string.new_room) + user.getObjectId());
+                                    push.setMessage(getString(R.string.roomInvite));
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "User not found", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                    });
+                }
+            })
+
+            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+
+                }
+            });
+        mess.show();
     }
 }

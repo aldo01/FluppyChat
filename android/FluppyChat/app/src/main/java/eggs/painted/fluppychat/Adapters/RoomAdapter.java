@@ -59,6 +59,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
         query.whereEqualTo( "room", roomList.get(i) );
         query.include("people");
+        query.whereEqualTo("confirm", true);
         Log.d("ROOM_NUM2", String.valueOf(i));
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
