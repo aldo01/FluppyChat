@@ -190,8 +190,8 @@ public class RoomActivity extends Activity implements OpenChat {
                         subscribedChannels = new ArrayList<String>();
                     Log.d(TAG, String.format("Subscribed list %s", subscribedChannels.toString()));
 
-                    if ( !subscribedChannels.contains( getString(R.string.new_room) + ParseUser.getCurrentUser().toString() ) ) {
-                        ParsePush.subscribeInBackground( getString(R.string.new_room) + ParseUser.getCurrentUser().toString() );
+                    if ( !subscribedChannels.contains( getString(R.string.new_room) + ParseUser.getCurrentUser().getObjectId() ) ) {
+                        ParsePush.subscribeInBackground( getString(R.string.new_room) + ParseUser.getCurrentUser().getObjectId() );
                     }
 
                     for (ParseObject obj : list) {

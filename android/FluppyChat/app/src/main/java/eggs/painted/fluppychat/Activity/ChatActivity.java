@@ -30,6 +30,7 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SendCallback;
 import com.scottyab.aescrypt.AESCrypt;
 
 import org.json.JSONException;
@@ -138,9 +139,6 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
                     for (int i = list.size() - 1; i >= 0; i--) {
                         ParseObject o = list.get(i);
                         ParseUser u = o.getParseUser("User");
-                        if (null != u) {
-                            Log.d("USER", u.getObjectId());
-                        }
 
                         Message m = new Message();
                         m.date = o.getUpdatedAt();
@@ -219,7 +217,17 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        push.sendInBackground();
+        push.sendInBackground(new SendCallback() {
+            @Override
+            public void done(ParseException e) {
+                if ( null == e ) {
+                    Log.d( "PUSH", "push sent" );
+                } else {
+                    Log.e( "PUSH", "error" );
+                    e.printStackTrace();
+                }
+            }
+        });
 
         // save message in parse
         ParseObject gameScore = new ParseObject("Message");
@@ -229,6 +237,7 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
         gameScore.saveInBackground();
 
         messageBodyField.setText("");
+        Log.d("MESSAGE", "message sent");
     }
 
     /**

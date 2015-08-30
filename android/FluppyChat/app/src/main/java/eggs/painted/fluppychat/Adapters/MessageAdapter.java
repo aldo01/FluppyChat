@@ -52,18 +52,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public void onBindViewHolder(final MessageViewHolder contactViewHolder, int i) {
         Message m = messageList.get(i);
         ParseUser u = m.user;
-        Log.d("BIND_CELL", String.valueOf(i));
 
         contactViewHolder.messageTV.setText( Decoder.decodeMessage(m.text) );
 
         if ( null != u ) {
-            Log.d( "BIND_CELL", "user is not null" );
             UserImage.showImage(u, contactViewHolder.userIV);
             contactViewHolder.userNameTV.setText(u.getUsername());
             contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format(m.date) );
         } else {
-//            contactViewHolder.userNameTV.setText(u.getUsername());
-            Log.d( "BIND_CELL", "user is null");
             UserImage.showImage(m.userId, contactViewHolder.userIV);
             contactViewHolder.userNameTV.setText( m.userName );
             contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format(new Date()) );
@@ -85,7 +81,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             id = m.user.getObjectId();
         }
 
-        Log.d( "CREATE_CELL", id);
         if ( id.equals(myUser.getObjectId()) ) {
             return 0;
         } else {
