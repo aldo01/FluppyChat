@@ -14,10 +14,15 @@ Currently, only android, version done. In future I plan add iOS version, social 
 
 When user open app, they can see authenfication page. Here user can login or sign up.
 
-![alt tag](https://lh3.googleusercontent.com/-9h94WvaBRpE/VWNoXwA7r_I/AAAAAAAAETM/VwAoIahocLQ/w325-h520-no/Screenshot_2015-05-25-00-19-03.jpg)
+<a href="https://play.google.com/store/apps/details?id=com.paintedeggs.fluppychat">
+<img src="https://lh3.googleusercontent.com/GGsF_PK8dbgaSwgvS5Iab_cQoSgwNZakzPHA-Kr2T3Q=w828-h1222-no" height="284" width="200"></a>
 
 ## Messaging
 
 The main part of messaging app is messaging activity. Here you can see how he looks.
 
-![alt tag](https://lh3.googleusercontent.com/-a288vR51UYs/VWNoYVKijaI/AAAAAAAAETQ/KoDfv8DEVJo/w325-h520-no/Screenshot_2015-05-25-00-18-31.jpg)
+<a href="https://play.google.com/store/apps/details?id=com.paintedeggs.fluppychat">
+<img src="https://lh3.googleusercontent.com/Kndrm4rTbwa0G4Bx4Hd6mXyTgHSKHqRjPsHlBq-_mdc=w830-h1224-no" height="284" width="200"></a>
+
+<a href="https://play.google.com/store/apps/details?id=com.paintedeggs.fluppychat">
+<img src="https://lh3.googleusercontent.com/xFiT3W1HxzL-yWPpkQeXWHKkFxOamw5fsvGJ6ZFHsu0=w826-h1224-no" height="284" width="200"></a>
