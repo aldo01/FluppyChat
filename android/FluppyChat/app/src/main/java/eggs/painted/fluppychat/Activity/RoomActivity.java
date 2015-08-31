@@ -112,6 +112,7 @@ public class RoomActivity extends Activity implements OpenChat {
             }
         };
 
+        // show user photo
         CircleImageView ui = (CircleImageView) findViewById(R.id.userImageNavigationDrawer);
         UserImage.showImage(ParseUser.getCurrentUser(), ui);
         ui.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +122,7 @@ public class RoomActivity extends Activity implements OpenChat {
             }
         });
 
+        // init floating button for search friends
         final FloatingActionButton fButton = (FloatingActionButton) findViewById( R.id.floatSearchButton );
         fButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,8 +192,8 @@ public class RoomActivity extends Activity implements OpenChat {
                         subscribedChannels = new ArrayList<String>();
                     Log.d(TAG, String.format("Subscribed list %s", subscribedChannels.toString()));
 
-                    if ( !subscribedChannels.contains( getString(R.string.new_room) + ParseUser.getCurrentUser().getObjectId() ) ) {
-                        ParsePush.subscribeInBackground( getString(R.string.new_room) + ParseUser.getCurrentUser().getObjectId() );
+                    if (!subscribedChannels.contains(getString(R.string.new_room) + ParseUser.getCurrentUser().getObjectId())) {
+                        ParsePush.subscribeInBackground(getString(R.string.new_room) + ParseUser.getCurrentUser().getObjectId());
                     }
 
                     for (ParseObject obj : list) {
@@ -277,6 +279,11 @@ public class RoomActivity extends Activity implements OpenChat {
                     buffer.write(mdata, 0, nRead);
                 }
                 buffer.flush();
+
+                if ( buffer.size() > 262144 ) {
+                    Toast.makeText( getApplicationContext(), "Max size 256 kb.", Toast.LENGTH_LONG ).show();
+                    return;
+                }
 
                 final ParseUser currUser = ParseUser.getCurrentUser();
                 ParseFile pfile = new ParseFile( currUser.getObjectId() + ".jpg", buffer.toByteArray());
