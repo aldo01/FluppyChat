@@ -5,23 +5,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -50,6 +44,8 @@ import eggs.painted.fluppychat.Util.UserImage;
 
 /**
  * Created by dmytro on 22.08.15.
+ *
+ * Show all available converstation room for user
  */
 public class RoomActivity extends Activity implements OpenChat {
     static private final String TAG = "ROOM_ACTIVITY";
@@ -65,6 +61,7 @@ public class RoomActivity extends Activity implements OpenChat {
     RecyclerView recList;
     public ActionBarDrawerToggle mDrawerToggle;
     ProgressWheel progressWheel;
+    int lastOpenedRoom; // show position of last opened room in the list
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,6 +233,11 @@ public class RoomActivity extends Activity implements OpenChat {
 
     @Override
     public void openChat(ParseObject room, ParseObject peopleInRoom ) {
+        if ( roomList.contains(room) ) {
+            lastOpenedRoom = roomList.indexOf(room);
+        }
+
+        // create intent for chat activity
         final Intent chatIntent = new Intent( RoomActivity.this, ChatActivity.class );
         ChatActivity.room = room;
         ChatActivity.peopleInRoom = peopleInRoom;
@@ -318,7 +320,8 @@ public class RoomActivity extends Activity implements OpenChat {
 
         if ( OPEN_CHAT == requestCode ) {
             if ( RESULT_OK == resultCode ) {
-                loadConversationsList();
+                roomList.remove(lastOpenedRoom);
+                adapter.notifyDataSetChanged();
             }
         }
     }

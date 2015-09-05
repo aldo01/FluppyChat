@@ -112,9 +112,14 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
                     peopleInRoom.deleteInBackground(new DeleteCallback() {
                         @Override
                         public void done(ParseException e) {
-                            Intent returnIntent = new Intent();
-                            setResult(RESULT_OK, returnIntent);
-                            finish();
+                            if ( null == e ) {
+                                Intent returnIntent = new Intent();
+                                setResult(RESULT_OK, returnIntent);
+                                finish();
+                            } else {
+                                Toast.makeText( getApplicationContext(), "Can't close room", Toast.LENGTH_LONG ).show();
+                                e.printStackTrace();
+                            }
                         }
                     });
 

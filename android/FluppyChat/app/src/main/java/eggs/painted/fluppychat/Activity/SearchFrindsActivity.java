@@ -18,11 +18,15 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import eggs.painted.fluppychat.Adapters.FriendCellAdapter;
 import eggs.painted.fluppychat.Interface.CreateRoom;
 import eggs.painted.fluppychat.R;
+import eggs.painted.fluppychat.Util.Decoder;
 
 /**
  * Created by dmytro on 23.08.15.
@@ -122,7 +126,19 @@ public class SearchFrindsActivity extends Activity implements CreateRoom {
             // send push with invite about new room
             ParsePush push = new ParsePush();
             push.setChannel(getString(R.string.new_room) + user.getObjectId());
-            push.setMessage( getString(R.string.roomInvite) );
+
+            // create data for push that invite new user
+            JSONObject data = new JSONObject();
+            try {
+                data.put( "Alert", Decoder.codeMessage(getString(R.string.roomInvite)) );
+                data.put( "AuthorName", ParseUser.getCurrentUser().getUsername() );
+                push.setData( data );
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            push.setData( data );
+            push.sendInBackground();
         } catch (ParseException e) {
             e.printStackTrace();
         }
