@@ -147,12 +147,8 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
                 public void onClick(View v) {
                     Log.d( "CONFIRM", "confirm" );
                     peopleInRoom.put("confirm", true);
-                    try {
-                        peopleInRoom.save();
-                        callback.acceptRoom();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    peopleInRoom.saveInBackground();
+                    callback.acceptRoom();
                 }
             });
 

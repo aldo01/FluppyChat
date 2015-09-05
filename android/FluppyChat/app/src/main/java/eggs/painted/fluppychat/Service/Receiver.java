@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import eggs.painted.fluppychat.Activity.ChatActivity;
+import eggs.painted.fluppychat.Activity.RoomActivity;
 import eggs.painted.fluppychat.R;
 import eggs.painted.fluppychat.Util.Decoder;
 
@@ -49,25 +50,32 @@ public class Receiver extends ParsePushBroadcastReceiver {
             // decode message and put them in intent
             pushData = new JSONObject(intent.getStringExtra( KEY_PUSH_DATA ));
             Log.d(TAG, String.format("DATA: %s", pushData.toString()));
+            final String chanel = intent.getStringExtra(KEY_PUSH_CHANNEL);
+
+            if ( !chanel.contains("ROOM") && isAppForground(context) ) {
+                if ( null != RoomActivity.self ) {
+                    RoomActivity.self.loadConversationsList();
+                }
+            }
 
             if ( isAppForground(context) ) {
-                final String chanel = intent.getStringExtra(KEY_PUSH_CHANNEL);
+
                 final String msg = pushData.getString("Alert");
                 final String authId = pushData.getString("Author");
                 final String authName = pushData.getString("AuthorName");
-                Log.d( TAG, String.format( "MESSAGE: %s", msg ) );
-                Log.d( TAG, String.format("CHANEL: %s", chanel ) );
+                Log.d(TAG, String.format("MESSAGE: %s", msg));
+                Log.d(TAG, String.format("CHANEL: %s", chanel));
 
                 ChatActivity.receiveMessage(msg, chanel, authId, authName);
             } else {
                 // check value
-                if ( sharedPref.getBoolean( context.getString(R.string.notificationKey), false ) ) {
+                if (sharedPref.getBoolean(context.getString(R.string.notificationKey), false)) {
                     return;
                 }
 
                 // save true value
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean( context.getString(R.string.notificationKey), true );
+                editor.putBoolean(context.getString(R.string.notificationKey), true);
                 editor.commit();
 
                 Log.d(TAG, String.format("DATA2: %s", pushData.toString()));
@@ -75,8 +83,8 @@ public class Receiver extends ParsePushBroadcastReceiver {
                 // generate message text for notification
                 final String msg = Decoder.decodeMessage(pushData.getString("Alert"));
                 final String author = pushData.getString("AuthorName");
-                pushData.put( "alert", String.format("%s: %s", author, msg) );
-                intent.putExtra( KEY_PUSH_DATA, pushData.toString() );
+                pushData.put("alert", String.format("%s: %s", author, msg));
+                intent.putExtra(KEY_PUSH_DATA, pushData.toString());
 
                 super.onPushReceive(context, intent);
             }

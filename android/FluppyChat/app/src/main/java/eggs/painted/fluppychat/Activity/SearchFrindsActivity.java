@@ -38,15 +38,15 @@ public class SearchFrindsActivity extends Activity implements CreateRoom {
     RecyclerView recList;
     EditText loginET;
     ProgressWheel wheel;
+    boolean isSearched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_friend_activity);
-
-        initUI();
+     //   initUI();
     }
-
+/*
     private void initUI() {
         recList = (RecyclerView) findViewById(R.id.friendsList);
         recList.setHasFixedSize(true);
@@ -82,7 +82,7 @@ public class SearchFrindsActivity extends Activity implements CreateRoom {
                 wheel.setVisibility(View.GONE);
             }
         });
-    }
+    }*/
 
     /**
      * Create new room and add to them 2 people: me and selected user
@@ -91,6 +91,11 @@ public class SearchFrindsActivity extends Activity implements CreateRoom {
      */
     @Override
     public void createRoom(ParseUser user) {
+        if ( isSearched ) {
+            return;
+        }
+
+        isSearched = true;
         try {
             wheel.setVisibility(View.VISIBLE);
             ParseObject room = new ParseObject( "Room" );

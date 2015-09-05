@@ -52,6 +52,7 @@ public class RoomActivity extends Activity implements OpenChat {
     private final int PICK_PHOTO_FOR_AVATAR = 1;
     static private final int SEARCH_FRIENDS = 2;
     static private final int OPEN_CHAT = 3;
+    static public RoomActivity self; // singeltoon
 
     List<ParseObject> roomList = new ArrayList<ParseObject>();
     List<ParseObject> converstationList = new ArrayList<ParseObject>();
@@ -68,6 +69,7 @@ public class RoomActivity extends Activity implements OpenChat {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rooms_layout);
 
+        self = this;
         initUI();
         loadConversationsList();
     }
