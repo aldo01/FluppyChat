@@ -324,6 +324,13 @@ public class RoomActivity extends Activity implements OpenChat {
     }
 
     private void logout() {
+        // unsubscribe from all rooms
+        final ParseInstallation myInstallation = ParseInstallation.getCurrentInstallation();
+        List<String> subscribedChannels = myInstallation.getList("channels");
+        for ( String chanel : subscribedChannels ) {
+            ParsePush.unsubscribeInBackground(chanel);
+        }
+
         ParseUser.logOut();
         finish();
     }

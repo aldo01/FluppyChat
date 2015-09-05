@@ -253,8 +253,6 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
             }
         });
 
-
-
         messageBodyField.setText("");
         Log.d("MESSAGE", "message sent");
     }

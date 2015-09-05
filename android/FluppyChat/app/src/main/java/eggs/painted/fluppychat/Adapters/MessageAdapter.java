@@ -55,6 +55,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         contactViewHolder.messageTV.setText( Decoder.decodeMessage(m.text) );
         if ( !m.saved ) {
+            // enable text view that message is not sent
             contactViewHolder.notSentMessageTV.setVisibility(View.VISIBLE);
         }
 
