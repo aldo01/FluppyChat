@@ -30,8 +30,7 @@
                 android:textSize="24sp"
                 android:textColor="#000000"
                 android:gravity="center|start"
-                android:layout_marginLeft="8dp"
-                android:text="Lera"/>
+                android:layout_marginLeft="8dp"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userImageViewFriendMessageCell"
@@ -58,6 +57,15 @@
             android:textColor="#000000"
             android:gravity="right"
             android:padding="4dp"/>
+
+        <TextView
+            android:id="@+id/notSavedMessageTVFriendMessageCell"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Message not sent!"
+            android:textColor="@android:color/holo_red_dark"
+            android:gravity="right"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

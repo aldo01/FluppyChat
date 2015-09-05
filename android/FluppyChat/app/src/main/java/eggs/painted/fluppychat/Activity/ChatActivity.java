@@ -229,15 +229,40 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
             }
         });
 
+        // add message to the list
+        final Message m = new Message();
+        m.text = encryptedMsg;
+        m.userId = ParseUser.getCurrentUser().getObjectId();
+        m.userName = myName;
+        messageList.add(m);
+        showMessage();
+
         // save message in parse
         ParseObject gameScore = new ParseObject("Message");
         gameScore.put("User", ParseUser.getCurrentUser() );
         gameScore.put("Room", room);
         gameScore.put("Text", encryptedMsg);
-        gameScore.saveInBackground();
+        gameScore.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (null != e) {
+                    // notify that message not sent
+                    m.saved = false;
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
 
         messageBodyField.setText("");
         Log.d("MESSAGE", "message sent");
+    }
+
+    public void showMessage() {
+        adapter.showAnimation();
+        adapter.notifyDataSetChanged();
+        llm.scrollToPosition(thisActivity.messageList.size() - 1);
     }
 
     /**
@@ -250,15 +275,16 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
                                        final String authorName ) {
         if ( null != thisActivity ) {
             if ( (thisActivity.getString(R.string.chanelPrefix) + room.getObjectId()).equals(chanel)) {
-                Log.d( TAG, "Show received message" );
-                Message m = new Message();
-                m.text = msg;
-                m.userId = authorId;
-                m.userName = authorName;
-                thisActivity.messageList.add(m);
-                thisActivity.adapter.showAnimation();
-                thisActivity.adapter.notifyDataSetChanged();
-                thisActivity.llm.scrollToPosition(thisActivity.messageList.size() - 1 );
+                // if message not from me
+                if ( !authorId.equals( ParseUser.getCurrentUser().getObjectId() ) ) {
+                    Log.d( TAG, "Show received message" );
+                    Message m = new Message();
+                    m.text = msg;
+                    m.userId = authorId;
+                    m.userName = authorName;
+                    thisActivity.messageList.add(m);
+                    thisActivity.showMessage();
+                }
             } else {
                 Log.d( TAG, String.format("chanel is not the same %s:%s", chanel, room.getObjectId() ) );
             }

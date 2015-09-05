@@ -13,4 +13,5 @@ public class Message {
     public ParseUser user;
     public String userName;
     public String userId;
+    public boolean saved = true;
 }

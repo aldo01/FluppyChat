@@ -54,6 +54,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         ParseUser u = m.user;
 
         contactViewHolder.messageTV.setText( Decoder.decodeMessage(m.text) );
+        if ( !m.saved ) {
+            contactViewHolder.notSentMessageTV.setVisibility(View.VISIBLE);
+        }
 
         if ( null != u ) {
             UserImage.showImage(u, contactViewHolder.userIV);
@@ -110,6 +113,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         protected TextView messageTV;
         protected TextView dateTV;
         protected TextView userNameTV;
+        protected TextView notSentMessageTV;
 
         public MessageViewHolder(View v) {
             super(v);
@@ -124,6 +128,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             messageTV = (TextView) v.findViewById(R.id.messageTVMyMessageCell);
             dateTV = (TextView) v.findViewById(R.id.dateTVMyMessageCell);
             userNameTV = (TextView) v.findViewById(R.id.userNameTVMyMessageCell);
+            notSentMessageTV = (TextView) v.findViewById(R.id.notSavedMessageTVMyMessageCell);
         }
     }
 
@@ -135,6 +140,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             messageTV = (TextView) v.findViewById(R.id.messageTVFriendMessageCell);
             dateTV = (TextView) v.findViewById(R.id.dateTVFriendMessageCell);
             userNameTV = (TextView) v.findViewById(R.id.userNameTVFriendMessageCell);
+            notSentMessageTV = (TextView) v.findViewById(R.id.notSavedMessageTVFriendMessageCell);
         }
     }
 

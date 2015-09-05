@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.0"
 
     defaultConfig {
-        applicationId "com.paintedeggs.fluppychat"
+        applicationId "eggs.painted.fluppychat"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 21
