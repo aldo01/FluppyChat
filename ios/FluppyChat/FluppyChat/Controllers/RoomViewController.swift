@@ -18,8 +18,9 @@ class RoomViewController: UIViewController, ENSideMenuDelegate, UITableViewDataS
         didSet {
             tableView.reloadData()
             
+            /*
             let currentInstallation = PFInstallation.currentInstallation()
-            let subscribedChannels = (PFInstallation.currentInstallation().channels as? [String])!
+            let subscribedChannels = (currentInstallation.channels as? [String])!
             for r in self.roomList {
                 let roomId = ROOM_PREFIX + r.objectId!
                 var res : Bool = true
@@ -41,11 +42,14 @@ class RoomViewController: UIViewController, ENSideMenuDelegate, UITableViewDataS
                     println( "Exist \(roomId)" )
                 }
             }
+*/
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
+        
         self.sideMenuController()?.sideMenu?.delegate = self
         obtainRoomList()
     }
@@ -142,5 +146,9 @@ class RoomViewController: UIViewController, ENSideMenuDelegate, UITableViewDataS
         let destinationVC = segue.destinationViewController as! MessagingViewController
         destinationVC.room = selectedRoom
         destinationVC.userImages = self.userImages
-    }    
+    }
+    
+    @IBAction func logoutAction(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }

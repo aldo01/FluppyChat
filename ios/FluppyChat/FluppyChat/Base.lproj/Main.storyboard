@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V3Z-8f-To9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="B6d-99-MUD">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--Login-->
         <scene sceneID="oVU-Pz-AFG">
             <objects>
-                <viewController id="NfE-jV-696" customClass="LoginViewController" customModule="FluppyChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Login" id="NfE-jV-696" customClass="LoginViewController" customModule="FluppyChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uTc-b0-zYR"/>
                         <viewControllerLayoutGuide type="bottom" id="H2v-kD-t7e"/>
@@ -65,17 +65,17 @@
                     <connections>
                         <outlet property="loginTextField" destination="CMz-Up-iub" id="Xik-nl-rtX"/>
                         <outlet property="passwordField" destination="R3q-Sd-vOH" id="aDg-VW-a67"/>
-                        <segue destination="VVy-Es-pMR" kind="show" identifier="loginSuccess" id="s2J-PH-XJr"/>
+                        <segue destination="V3Z-8f-To9" kind="show" identifier="loginSuccess" id="uJj-wi-se7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1a5-iE-Stv" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="940" y="379"/>
         </scene>
-        <!--Messaging View Controller-->
+        <!--Messages-->
         <scene sceneID="eD3-CH-MPz">
             <objects>
-                <viewController id="1MA-Az-LRP" customClass="MessagingViewController" customModule="FluppyChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Messages" id="1MA-Az-LRP" customClass="MessagingViewController" customModule="FluppyChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XAG-Jj-LDA"/>
                         <viewControllerLayoutGuide type="bottom" id="KR5-CN-wL0"/>
@@ -103,7 +103,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Text" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikz-Rh-vc5">
                                                     <rect key="frame" x="8" y="33" width="552" height="46"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pa-pI-NHG">
@@ -147,7 +147,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-Ss-h44">
                                                     <rect key="frame" x="8" y="33" width="552" height="46"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Bv-2k-LJL">
@@ -254,10 +254,10 @@
             </objects>
             <point key="canvasLocation" x="194" y="1110"/>
         </scene>
-        <!--Room View Controller-->
+        <!--Rooms-->
         <scene sceneID="7pn-8C-hcj">
             <objects>
-                <viewController id="VVy-Es-pMR" customClass="RoomViewController" customModule="FluppyChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Rooms" id="VVy-Es-pMR" customClass="RoomViewController" customModule="FluppyChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aAP-Is-4jm"/>
                         <viewControllerLayoutGuide type="bottom" id="fhj-Nw-RIV"/>
@@ -293,7 +293,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WrI-HS-RWc">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -326,7 +326,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzI-gx-pHZ">
                                                     <rect key="frame" x="8" y="0.0" width="439" height="63"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -374,6 +374,13 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="cMh-We-qTA">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="wdS-ML-s6v">
+                            <connections>
+                                <action selector="logoutAction:" destination="VVy-Es-pMR" id="nS2-Io-57B"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="wEZ-Ot-wTZ" id="N4R-ba-z6d"/>
@@ -384,6 +391,22 @@
             </objects>
             <point key="canvasLocation" x="940" y="1110"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6mO-lD-zDc">
+            <objects>
+                <navigationController id="B6d-99-MUD" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="la6-sm-v1W">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="NfE-jV-696" kind="relationship" relationship="rootViewController" id="lqZ-IJ-6JU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Utx-6v-qh9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="186" y="379"/>
+        </scene>
         <!--My Navigation Controller-->
         <scene sceneID="15M-KD-5RL">
             <objects>
@@ -393,12 +416,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="NfE-jV-696" kind="relationship" relationship="rootViewController" id="1pp-Fc-y1w"/>
+                        <segue destination="VVy-Es-pMR" kind="relationship" relationship="rootViewController" id="0k5-5x-wpw"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ueM-Ps-7gM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="188" y="379"/>
+            <point key="canvasLocation" x="1648" y="379"/>
         </scene>
     </scenes>
 </document>
