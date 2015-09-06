@@ -264,8 +264,9 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
 
     public void showMessage() {
         adapter.showAnimation();
-        adapter.notifyDataSetChanged();
         llm.scrollToPosition(thisActivity.messageList.size() - 1);
+        adapter.notifyItemInserted( messageList.size() - 1 );
+
     }
 
     /**

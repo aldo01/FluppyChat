@@ -181,6 +181,7 @@ public class RoomActivity extends Activity implements OpenChat {
             public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
                     if (null != adapter) {
+                        converstationList.clear();
                         roomList.clear();
                         adapter.notifyItemRangeRemoved(0, roomList.size() - 1);
                     }
@@ -222,7 +223,7 @@ public class RoomActivity extends Activity implements OpenChat {
                         adapter = new RoomAdapter(RoomActivity.this, roomList, converstationList);
                         recList.setAdapter(adapter);
                     } else {
-                        adapter.notifyDataSetChanged();
+                        adapter.reloadData();
                     }
                     progressWheel.setVisibility(View.GONE);
                 } else {
@@ -248,7 +249,7 @@ public class RoomActivity extends Activity implements OpenChat {
 
     @Override
     public void acceptRoom() {
-        adapter.notifyDataSetChanged();
+        adapter.reloadData();
     }
 
     @Override

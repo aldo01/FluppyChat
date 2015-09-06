@@ -3,6 +3,7 @@ package eggs.painted.fluppychat.Util;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
@@ -21,37 +22,35 @@ import de.hdodenhof.circleimageview.CircleImageView;
 final public class UserImage {
     static private Hashtable<String, Bitmap> userImages = new Hashtable<String, Bitmap>();
 
-    static private void downloadImage( final ParseUser user, final CircleImageView img ) {
+    static private void downloadImage( final ParseUser user, final ImageView img ) {
+        Log.d("DOWNLOAD_IMAGE", user.getObjectId());
         ParseFile file = user.getParseFile("profilepic");
         if ( null != file ) {
-            file.getDataInBackground(new GetDataCallback() {
-                @Override
-                public void done(byte[] bytes, ParseException e) {
-                    if (null == e) {
-                        Log.d("IMAGE", "loaded");
-                        userImages.put(user.getObjectId(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-                        img.setImageBitmap(userImages.get(user.getObjectId()));
-                    } else {
-                        Log.e("PARSE", "Load image error");
-                        e.printStackTrace();
-                    }
-                }
-            });
+            try {
+                byte [] bytes = file.getData();
+                userImages.put(user.getObjectId(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                img.setImageBitmap(userImages.get(user.getObjectId()));
+                Log.d("SET_IMAGE", user.getObjectId());
+            } catch (ParseException e) {
+                Log.e("PARSE", "Load image error");
+                e.printStackTrace();
+            }
         }
     }
 
-    static public void showImage( final ParseUser user, final CircleImageView img ) {
+    static public void showImage( final ParseUser user, final ImageView img ) {
         Log.d("SHOW_IMAGE", user.getObjectId());
         if ( !userImages.containsKey(user.getObjectId()) ) {
             downloadImage( user, img );
         } else {
             img.setImageBitmap( userImages.get(user.getObjectId()) );
+            Log.d("SET_IMAGE", user.getObjectId());
         }
     }
 
-    static public void showImage( final String userId, final CircleImageView img ) {
+    static public void showImage( final String userId, final ImageView img ) {
         if ( null != userImages ) {
-            if (userImages.containsKey(userId)) {
+            if ( userImages.containsKey(userId) ) {
                 img.setImageBitmap(userImages.get(userId));
             }
         }

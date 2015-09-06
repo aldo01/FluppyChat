@@ -47,6 +47,7 @@
             style="@style/buttonStyle"
             android:id="@+id/loginButton"
             android:layout_width="128dp"
+            android:padding="4dp"
             android:layout_height="wrap_content"
             android:text="Sign In"/>
 
@@ -59,6 +60,7 @@
             android:id="@+id/signupButton"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
+            android:padding="4dp"
             android:text="Sign up"/>
 
     </LinearLayout>

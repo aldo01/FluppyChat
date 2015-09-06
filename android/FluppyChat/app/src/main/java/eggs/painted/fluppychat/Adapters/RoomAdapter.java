@@ -7,13 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -29,7 +33,7 @@ import eggs.painted.fluppychat.Util.UserImage;
 public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder> {
     private final int USER_IMAGE_SIZE = 96;
     private Context context;
-    private static List<ParseObject> roomList, peopleInRoomList;
+    private static List<ParseObject> roomList, peopleInRoomList, peopleInRoomOtherUserList;
     private OpenChat callback;
 
     public RoomAdapter( RoomActivity activity, List<ParseObject> roomList, List<ParseObject> peopleInRoomList) {
@@ -37,6 +41,8 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         this.peopleInRoomList = peopleInRoomList;
         this.context = activity.getApplicationContext();
         this.callback = (OpenChat) activity;
+
+        loadOtherPeople();
     }
 
     @Override
@@ -50,32 +56,34 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         ParseObject peopleInRoom = peopleInRoomList.get(i);
 
         contactViewHolder.putData( r, peopleInRoom );
+        Log.d( "ROOM_ADAPTER", String.format( "ROOM ID: %s %s", r.getObjectId(), String.valueOf(peopleInRoom.getBoolean("confirm")) ) );
         if ( peopleInRoom.getBoolean("confirm") ) {
-            contactViewHolder.initUI( r );
+            contactViewHolder.initUI(r);
+            contactViewHolder.containerLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, USER_IMAGE_SIZE));
         } else  {
-            contactViewHolder.initUI( peopleInRoom );
+            contactViewHolder.initUI(peopleInRoom);
+            contactViewHolder.containerLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, USER_IMAGE_SIZE));
         }
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
-        query.whereEqualTo( "room", roomList.get(i) );
-        query.include("people");
-        query.whereEqualTo("confirm", true);
-        Log.d("ROOM_NUM2", String.valueOf(i));
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                if ( null == e ) {
-                    contactViewHolder.containerLayout.removeAllViews();
-                    Log.d("ROOM", "receive people list");
-                    for ( ParseObject o : list ) {
-                        CircleImageView img = new CircleImageView(context);
-                        img.setLayoutParams( new ViewGroup.LayoutParams( USER_IMAGE_SIZE, USER_IMAGE_SIZE ) );
-                        UserImage.showImage( o.getParseUser("people"), img );
-                        contactViewHolder.containerLayout.addView(img);
-                    }
-                }
+        List<ParseObject> subList = new ArrayList<>();
+        for ( ParseObject o : peopleInRoomOtherUserList ) {
+            if ( o.getParseObject("room").getObjectId().equals( r.getObjectId() ) ) {
+                subList.add(o);
             }
-        });
+        }
+
+        contactViewHolder.containerLayout.removeAllViews();
+        Log.d("ROOM", String.format("receive people list, count %d", subList.size()) );
+        int j = 1;
+        for ( ParseObject o : subList ) {
+            CircleImageView img = new CircleImageView(context);
+            img.setLayoutParams(new ViewGroup.LayoutParams(USER_IMAGE_SIZE, USER_IMAGE_SIZE));
+            UserImage.showImage(o.getParseUser("people"), img);
+            //img.setImageResource(R.drawable.logo);
+            contactViewHolder.containerLayout.addView(img);
+            Log.d( "J = ", String.valueOf(j) );
+            j++;
+        }
     }
 
     @Override
@@ -106,6 +114,24 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
             RoomViewHolder holder = new RoomViewHolderNotConfirmed(callback, itemView);
             Log.d("ROOM_NUM", String.valueOf(i));
             return holder;
+        }
+    }
+
+    public void reloadData() {
+        loadOtherPeople();
+        this.notifyDataSetChanged();
+    }
+
+    private void loadOtherPeople() {
+        // get other people with him talk user
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("PeopleInRoom");
+        query.whereContainedIn("room", roomList);
+        query.include("people");
+        query.include("room");
+        try {
+            peopleInRoomOtherUserList = query.find();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

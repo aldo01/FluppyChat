@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:gravity="start">
+        android:gravity="start|center">
 
         <LinearLayout
             android:id="@+id/imageContainerLayout"
@@ -28,7 +28,8 @@
         <Button
             style="@style/buttonStyle"
             android:id="@+id/confirmButton"
-            android:layout_margin="2dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Confirm"/>
@@ -36,7 +37,8 @@
         <Button
             style="@style/buttonStyle"
             android:id="@+id/declineButton"
-            android:layout_margin="2dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Decline"/>
