@@ -48,6 +48,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             Calendar mCalendar = new GregorianCalendar();
             TimeZone mTimeZone = mCalendar.getTimeZone();
             mGMTOffset = mTimeZone.getRawOffset();
+            Log.d( "TIME_OFFSET", String.valueOf(mGMTOffset) );
         }
 
         myUser = ParseUser.getCurrentUser();
@@ -75,16 +76,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             // incomming message
             UserImage.showImage(u, contactViewHolder.userIV);
             contactViewHolder.userNameTV.setText(u.getUsername());
-            /*
+
             long timeMil = m.date.getTime();
-            timeMil = (timeMil - mGMTOffset) * 1000L;
-            */
-            contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format(m.date) );
+            //timeMil = (timeMil + mGMTOffset);
+            contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format( timeMil ) );
         } else {
             // my message
             UserImage.showImage(m.userId, contactViewHolder.userIV);
-            contactViewHolder.userNameTV.setText( m.userName );
-            contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format(new Date()) );
+            contactViewHolder.userNameTV.setText(m.userName);
+
+            // get curr time
+            long timeMil = new Date().getTime();
+            //timeMil = (timeMil + mGMTOffset);
+            contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format(timeMil) );
         }
 
         if ( animate && i == messageList.size() - 1 ) {
