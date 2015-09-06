@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="4dp">
@@ -51,6 +52,8 @@
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        wheel:matProg_barColor="@color/sinch_purple"
+        wheel:matProg_progressIndeterminate="true"
         android:visibility="gone"/>
 
 </RelativeLayout>

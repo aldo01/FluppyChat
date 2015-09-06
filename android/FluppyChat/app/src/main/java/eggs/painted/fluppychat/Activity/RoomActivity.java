@@ -49,6 +49,7 @@ import eggs.painted.fluppychat.Util.UserImage;
  */
 public class RoomActivity extends Activity implements OpenChat {
     static private final String TAG = "ROOM_ACTIVITY";
+
     private final int PICK_PHOTO_FOR_AVATAR = 1;
     static private final int SEARCH_FRIENDS = 2;
     static private final int OPEN_CHAT = 3;
@@ -198,6 +199,11 @@ public class RoomActivity extends Activity implements OpenChat {
 
                     for (ParseObject obj : list) {
                         ParseObject room = obj.getParseObject("room");
+                        if ( null == room ) {
+                            Log.e( TAG, "room is null" );
+                            continue;
+                        }
+
                         roomList.add(room);
                         converstationList.add(obj);
 

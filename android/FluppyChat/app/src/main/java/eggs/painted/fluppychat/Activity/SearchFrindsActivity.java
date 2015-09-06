@@ -1,11 +1,13 @@
 package eggs.painted.fluppychat.Activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -43,6 +45,7 @@ public class SearchFrindsActivity extends Activity implements CreateRoom {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.search_friend_activity);
         initUI();
     }
@@ -67,6 +70,7 @@ public class SearchFrindsActivity extends Activity implements CreateRoom {
 
     private void searchPeople() {
         wheel.setVisibility(View.VISIBLE);
+
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereMatches("username", loginET.getText().toString() );
         query.findInBackground(new FindCallback<ParseUser>() {

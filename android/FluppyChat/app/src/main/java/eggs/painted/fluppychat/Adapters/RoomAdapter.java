@@ -8,14 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +20,13 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import eggs.painted.fluppychat.Activity.RoomActivity;
 import eggs.painted.fluppychat.Interface.OpenChat;
-import eggs.painted.fluppychat.Model.Message;
 import eggs.painted.fluppychat.R;
 import eggs.painted.fluppychat.Util.UserImage;
 
 /**
  * Created by dmytro on 22.08.15.
+ *
+ * Adapter for showing rooms
  */
 public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder> {
     private final int USER_IMAGE_SIZE = 96;
@@ -79,7 +77,6 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
             CircleImageView img = new CircleImageView(context);
             img.setLayoutParams(new ViewGroup.LayoutParams(USER_IMAGE_SIZE, USER_IMAGE_SIZE));
             UserImage.showImage(o.getParseUser("people"), img);
-            //img.setImageResource(R.drawable.logo);
             contactViewHolder.containerLayout.addView(img);
             Log.d( "J = ", String.valueOf(j) );
             j++;
@@ -135,6 +132,10 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         }
     }
 
+    /**
+     * Default holder class.
+     * Contain union property for confirm and not confiem class
+     */
     public static class RoomViewHolder extends RecyclerView.ViewHolder {
         protected LinearLayout containerLayout;
         protected Button confirmButton, declineButton;
@@ -159,6 +160,10 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         }
     }
 
+    /**
+     * Confirmed view holder.
+     * Init parent propreties from extended class
+     */
     public static class RoomViewHolderNotConfirmed extends RoomViewHolder {
 
         public RoomViewHolderNotConfirmed( final OpenChat callback, View v ) {
@@ -191,6 +196,10 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         }
     }
 
+    /**
+     * Not confirmed view holder.
+     * Init parent propreties from extended class
+     */
     public static class RoomViewHolderConfirmed extends RoomViewHolder {
         public RoomViewHolderConfirmed( final OpenChat callback, View v ) {
             super(callback, v);

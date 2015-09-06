@@ -14,8 +14,11 @@ import android.widget.TextView;
 import com.parse.ParseUser;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import eggs.painted.fluppychat.Model.Message;
@@ -27,6 +30,8 @@ import eggs.painted.fluppychat.Util.UserImage;
  * Created by dmytro on 23.08.15.
  */
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
+    static private int mGMTOffset = -1; // time offset from GMT+0
+
     private Context context;
     private List<Message> messageList;
     private ParseUser myUser;
@@ -37,6 +42,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public MessageAdapter( Context context, List<Message> messageList) {
         this.messageList = messageList;
         this.context = context;
+
+        if ( -1 == mGMTOffset ) {
+            // init time offset from grinvich
+            Calendar mCalendar = new GregorianCalendar();
+            TimeZone mTimeZone = mCalendar.getTimeZone();
+            mGMTOffset = mTimeZone.getRawOffset();
+        }
 
         myUser = ParseUser.getCurrentUser();
         animFromMiddle  = AnimationUtils.loadAnimation(context, R.anim.from_middle);
@@ -60,10 +72,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
 
         if ( null != u ) {
+            // incomming message
             UserImage.showImage(u, contactViewHolder.userIV);
             contactViewHolder.userNameTV.setText(u.getUsername());
+            /*
+            long timeMil = m.date.getTime();
+            timeMil = (timeMil - mGMTOffset) * 1000L;
+            */
             contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format(m.date) );
         } else {
+            // my message
             UserImage.showImage(m.userId, contactViewHolder.userIV);
             contactViewHolder.userNameTV.setText( m.userName );
             contactViewHolder.dateTV.setText( DateFormat.getDateTimeInstance().format(new Date()) );
