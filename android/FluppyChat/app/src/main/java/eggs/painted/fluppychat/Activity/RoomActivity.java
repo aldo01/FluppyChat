@@ -59,6 +59,7 @@ public class RoomActivity extends Activity implements OpenChat {
     List<ParseObject> converstationList = new ArrayList<ParseObject>();
 
     // ui objects
+    CircleImageView userIV;
     RoomAdapter adapter;
     RecyclerView recList;
     public ActionBarDrawerToggle mDrawerToggle;
@@ -113,9 +114,9 @@ public class RoomActivity extends Activity implements OpenChat {
         };
 
         // show user photo
-        CircleImageView ui = (CircleImageView) findViewById(R.id.userImageNavigationDrawer);
-        UserImage.showImage(ParseUser.getCurrentUser(), ui);
-        ui.setOnClickListener(new View.OnClickListener() {
+        userIV = (CircleImageView) findViewById(R.id.userImageNavigationDrawer);
+        UserImage.showImage(ParseUser.getCurrentUser(), userIV);
+        userIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pickImage();
@@ -310,6 +311,8 @@ public class RoomActivity extends Activity implements OpenChat {
                     @Override
                     public void done(ParseException e) {
                         UserImage.removeImage(currUser.getObjectId());
+                        UserImage.showImage(ParseUser.getCurrentUser(), userIV);
+                        adapter.notifyDataSetChanged();
                     }
                 });
             } catch (FileNotFoundException e) {
