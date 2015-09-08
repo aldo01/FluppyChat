@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -292,13 +294,31 @@ public class RoomActivity extends Activity implements OpenChat {
                 }
                 buffer.flush();
 
+                /*
                 if ( buffer.size() > 262144 ) {
                     Toast.makeText( getApplicationContext(), "Max size 256 kb.", Toast.LENGTH_LONG ).show();
                     return;
-                }
+                }*/
+
+                // create bitmap from byte array
+                byte [] bitmapData = buffer.toByteArray();
+                Bitmap bmp = BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length);
+
+                // calculate scalling size
+                int bWidth = bmp.getWidth();
+                int bHeight = bmp.getHeight();
+                double bScale = bWidth / 128;
+
+                // scale bitmap
+                Bitmap scaleBitmap = Bitmap.createScaledBitmap(bmp, (int) (bWidth / bScale), (int) (bHeight / bScale), false);
+
+                // convert scaled bitmap to byte array
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                scaleBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteScaledBitmap = stream.toByteArray();
 
                 final ParseUser currUser = ParseUser.getCurrentUser();
-                ParseFile pfile = new ParseFile( currUser.getObjectId() + ".jpg", buffer.toByteArray());
+                ParseFile pfile = new ParseFile( currUser.getObjectId() + ".jpg", byteScaledBitmap);
                 pfile.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
