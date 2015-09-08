@@ -51,7 +51,7 @@ import eggs.painted.fluppychat.Util.UserImage;
 /**
  * Created by dmytro on 23.08.15.
  */
-public class ChatActivity extends Activity implements AddPeopleToRoom {
+public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnClickListener {
     static public ParseObject room, peopleInRoom;
     static private ChatActivity thisActivity = null;
     static private String TAG = "MessagingActivity";
@@ -98,34 +98,10 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
         UserImage.showImage(ParseUser.getCurrentUser(), ui);
 
         messageBodyField = (EditText) findViewById(R.id.messageTextET);
-        findViewById(R.id.sendMessageButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendMessage();
-            }
-        });
-
-        findViewById(R.id.cancelButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (null != peopleInRoom) {
-                    peopleInRoom.deleteInBackground(new DeleteCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if ( null == e ) {
-                                Intent returnIntent = new Intent();
-                                setResult(RESULT_OK, returnIntent);
-                                finish();
-                            } else {
-                                Toast.makeText( getApplicationContext(), "Can't close room", Toast.LENGTH_LONG ).show();
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
-                }
-            }
-        });
+        findViewById(R.id.sendMessageButton).setOnClickListener(this);
+        findViewById(R.id.backButton).setOnClickListener(this);
+        findViewById(R.id.roomsTV).setOnClickListener(this);
+        findViewById(R.id.deleteButton).setOnClickListener(this);
     }
 
     private void obtainMessageHistory() {
@@ -266,8 +242,9 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
         adapter.showAnimation();
         llm.scrollToPosition(thisActivity.messageList.size() - 1);
         adapter.notifyItemInserted( messageList.size() - 1 );
-
     }
+
+
 
     /**
      * Receive message from gcm
@@ -359,5 +336,51 @@ public class ChatActivity extends Activity implements AddPeopleToRoom {
                 }
             });
         mess.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch ( v.getId() ) {
+            case R.id.deleteButton:
+                if (null != peopleInRoom) {
+                    AlertDialog.Builder mess = new AlertDialog.Builder( ChatActivity.this );
+                    mess.setTitle("Do you want to delete this room?");
+                    mess.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            peopleInRoom.deleteInBackground(new DeleteCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if (null == e) {
+                                        Intent returnIntent = new Intent();
+                                        setResult(RESULT_OK, returnIntent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Can't close room", Toast.LENGTH_LONG).show();
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    mess.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+                    });
+                    mess.show();
+
+                }
+                break;
+
+            case R.id.backButton:
+            case R.id.roomsTV:
+                finish();
+                break;
+
+            case R.id.sendMessageButton:
+                sendMessage();
+                break;
+        }
     }
 }

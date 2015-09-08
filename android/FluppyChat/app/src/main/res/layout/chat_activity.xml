@@ -24,11 +24,33 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/cancelButton"
+                    android:id="@+id/backButton"
                     android:layout_width="46dp"
                     android:layout_height="46dp"
                     android:layout_marginRight="4dp"
-                    android:src="@mipmap/ic_cancel"
+                    android:src="@mipmap/ic_arrow_back"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:id="@+id/roomsTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="Rooms"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:textSize="24sp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.0"/>
+
+                <ImageButton
+                    android:id="@+id/deleteButton"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/ic_trash"
                     android:background="@android:color/transparent"/>
 
             </LinearLayout>
