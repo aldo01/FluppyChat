@@ -10,4 +10,5 @@
     <string name="roomInvite">You invited visit new room</string>
     <string name="preference_file_key">fluppy_chat_preferences_file</string>
     <string name="notificationKey">FluppyChatReceiveNotification</string>
+    <string name="notificationCountKey">FluppyChatReceiveNotificationCount</string>
 </resources>

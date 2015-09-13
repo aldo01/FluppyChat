@@ -1,6 +1,8 @@
 package eggs.painted.fluppychat.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -33,12 +36,15 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
     private Context context;
     private static List<ParseObject> roomList, peopleInRoomList, peopleInRoomOtherUserList;
     private OpenChat callback;
+    private SharedPreferences sharedPref;
 
     public RoomAdapter( RoomActivity activity, List<ParseObject> roomList, List<ParseObject> peopleInRoomList) {
         this.roomList = roomList;
         this.peopleInRoomList = peopleInRoomList;
         this.context = activity.getApplicationContext();
         this.callback = (OpenChat) activity;
+        sharedPref = context.getSharedPreferences(
+                context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         loadOtherPeople();
     }
@@ -55,12 +61,19 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
 
         contactViewHolder.putData( r, peopleInRoom );
         Log.d( "ROOM_ADAPTER", String.format( "ROOM ID: %s %s", r.getObjectId(), String.valueOf(peopleInRoom.getBoolean("confirm")) ) );
+        contactViewHolder.containerLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, USER_IMAGE_SIZE));
         if ( peopleInRoom.getBoolean("confirm") ) {
             contactViewHolder.initUI(r);
-            contactViewHolder.containerLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, USER_IMAGE_SIZE));
-        } else  {
+            int messageCount = sharedPref.getInt( context.getString(R.string.notificationCountKey) +
+                    context.getString(R.string.chanelPrefix) + r.getObjectId(), 0 );
+            Log.d( "ROOM_ADAPTER", String.format( "message count %d for room %s", messageCount, context.getString(R.string.notificationCountKey) + r.getObjectId()) );
+            if ( 0 != messageCount ) {
+                Log.d( "ROOM_ADAPTER", "show incommig message count" );
+                contactViewHolder.incommigCountMessageTV.setText( String.valueOf(messageCount) );
+                contactViewHolder.incommigCountMessageTV.setVisibility(View.VISIBLE);
+            }
+        } else {
             contactViewHolder.initUI(peopleInRoom);
-            contactViewHolder.containerLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, USER_IMAGE_SIZE));
         }
 
         List<ParseObject> subList = new ArrayList<>();
@@ -142,6 +155,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         protected OpenChat callback;
         protected View v;
         protected ParseObject room, peopleInRoom;
+        protected TextView incommigCountMessageTV;
 
         public RoomViewHolder( final OpenChat callback, View v ) {
             super(v);
@@ -206,14 +220,17 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomViewHolder
         }
 
         public void initUI( final ParseObject room ) {
-            Log.d( "ROOM_ID", room.getObjectId() );
+            Log.d("ROOM_ID", room.getObjectId());
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d( "ROOM_ID", room.getObjectId() );
+                    Log.d("ROOM_ID", room.getObjectId());
+                    incommigCountMessageTV.setVisibility(View.GONE);
                     callback.openChat(room, peopleInRoom);
                 }
             });
+
+            incommigCountMessageTV = (TextView) v.findViewById(R.id.incommingMessageCountTV);
         }
     }
 }

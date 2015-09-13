@@ -72,24 +72,31 @@ public class Receiver extends ParsePushBroadcastReceiver {
                 ChatActivity.receiveMessage(msg, chanel, authId, authName);
             } else {
                 // check value
-                if (sharedPref.getBoolean(context.getString(R.string.notificationKey), false)) {
-                    return;
-                }
+                boolean showNotification = sharedPref.getBoolean(context.getString(R.string.notificationKey) + chanel, true);
 
                 // save true value
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean(context.getString(R.string.notificationKey), true);
-                editor.commit();
+                editor.putBoolean(context.getString(R.string.notificationKey) + chanel, false);
 
-                Log.d(TAG, String.format("DATA2: %s", pushData.toString()));
+                // get prev count message and increment them
+                int countMessage = sharedPref.getInt( context.getString(R.string.notificationCountKey) + chanel, 0);
+                countMessage++;
+                editor.putInt( context.getString(R.string.notificationCountKey) + chanel, countMessage );
+                Log.d(TAG, String.format("message count %d for room %s", countMessage, context.getString(R.string.notificationCountKey) + chanel));
+                editor.apply();
 
-                // generate message text for notification
-                final String msg = Decoder.decodeMessage(pushData.getString("Alert"));
-                final String author = pushData.getString("AuthorName");
-                pushData.put("alert", String.format("%s: %s", author, msg));
-                intent.putExtra(KEY_PUSH_DATA, pushData.toString());
 
-                super.onPushReceive(context, intent);
+                Log.d(TAG, String.format("DATA2: count message %d, show notification %s", countMessage, String.valueOf(showNotification)));
+
+                if ( showNotification ) {
+                    // generate message text for notification
+                    final String msg = Decoder.decodeMessage(pushData.getString("Alert"));
+                    final String author = pushData.getString("AuthorName");
+                    pushData.put("alert", String.format("You receive message from %s", author));
+                    intent.putExtra(KEY_PUSH_DATA, pushData.toString());
+
+                    super.onPushReceive(context, intent);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

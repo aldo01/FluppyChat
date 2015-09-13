@@ -3,8 +3,10 @@ package eggs.painted.fluppychat.Activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -79,6 +81,16 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
         initUI();
         obtainMessageHistory();
         obtainUserList();
+
+        // clear shared pref
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean( getString(R.string.notificationKey) + getString(R.string.chanelPrefix) +
+                room.getObjectId(), true);
+        editor.putInt( getString(R.string.notificationCountKey) + getString(R.string.chanelPrefix) +
+                room.getObjectId(), 0);
+        editor.apply();
     }
 
     private void initUI() {
