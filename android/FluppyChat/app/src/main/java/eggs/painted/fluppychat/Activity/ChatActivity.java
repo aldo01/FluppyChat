@@ -48,6 +48,7 @@ import eggs.painted.fluppychat.Adapters.UserHereAdapter;
 import eggs.painted.fluppychat.Interface.AddPeopleToRoom;
 import eggs.painted.fluppychat.Model.Message;
 import eggs.painted.fluppychat.R;
+import eggs.painted.fluppychat.Util.Toaster;
 import eggs.painted.fluppychat.Util.UserImage;
 
 /**
@@ -61,6 +62,7 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
     String myName; // store current user name
     MessageAdapter adapter;
     List<Message> messageList;
+    List<String> userNameList = new ArrayList<>();
     public ActionBarDrawerToggle mDrawerToggle;
 
     // ui elements
@@ -165,6 +167,7 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
 
                         ParseUser u = o.getParseUser("people");
                         listUser.add(u);
+                        userNameList.add( u.getUsername() );
                     }
 
                     // show user list in listview from navigation drawer
@@ -256,8 +259,6 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
         adapter.notifyItemInserted( messageList.size() - 1 );
     }
 
-
-
     /**
      * Receive message from gcm
      * Call from receiver
@@ -309,13 +310,18 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
             .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     String username = usernameET.getText().toString();
+                    if (userNameList.contains(username)) {
+                        Toaster.showText( getApplicationContext(), "This user is here" );
+                        return;
+                    }
+
                     ParseQuery<ParseUser> query = ParseUser.getQuery();
                     query.whereEqualTo("username", username);
                     query.findInBackground(new FindCallback<ParseUser>() {
                         @Override
                         public void done(List<ParseUser> list, ParseException e) {
-                            if ( null == e ) {
-                                if ( 0 != list.size() ) {
+                            if (null == e) {
+                                if (0 != list.size()) {
                                     ParseUser user = list.get(0);
 
                                     ParseObject obj = new ParseObject("PeopleInRoom");

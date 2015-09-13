@@ -90,7 +90,6 @@ public class Receiver extends ParsePushBroadcastReceiver {
 
                 if ( showNotification ) {
                     // generate message text for notification
-                    final String msg = Decoder.decodeMessage(pushData.getString("Alert"));
                     final String author = pushData.getString("AuthorName");
                     pushData.put("alert", String.format("You receive message from %s", author));
                     intent.putExtra(KEY_PUSH_DATA, pushData.toString());
