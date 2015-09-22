@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,6 +62,14 @@ public class LoginActivity extends Activity {
                 username = usernameField.getText().toString();
                 password = passwordField.getText().toString();
 
+                // check withespace in username
+                if ( containsWhiteSpace(username) ) {
+                    Toast.makeText(getApplicationContext(),
+                            "Incorrect User Name."
+                            , Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     public void done(ParseUser user, com.parse.ParseException e) {
                         if (user != null) {
@@ -80,6 +89,14 @@ public class LoginActivity extends Activity {
             public void onClick(View view) {
                 username = usernameField.getText().toString();
                 password = passwordField.getText().toString();
+
+                // check withespace in username
+                if ( containsWhiteSpace(username) ) {
+                    Toast.makeText(getApplicationContext(),
+                            "Incorrect User Name."
+                            , Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 // upload default user photo
                 byte [] imageData = getBytesFromBitmap(BitmapFactory.decodeResource( getResources(), R.mipmap.user_photo ));
@@ -107,6 +124,32 @@ public class LoginActivity extends Activity {
                 });
             }
         });
+    }
+
+    /**
+     * Check if string contain space character
+     *
+     * @param testCode - string for checking
+     */
+    private boolean containsWhiteSpace(final String testCode){
+        if(testCode != null){
+            // first is not digit
+            if ( Character.isDigit(testCode.charAt(0)) ) {
+                return true;
+            }
+
+            for(int i = 0; i < testCode.length(); i++){
+                char c = testCode.charAt(i);
+                // is alphabetical or digit
+                Log.d( "LOGIN", String.format("%s %s", String.valueOf(Character.isAlphabetic(c)),
+                        String.valueOf(Character.isDigit(c) )));
+                if ( !Character.isAlphabetic(c) && !Character.isDigit(c) ){
+                    Log.d( "LOGIN", "contain whitespace" );
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

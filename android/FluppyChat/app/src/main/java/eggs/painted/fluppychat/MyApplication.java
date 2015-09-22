@@ -9,7 +9,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Parse.initialize(this, "123", "123");
+        Parse.initialize(this, "***", "***");
         ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 }

@@ -19,7 +19,6 @@ import java.util.List;
 import eggs.painted.fluppychat.Activity.ChatActivity;
 import eggs.painted.fluppychat.Activity.RoomActivity;
 import eggs.painted.fluppychat.R;
-import eggs.painted.fluppychat.Util.Decoder;
 
 public class Receiver extends ParsePushBroadcastReceiver {
     private final String TAG = "MY_RECEIVER";
@@ -63,13 +62,16 @@ public class Receiver extends ParsePushBroadcastReceiver {
             }
 
             if ( isAppForground(context) ) {
+                Log.d( "PUSH_DATA", pushData.toString() );
                 final String msg = pushData.getString("Alert");
                 final String authId = pushData.getString("Author");
                 final String authName = pushData.getString("AuthorName");
+                final String androidId = pushData.getString("AndroidId");
+
                 Log.d(TAG, String.format("MESSAGE: %s", msg));
                 Log.d(TAG, String.format("CHANEL: %s", chanel));
 
-                ChatActivity.receiveMessage(msg, chanel, authId, authName);
+                ChatActivity.receiveMessage(msg, chanel, authId, authName, androidId);
             } else {
                 // check value
                 boolean showNotification = sharedPref.getBoolean(context.getString(R.string.notificationKey) + chanel, true);

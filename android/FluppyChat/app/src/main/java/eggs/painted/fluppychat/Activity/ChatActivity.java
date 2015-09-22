@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -58,6 +59,7 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
     static public ParseObject room, peopleInRoom;
     static private ChatActivity thisActivity = null;
     static private String TAG = "MessagingActivity";
+    static private String currentDeviceId;
 
     String myName; // store current user name
     MessageAdapter adapter;
@@ -90,9 +92,12 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean( getString(R.string.notificationKey) + getString(R.string.chanelPrefix) +
                 room.getObjectId(), true);
-        editor.putInt( getString(R.string.notificationCountKey) + getString(R.string.chanelPrefix) +
+        editor.putInt(getString(R.string.notificationCountKey) + getString(R.string.chanelPrefix) +
                 room.getObjectId(), 0);
         editor.apply();
+
+        // get current device id
+        currentDeviceId = Settings.Secure.getString( getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
     private void initUI() {
@@ -205,10 +210,14 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
         ParsePush push = new ParsePush();
         push.setChannel( getString(R.string.chanelPrefix) + room.getObjectId() );
         try {
+            String android_id = Settings.Secure.getString( getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+
             JSONObject data = new JSONObject();
             data.put( "Alert", encryptedMsg );
             data.put( "Author", ParseUser.getCurrentUser().getObjectId() );
             data.put( "AuthorName", ParseUser.getCurrentUser().getUsername() );
+            data.put( "AndroidId", android_id );
             push.setData( data );
         } catch (JSONException e) {
             e.printStackTrace();
@@ -266,11 +275,12 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
     static public void receiveMessage( final String msg,
                                        final String chanel,
                                        final String authorId,
-                                       final String authorName ) {
+                                       final String authorName,
+                                       final String androidId ) {
         if ( null != thisActivity ) {
             if ( (thisActivity.getString(R.string.chanelPrefix) + room.getObjectId()).equals(chanel)) {
                 // if message not from me
-                if ( !authorId.equals( ParseUser.getCurrentUser().getObjectId() ) ) {
+                if ( !androidId.equals( currentDeviceId ) ) {
                     Log.d( TAG, "Show received message" );
                     Message m = new Message();
                     m.text = msg;

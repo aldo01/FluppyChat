@@ -138,7 +138,7 @@ public class RoomActivity extends Activity implements OpenChat {
         findViewById( R.id.logoutButton ).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logout();
+                askAboutLogout();
             }
         });
     }
@@ -294,12 +294,6 @@ public class RoomActivity extends Activity implements OpenChat {
                 }
                 buffer.flush();
 
-                /*
-                if ( buffer.size() > 262144 ) {
-                    Toast.makeText( getApplicationContext(), "Max size 256 kb.", Toast.LENGTH_LONG ).show();
-                    return;
-                }*/
-
                 // create bitmap from byte array
                 byte [] bitmapData = buffer.toByteArray();
                 Bitmap bmp = BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length);
@@ -358,6 +352,11 @@ public class RoomActivity extends Activity implements OpenChat {
         }
     }
 
+    /**
+     * Logout current user
+     * Remove push listener from device
+     * Logout Parse User
+     */
     private void logout() {
         // unsubscribe from all rooms
         final ParseInstallation myInstallation = ParseInstallation.getCurrentInstallation();
@@ -370,8 +369,10 @@ public class RoomActivity extends Activity implements OpenChat {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
+    /**
+     * Show alert dialog, that ask in user about confirm logout
+     */
+    private void askAboutLogout() {
         // create new alert dialog
         AlertDialog.Builder mess = new AlertDialog.Builder( RoomActivity.this );
         mess.setMessage("Do you want to logout?")
@@ -387,5 +388,10 @@ public class RoomActivity extends Activity implements OpenChat {
                     }
                 });
         mess.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        askAboutLogout();
     }
 }

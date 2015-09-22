@@ -6,7 +6,7 @@
     </style>
 
     <style name="buttonStyle">
-        <item name="android:background">@color/sinch_purple</item>
+        <item name="android:background">@drawable/button_background</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">22sp</item>
     </style>

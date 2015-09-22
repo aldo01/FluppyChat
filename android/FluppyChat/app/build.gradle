@@ -8,8 +8,8 @@ android {
         applicationId "eggs.painted.fluppychat"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 24
-        versionName "2.4"
+        versionCode 26
+        versionName "2.6"
     }
     buildTypes {
         release {

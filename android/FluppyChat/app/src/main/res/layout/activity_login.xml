@@ -55,6 +55,11 @@
             android:orientation="horizontal"
             android:gravity="center">
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1.0"/>
+
             <Button
                 style="@style/buttonStyle"
                 android:id="@+id/loginButton"
@@ -63,8 +68,9 @@
                 android:text="Sign In"/>
 
             <View
-                android:layout_width="96dp"
-                android:layout_height="0dp"/>
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1.0"/>
 
             <Button
                 style="@style/buttonStyle"
@@ -72,6 +78,11 @@
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
                 android:text="Sign up"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1.0"/>
 
         </LinearLayout>
 
