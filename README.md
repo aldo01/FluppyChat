@@ -10,6 +10,16 @@ Currently, only android, version done. In future I plan add iOS version, social 
 <a href="https://play.google.com/store/apps/details?id=eggs.painted.fluppychat">
 <img src="https://lh3.googleusercontent.com/SApKl4qo028NAeV3vMq9OQw5STE-JupQ3AeFiU8qvvQ=w519-h186-no" height="100" width="279"></a>
 
+## Features
+
+Application has few features:
+- push notification
+- "parse" api
+- optimistic approach
+- photo uploading
+- material design
+etc.
+
 ## Authenfication
 
 When user open app, they can see authenfication page. Here user can login or sign up.
