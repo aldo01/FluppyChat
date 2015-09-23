@@ -7,119 +7,80 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A92024371B6CEDB300D1B85F /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = A92024301B6CEDB300D1B85F /* AESCrypt.m */; };
-		A92024381B6CEDB300D1B85F /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A92024321B6CEDB300D1B85F /* NSData+Base64.m */; };
-		A92024391B6CEDB300D1B85F /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = A92024341B6CEDB300D1B85F /* NSData+CommonCrypto.m */; };
-		A920243A1B6CEDB300D1B85F /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A92024361B6CEDB300D1B85F /* NSString+Base64.m */; };
-		A920243D1B6CF7E500D1B85F /* MyMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A920243C1B6CF7E500D1B85F /* MyMessageTableViewCell.swift */; };
-		A932A98B1B69761600291FCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A98A1B69761600291FCF /* AppDelegate.swift */; };
-		A932A98D1B69761600291FCF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A98C1B69761600291FCF /* ViewController.swift */; };
-		A932A9901B69761600291FCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A932A98E1B69761600291FCF /* Main.storyboard */; };
-		A932A9921B69761600291FCF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A932A9911B69761600291FCF /* Images.xcassets */; };
-		A932A9951B69761600291FCF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A932A9931B69761600291FCF /* LaunchScreen.xib */; };
-		A932A9A11B69761600291FCF /* FluppyChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A9A01B69761600291FCF /* FluppyChatTests.swift */; };
-		A932A9AC1B6A4C8B00291FCF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A932A9AB1B6A4C8B00291FCF /* LoginViewController.swift */; };
-		A932A9B41B6A52D300291FCF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9B21B6A52D300291FCF /* Bolts.framework */; };
-		A932A9B51B6A52D300291FCF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9B31B6A52D300291FCF /* Parse.framework */; };
-		A932A9B71B6A52EC00291FCF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9B61B6A52EC00291FCF /* AudioToolbox.framework */; };
-		A932A9B91B6A587A00291FCF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9B81B6A587A00291FCF /* CFNetwork.framework */; };
-		A932A9BB1B6A588200291FCF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9BA1B6A588200291FCF /* CoreGraphics.framework */; };
-		A932A9BD1B6A589000291FCF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9BC1B6A589000291FCF /* CoreLocation.framework */; };
-		A932A9BF1B6A589600291FCF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9BE1B6A589600291FCF /* QuartzCore.framework */; };
-		A932A9C11B6A58A100291FCF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C01B6A58A100291FCF /* Security.framework */; };
-		A932A9C31B6A58A700291FCF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C21B6A58A700291FCF /* StoreKit.framework */; };
-		A932A9C51B6A58B800291FCF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C41B6A58B800291FCF /* SystemConfiguration.framework */; };
-		A932A9C71B6A58C200291FCF /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C61B6A58C200291FCF /* libz.dylib */; };
-		A932A9C91B6A58DA00291FCF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A932A9C81B6A58DA00291FCF /* libsqlite3.dylib */; };
-		A94478161B81E9E600AE8712 /* LeftRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94478151B81E9E600AE8712 /* LeftRoomViewController.swift */; };
-		A95DD2841B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2831B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift */; };
-		A95DD2861B6AB987009AD795 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2851B6AB987009AD795 /* RoomViewController.swift */; };
-		A95DD2881B6AC1E3009AD795 /* MessagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2871B6AC1E3009AD795 /* MessagingViewController.swift */; };
-		A95DD28C1B6AC405009AD795 /* FriendMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD28B1B6AC405009AD795 /* FriendMessageTableViewCell.swift */; };
-		A95DD29A1B6B6998009AD795 /* Decrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95DD2991B6B6998009AD795 /* Decrypt.swift */; };
-		A9AF16901B81FA9E00F1A7A8 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AF168F1B81FA9E00F1A7A8 /* MyNavigationController.swift */; };
-		A9AF16941B81FB0500F1A7A8 /* ENSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AF16921B81FB0500F1A7A8 /* ENSideMenu.swift */; };
-		A9AF16951B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AF16931B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift */; };
-		A9AF16971B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AF16961B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift */; };
+		7F58BDE01BB1F12400086384 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BDDF1BB1F12400086384 /* AppDelegate.swift */; };
+		7F58BDE51BB1F12400086384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F58BDE31BB1F12400086384 /* Main.storyboard */; };
+		7F58BDE71BB1F12400086384 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F58BDE61BB1F12400086384 /* Assets.xcassets */; };
+		7F58BDEA1BB1F12400086384 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F58BDE81BB1F12400086384 /* LaunchScreen.storyboard */; };
+		7F58BDF51BB1F12500086384 /* FluppyChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BDF41BB1F12500086384 /* FluppyChatTests.swift */; };
+		7F58BE001BB1F12500086384 /* FluppyChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BDFF1BB1F12500086384 /* FluppyChatUITests.swift */; };
+		7F58BE0E1BB1F14C00086384 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 7F58BE0D1BB1F14C00086384 /* PodFile */; settings = {ASSET_TAGS = (); }; };
+		7F58BE151BB1F51300086384 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE141BB1F51300086384 /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		7F58BE191BB1F7B700086384 /* MessageAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE181BB1F7B700086384 /* MessageAlert.swift */; settings = {ASSET_TAGS = (); }; };
+		7F58BE1B1BB1FA7A00086384 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */; settings = {ASSET_TAGS = (); }; };
+		B62D1D2DB8F7B0D17DD808A4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD66D8AD79EEE91C76B4F66 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A932A99B1B69761600291FCF /* PBXContainerItemProxy */ = {
+		7F58BDF11BB1F12500086384 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A932A97D1B69761600291FCF /* Project object */;
+			containerPortal = 7F58BDD41BB1F12400086384 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A932A9841B69761600291FCF;
+			remoteGlobalIDString = 7F58BDDB1BB1F12400086384;
+			remoteInfo = FluppyChat;
+		};
+		7F58BDFC1BB1F12500086384 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F58BDD41BB1F12400086384 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F58BDDB1BB1F12400086384;
 			remoteInfo = FluppyChat;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A920242F1B6CEDB300D1B85F /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AESCrypt.h; path = AESCrypt/AESCrypt.h; sourceTree = "<group>"; };
-		A92024301B6CEDB300D1B85F /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AESCrypt.m; path = AESCrypt/AESCrypt.m; sourceTree = "<group>"; };
-		A92024311B6CEDB300D1B85F /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "AESCrypt/NSData+Base64.h"; sourceTree = "<group>"; };
-		A92024321B6CEDB300D1B85F /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "AESCrypt/NSData+Base64.m"; sourceTree = "<group>"; };
-		A92024331B6CEDB300D1B85F /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+CommonCrypto.h"; path = "AESCrypt/NSData+CommonCrypto.h"; sourceTree = "<group>"; };
-		A92024341B6CEDB300D1B85F /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+CommonCrypto.m"; path = "AESCrypt/NSData+CommonCrypto.m"; sourceTree = "<group>"; };
-		A92024351B6CEDB300D1B85F /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "AESCrypt/NSString+Base64.h"; sourceTree = "<group>"; };
-		A92024361B6CEDB300D1B85F /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "AESCrypt/NSString+Base64.m"; sourceTree = "<group>"; };
-		A920243B1B6CEE0700D1B85F /* FluppyChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FluppyChat-Bridging-Header.h"; sourceTree = "<group>"; };
-		A920243C1B6CF7E500D1B85F /* MyMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyMessageTableViewCell.swift; path = Controllers/Cells/MyMessageTableViewCell.swift; sourceTree = "<group>"; };
-		A932A9851B69761600291FCF /* FluppyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FluppyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A932A9891B69761600291FCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A932A98A1B69761600291FCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A932A98C1B69761600291FCF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A932A98F1B69761600291FCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A932A9911B69761600291FCF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A932A9941B69761600291FCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		A932A99A1B69761600291FCF /* FluppyChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FluppyChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A932A99F1B69761600291FCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A932A9A01B69761600291FCF /* FluppyChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluppyChatTests.swift; sourceTree = "<group>"; };
-		A932A9AB1B6A4C8B00291FCF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
-		A932A9B21B6A52D300291FCF /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../Bolts.framework; sourceTree = "<group>"; };
-		A932A9B31B6A52D300291FCF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
-		A932A9B61B6A52EC00291FCF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		A932A9B81B6A587A00291FCF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		A932A9BA1B6A588200291FCF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A932A9BC1B6A589000291FCF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		A932A9BE1B6A589600291FCF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A932A9C01B6A58A100291FCF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		A932A9C21B6A58A700291FCF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		A932A9C41B6A58B800291FCF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		A932A9C61B6A58C200291FCF /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A932A9C81B6A58DA00291FCF /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		A94478151B81E9E600AE8712 /* LeftRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftRoomViewController.swift; path = Controllers/LeftRoomViewController.swift; sourceTree = "<group>"; };
-		A95DD2831B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotConfirmedRoomTableViewCell.swift; path = Controllers/Cells/NotConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
-		A95DD2851B6AB987009AD795 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomViewController.swift; path = Controllers/RoomViewController.swift; sourceTree = "<group>"; };
-		A95DD2871B6AC1E3009AD795 /* MessagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagingViewController.swift; path = Controllers/MessagingViewController.swift; sourceTree = "<group>"; };
-		A95DD28B1B6AC405009AD795 /* FriendMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendMessageTableViewCell.swift; path = Controllers/Cells/FriendMessageTableViewCell.swift; sourceTree = "<group>"; };
-		A95DD2991B6B6998009AD795 /* Decrypt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Decrypt.swift; path = Util/Decrypt.swift; sourceTree = "<group>"; };
-		A9AF168F1B81FA9E00F1A7A8 /* MyNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
-		A9AF16921B81FB0500F1A7A8 /* ENSideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSideMenu.swift; sourceTree = "<group>"; };
-		A9AF16931B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSideMenuNavigationController.swift; sourceTree = "<group>"; };
-		A9AF16961B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmedRoomTableViewCell.swift; path = Controllers/Cells/ConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
+		1DD66D8AD79EEE91C76B4F66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DE4593AEC4BA184817F76A3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7F58BDDC1BB1F12400086384 /* FluppyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FluppyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F58BDDF1BB1F12400086384 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7F58BDE41BB1F12400086384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7F58BDE61BB1F12400086384 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7F58BDE91BB1F12400086384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7F58BDEB1BB1F12400086384 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F58BDF01BB1F12500086384 /* FluppyChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FluppyChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F58BDF41BB1F12500086384 /* FluppyChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluppyChatTests.swift; sourceTree = "<group>"; };
+		7F58BDF61BB1F12500086384 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F58BDFB1BB1F12500086384 /* FluppyChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FluppyChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F58BDFF1BB1F12500086384 /* FluppyChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluppyChatUITests.swift; sourceTree = "<group>"; };
+		7F58BE011BB1F12500086384 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F58BE0D1BB1F14C00086384 /* PodFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PodFile; sourceTree = "<group>"; };
+		7F58BE0F1BB1F21D00086384 /* FluppyChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FluppyChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		7F58BE141BB1F51300086384 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
+		7F58BE181BB1F7B700086384 /* MessageAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageAlert.swift; path = Util/MessageAlert.swift; sourceTree = "<group>"; };
+		7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomListViewController.swift; path = Controllers/RoomListViewController.swift; sourceTree = "<group>"; };
+		7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmedRoomTableViewCell.swift; path = Cells/ConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
+		7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoContainer.swift; path = Util/PhotoContainer.swift; sourceTree = "<group>"; };
+		8B37774411AF1F04C132F993 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A932A9821B69761600291FCF /* Frameworks */ = {
+		7F58BDD91BB1F12400086384 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A932A9C91B6A58DA00291FCF /* libsqlite3.dylib in Frameworks */,
-				A932A9C71B6A58C200291FCF /* libz.dylib in Frameworks */,
-				A932A9C51B6A58B800291FCF /* SystemConfiguration.framework in Frameworks */,
-				A932A9C31B6A58A700291FCF /* StoreKit.framework in Frameworks */,
-				A932A9C11B6A58A100291FCF /* Security.framework in Frameworks */,
-				A932A9BF1B6A589600291FCF /* QuartzCore.framework in Frameworks */,
-				A932A9BD1B6A589000291FCF /* CoreLocation.framework in Frameworks */,
-				A932A9BB1B6A588200291FCF /* CoreGraphics.framework in Frameworks */,
-				A932A9B91B6A587A00291FCF /* CFNetwork.framework in Frameworks */,
-				A932A9B71B6A52EC00291FCF /* AudioToolbox.framework in Frameworks */,
-				A932A9B51B6A52D300291FCF /* Parse.framework in Frameworks */,
-				A932A9B41B6A52D300291FCF /* Bolts.framework in Frameworks */,
+				B62D1D2DB8F7B0D17DD808A4 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A932A9971B69761600291FCF /* Frameworks */ = {
+		7F58BDED1BB1F12500086384 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F58BDF81BB1F12500086384 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -129,153 +90,134 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A932A97C1B69761600291FCF = {
+		3BA39968F288937C4E62CC16 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A932A9871B69761600291FCF /* FluppyChat */,
-				A932A99D1B69761600291FCF /* FluppyChatTests */,
-				A932A9861B69761600291FCF /* Products */,
+				5DE4593AEC4BA184817F76A3 /* Pods.debug.xcconfig */,
+				8B37774411AF1F04C132F993 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7F58BDD31BB1F12400086384 = {
+			isa = PBXGroup;
+			children = (
+				7F58BE0D1BB1F14C00086384 /* PodFile */,
+				7F58BDDE1BB1F12400086384 /* FluppyChat */,
+				7F58BDF31BB1F12500086384 /* FluppyChatTests */,
+				7F58BDFE1BB1F12500086384 /* FluppyChatUITests */,
+				7F58BDDD1BB1F12400086384 /* Products */,
+				3BA39968F288937C4E62CC16 /* Pods */,
+				C22DBEB1BD4A3F3F71790123 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		A932A9861B69761600291FCF /* Products */ = {
+		7F58BDDD1BB1F12400086384 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A932A9851B69761600291FCF /* FluppyChat.app */,
-				A932A99A1B69761600291FCF /* FluppyChatTests.xctest */,
+				7F58BDDC1BB1F12400086384 /* FluppyChat.app */,
+				7F58BDF01BB1F12500086384 /* FluppyChatTests.xctest */,
+				7F58BDFB1BB1F12500086384 /* FluppyChatUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A932A9871B69761600291FCF /* FluppyChat */ = {
+		7F58BDDE1BB1F12400086384 /* FluppyChat */ = {
 			isa = PBXGroup;
 			children = (
-				A920243B1B6CEE0700D1B85F /* FluppyChat-Bridging-Header.h */,
-				A95DD2981B6B696F009AD795 /* Util */,
-				A932A9AD1B6A51EB00291FCF /* Framework */,
-				A932A9AA1B6A4BC300291FCF /* Controllers */,
-				A932A98C1B69761600291FCF /* ViewController.swift */,
-				A932A98E1B69761600291FCF /* Main.storyboard */,
-				A932A9911B69761600291FCF /* Images.xcassets */,
-				A932A9881B69761600291FCF /* Supporting Files */,
+				7F58BE1C1BB1FCF600086384 /* Cell */,
+				7F58BE171BB1F78C00086384 /* Util */,
+				7F58BE161BB1F72C00086384 /* SupportedFiles */,
+				7F58BE131BB1F4F900086384 /* Controllers */,
+				7F58BE121BB1F28C00086384 /* UI */,
 			);
 			path = FluppyChat;
 			sourceTree = "<group>";
 		};
-		A932A9881B69761600291FCF /* Supporting Files */ = {
+		7F58BDF31BB1F12500086384 /* FluppyChatTests */ = {
 			isa = PBXGroup;
 			children = (
-				A932A9931B69761600291FCF /* LaunchScreen.xib */,
-				A932A98A1B69761600291FCF /* AppDelegate.swift */,
-				A932A9891B69761600291FCF /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		A932A99D1B69761600291FCF /* FluppyChatTests */ = {
-			isa = PBXGroup;
-			children = (
-				A932A9A01B69761600291FCF /* FluppyChatTests.swift */,
-				A932A99E1B69761600291FCF /* Supporting Files */,
+				7F58BDF41BB1F12500086384 /* FluppyChatTests.swift */,
+				7F58BDF61BB1F12500086384 /* Info.plist */,
 			);
 			path = FluppyChatTests;
 			sourceTree = "<group>";
 		};
-		A932A99E1B69761600291FCF /* Supporting Files */ = {
+		7F58BDFE1BB1F12500086384 /* FluppyChatUITests */ = {
 			isa = PBXGroup;
 			children = (
-				A932A99F1B69761600291FCF /* Info.plist */,
+				7F58BDFF1BB1F12500086384 /* FluppyChatUITests.swift */,
+				7F58BE011BB1F12500086384 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = FluppyChatUITests;
 			sourceTree = "<group>";
 		};
-		A932A9AA1B6A4BC300291FCF /* Controllers */ = {
+		7F58BE121BB1F28C00086384 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				A9AF168F1B81FA9E00F1A7A8 /* MyNavigationController.swift */,
-				A95DD2821B6AB59A009AD795 /* TableCells */,
-				A932A9AB1B6A4C8B00291FCF /* LoginViewController.swift */,
-				A95DD2851B6AB987009AD795 /* RoomViewController.swift */,
-				A95DD2871B6AC1E3009AD795 /* MessagingViewController.swift */,
-				A94478151B81E9E600AE8712 /* LeftRoomViewController.swift */,
+				7F58BDE61BB1F12400086384 /* Assets.xcassets */,
+				7F58BDE81BB1F12400086384 /* LaunchScreen.storyboard */,
+				7F58BDE31BB1F12400086384 /* Main.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		7F58BE131BB1F4F900086384 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F58BE141BB1F51300086384 /* LoginViewController.swift */,
+				7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		A932A9AD1B6A51EB00291FCF /* Framework */ = {
+		7F58BE161BB1F72C00086384 /* SupportedFiles */ = {
 			isa = PBXGroup;
 			children = (
-				A9AF16911B81FAEB00F1A7A8 /* SideMenu */,
-				A95DD29B1B6B71D8009AD795 /* AES */,
-				A932A9C81B6A58DA00291FCF /* libsqlite3.dylib */,
-				A932A9C61B6A58C200291FCF /* libz.dylib */,
-				A932A9C41B6A58B800291FCF /* SystemConfiguration.framework */,
-				A932A9C21B6A58A700291FCF /* StoreKit.framework */,
-				A932A9C01B6A58A100291FCF /* Security.framework */,
-				A932A9BE1B6A589600291FCF /* QuartzCore.framework */,
-				A932A9BC1B6A589000291FCF /* CoreLocation.framework */,
-				A932A9BA1B6A588200291FCF /* CoreGraphics.framework */,
-				A932A9B81B6A587A00291FCF /* CFNetwork.framework */,
-				A932A9B61B6A52EC00291FCF /* AudioToolbox.framework */,
-				A932A9B21B6A52D300291FCF /* Bolts.framework */,
-				A932A9B31B6A52D300291FCF /* Parse.framework */,
+				7F58BDEB1BB1F12400086384 /* Info.plist */,
+				7F58BE0F1BB1F21D00086384 /* FluppyChat-Bridging-Header.h */,
+				7F58BDDF1BB1F12400086384 /* AppDelegate.swift */,
 			);
-			name = Framework;
+			name = SupportedFiles;
 			sourceTree = "<group>";
 		};
-		A95DD2821B6AB59A009AD795 /* TableCells */ = {
+		7F58BE171BB1F78C00086384 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				A95DD2831B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift */,
-				A95DD28B1B6AC405009AD795 /* FriendMessageTableViewCell.swift */,
-				A920243C1B6CF7E500D1B85F /* MyMessageTableViewCell.swift */,
-				A9AF16961B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift */,
-			);
-			name = TableCells;
-			sourceTree = "<group>";
-		};
-		A95DD2981B6B696F009AD795 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				A95DD2991B6B6998009AD795 /* Decrypt.swift */,
+				7F58BE181BB1F7B700086384 /* MessageAlert.swift */,
+				7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
 		};
-		A95DD29B1B6B71D8009AD795 /* AES */ = {
+		7F58BE1C1BB1FCF600086384 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				A920242F1B6CEDB300D1B85F /* AESCrypt.h */,
-				A92024301B6CEDB300D1B85F /* AESCrypt.m */,
-				A92024311B6CEDB300D1B85F /* NSData+Base64.h */,
-				A92024321B6CEDB300D1B85F /* NSData+Base64.m */,
-				A92024331B6CEDB300D1B85F /* NSData+CommonCrypto.h */,
-				A92024341B6CEDB300D1B85F /* NSData+CommonCrypto.m */,
-				A92024351B6CEDB300D1B85F /* NSString+Base64.h */,
-				A92024361B6CEDB300D1B85F /* NSString+Base64.m */,
+				7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */,
 			);
-			name = AES;
+			name = Cell;
 			sourceTree = "<group>";
 		};
-		A9AF16911B81FAEB00F1A7A8 /* SideMenu */ = {
+		C22DBEB1BD4A3F3F71790123 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A9AF16921B81FB0500F1A7A8 /* ENSideMenu.swift */,
-				A9AF16931B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift */,
+				1DD66D8AD79EEE91C76B4F66 /* libPods.a */,
 			);
-			name = SideMenu;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A932A9841B69761600291FCF /* FluppyChat */ = {
+		7F58BDDB1BB1F12400086384 /* FluppyChat */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A932A9A41B69761600291FCF /* Build configuration list for PBXNativeTarget "FluppyChat" */;
+			buildConfigurationList = 7F58BE041BB1F12500086384 /* Build configuration list for PBXNativeTarget "FluppyChat" */;
 			buildPhases = (
-				A932A9811B69761600291FCF /* Sources */,
-				A932A9821B69761600291FCF /* Frameworks */,
-				A932A9831B69761600291FCF /* Resources */,
+				81D26B2ECB05F987A37D4FC2 /* Check Pods Manifest.lock */,
+				7F58BDD81BB1F12400086384 /* Sources */,
+				7F58BDD91BB1F12400086384 /* Frameworks */,
+				7F58BDDA1BB1F12400086384 /* Resources */,
+				9DB63497C9C9216EC1711DFF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -283,46 +225,69 @@
 			);
 			name = FluppyChat;
 			productName = FluppyChat;
-			productReference = A932A9851B69761600291FCF /* FluppyChat.app */;
+			productReference = 7F58BDDC1BB1F12400086384 /* FluppyChat.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A932A9991B69761600291FCF /* FluppyChatTests */ = {
+		7F58BDEF1BB1F12500086384 /* FluppyChatTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A932A9A71B69761600291FCF /* Build configuration list for PBXNativeTarget "FluppyChatTests" */;
+			buildConfigurationList = 7F58BE071BB1F12500086384 /* Build configuration list for PBXNativeTarget "FluppyChatTests" */;
 			buildPhases = (
-				A932A9961B69761600291FCF /* Sources */,
-				A932A9971B69761600291FCF /* Frameworks */,
-				A932A9981B69761600291FCF /* Resources */,
+				7F58BDEC1BB1F12500086384 /* Sources */,
+				7F58BDED1BB1F12500086384 /* Frameworks */,
+				7F58BDEE1BB1F12500086384 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A932A99C1B69761600291FCF /* PBXTargetDependency */,
+				7F58BDF21BB1F12500086384 /* PBXTargetDependency */,
 			);
 			name = FluppyChatTests;
 			productName = FluppyChatTests;
-			productReference = A932A99A1B69761600291FCF /* FluppyChatTests.xctest */;
+			productReference = 7F58BDF01BB1F12500086384 /* FluppyChatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7F58BDFA1BB1F12500086384 /* FluppyChatUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F58BE0A1BB1F12500086384 /* Build configuration list for PBXNativeTarget "FluppyChatUITests" */;
+			buildPhases = (
+				7F58BDF71BB1F12500086384 /* Sources */,
+				7F58BDF81BB1F12500086384 /* Frameworks */,
+				7F58BDF91BB1F12500086384 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7F58BDFD1BB1F12500086384 /* PBXTargetDependency */,
+			);
+			name = FluppyChatUITests;
+			productName = FluppyChatUITests;
+			productReference = 7F58BDFB1BB1F12500086384 /* FluppyChatUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A932A97D1B69761600291FCF /* Project object */ = {
+		7F58BDD41BB1F12400086384 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
-				ORGANIZATIONNAME = "Dmytro Bohachevskyi";
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Dmytro Bohachevskyy";
 				TargetAttributes = {
-					A932A9841B69761600291FCF = {
-						CreatedOnToolsVersion = 6.4;
+					7F58BDDB1BB1F12400086384 = {
+						CreatedOnToolsVersion = 7.0;
 					};
-					A932A9991B69761600291FCF = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = A932A9841B69761600291FCF;
+					7F58BDEF1BB1F12500086384 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 7F58BDDB1BB1F12400086384;
+					};
+					7F58BDFA1BB1F12500086384 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 7F58BDDB1BB1F12400086384;
 					};
 				};
 			};
-			buildConfigurationList = A932A9801B69761600291FCF /* Build configuration list for PBXProject "FluppyChat" */;
+			buildConfigurationList = 7F58BDD71BB1F12400086384 /* Build configuration list for PBXProject "FluppyChat" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -330,29 +295,38 @@
 				en,
 				Base,
 			);
-			mainGroup = A932A97C1B69761600291FCF;
-			productRefGroup = A932A9861B69761600291FCF /* Products */;
+			mainGroup = 7F58BDD31BB1F12400086384;
+			productRefGroup = 7F58BDDD1BB1F12400086384 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A932A9841B69761600291FCF /* FluppyChat */,
-				A932A9991B69761600291FCF /* FluppyChatTests */,
+				7F58BDDB1BB1F12400086384 /* FluppyChat */,
+				7F58BDEF1BB1F12500086384 /* FluppyChatTests */,
+				7F58BDFA1BB1F12500086384 /* FluppyChatUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A932A9831B69761600291FCF /* Resources */ = {
+		7F58BDDA1BB1F12400086384 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A932A9901B69761600291FCF /* Main.storyboard in Resources */,
-				A932A9951B69761600291FCF /* LaunchScreen.xib in Resources */,
-				A932A9921B69761600291FCF /* Images.xcassets in Resources */,
+				7F58BDEA1BB1F12400086384 /* LaunchScreen.storyboard in Resources */,
+				7F58BDE71BB1F12400086384 /* Assets.xcassets in Resources */,
+				7F58BE0E1BB1F14C00086384 /* PodFile in Resources */,
+				7F58BDE51BB1F12400086384 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A932A9981B69761600291FCF /* Resources */ = {
+		7F58BDEE1BB1F12500086384 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F58BDF91BB1F12500086384 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -361,71 +335,105 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		81D26B2ECB05F987A37D4FC2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9DB63497C9C9216EC1711DFF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		A932A9811B69761600291FCF /* Sources */ = {
+		7F58BDD81BB1F12400086384 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A920243A1B6CEDB300D1B85F /* NSString+Base64.m in Sources */,
-				A932A9AC1B6A4C8B00291FCF /* LoginViewController.swift in Sources */,
-				A92024371B6CEDB300D1B85F /* AESCrypt.m in Sources */,
-				A9AF16901B81FA9E00F1A7A8 /* MyNavigationController.swift in Sources */,
-				A92024381B6CEDB300D1B85F /* NSData+Base64.m in Sources */,
-				A95DD2841B6AB5CC009AD795 /* NotConfirmedRoomTableViewCell.swift in Sources */,
-				A932A98D1B69761600291FCF /* ViewController.swift in Sources */,
-				A9AF16951B81FB0500F1A7A8 /* ENSideMenuNavigationController.swift in Sources */,
-				A95DD2861B6AB987009AD795 /* RoomViewController.swift in Sources */,
-				A9AF16941B81FB0500F1A7A8 /* ENSideMenu.swift in Sources */,
-				A9AF16971B820DAC00F1A7A8 /* ConfirmedRoomTableViewCell.swift in Sources */,
-				A932A98B1B69761600291FCF /* AppDelegate.swift in Sources */,
-				A920243D1B6CF7E500D1B85F /* MyMessageTableViewCell.swift in Sources */,
-				A94478161B81E9E600AE8712 /* LeftRoomViewController.swift in Sources */,
-				A92024391B6CEDB300D1B85F /* NSData+CommonCrypto.m in Sources */,
-				A95DD29A1B6B6998009AD795 /* Decrypt.swift in Sources */,
-				A95DD28C1B6AC405009AD795 /* FriendMessageTableViewCell.swift in Sources */,
-				A95DD2881B6AC1E3009AD795 /* MessagingViewController.swift in Sources */,
+				7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */,
+				7F58BE191BB1F7B700086384 /* MessageAlert.swift in Sources */,
+				7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */,
+				7F58BE151BB1F51300086384 /* LoginViewController.swift in Sources */,
+				7F58BDE01BB1F12400086384 /* AppDelegate.swift in Sources */,
+				7F58BE1B1BB1FA7A00086384 /* RoomListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A932A9961B69761600291FCF /* Sources */ = {
+		7F58BDEC1BB1F12500086384 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A932A9A11B69761600291FCF /* FluppyChatTests.swift in Sources */,
+				7F58BDF51BB1F12500086384 /* FluppyChatTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F58BDF71BB1F12500086384 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F58BE001BB1F12500086384 /* FluppyChatUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A932A99C1B69761600291FCF /* PBXTargetDependency */ = {
+		7F58BDF21BB1F12500086384 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A932A9841B69761600291FCF /* FluppyChat */;
-			targetProxy = A932A99B1B69761600291FCF /* PBXContainerItemProxy */;
+			target = 7F58BDDB1BB1F12400086384 /* FluppyChat */;
+			targetProxy = 7F58BDF11BB1F12500086384 /* PBXContainerItemProxy */;
+		};
+		7F58BDFD1BB1F12500086384 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7F58BDDB1BB1F12400086384 /* FluppyChat */;
+			targetProxy = 7F58BDFC1BB1F12500086384 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A932A98E1B69761600291FCF /* Main.storyboard */ = {
+		7F58BDE31BB1F12400086384 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A932A98F1B69761600291FCF /* Base */,
+				7F58BDE41BB1F12400086384 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		A932A9931B69761600291FCF /* LaunchScreen.xib */ = {
+		7F58BDE81BB1F12400086384 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A932A9941B69761600291FCF /* Base */,
+				7F58BDE91BB1F12400086384 /* Base */,
 			);
-			name = LaunchScreen.xib;
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A932A9A21B69761600291FCF /* Debug */ = {
+		7F58BE021BB1F12500086384 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -444,9 +452,9 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -455,24 +463,22 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		A932A9A31B69761600291FCF /* Release */ = {
+		7F58BE031BB1F12500086384 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -492,7 +498,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -503,115 +508,131 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		A932A9A51B69761600291FCF /* Debug */ = {
+		7F58BE051BB1F12500086384 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DE4593AEC4BA184817F76A3 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FluppyChat",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = FluppyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = painted.eggs.FluppyChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		A932A9A61B69761600291FCF /* Release */ = {
+		7F58BE061BB1F12500086384 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B37774411AF1F04C132F993 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FluppyChat",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = FluppyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = painted.eggs.FluppyChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
 			};
 			name = Release;
 		};
-		A932A9A81B69761600291FCF /* Debug */ = {
+		7F58BE081BB1F12500086384 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = FluppyChatTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = painted.eggs.FluppyChatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluppyChat.app/FluppyChat";
 			};
 			name = Debug;
 		};
-		A932A9A91B69761600291FCF /* Release */ = {
+		7F58BE091BB1F12500086384 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = FluppyChatTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = painted.eggs.FluppyChatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluppyChat.app/FluppyChat";
+			};
+			name = Release;
+		};
+		7F58BE0B1BB1F12500086384 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FluppyChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = painted.eggs.FluppyChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = FluppyChat;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		7F58BE0C1BB1F12500086384 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FluppyChatUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = painted.eggs.FluppyChatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = FluppyChat;
+				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A932A9801B69761600291FCF /* Build configuration list for PBXProject "FluppyChat" */ = {
+		7F58BDD71BB1F12400086384 /* Build configuration list for PBXProject "FluppyChat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A932A9A21B69761600291FCF /* Debug */,
-				A932A9A31B69761600291FCF /* Release */,
+				7F58BE021BB1F12500086384 /* Debug */,
+				7F58BE031BB1F12500086384 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A932A9A41B69761600291FCF /* Build configuration list for PBXNativeTarget "FluppyChat" */ = {
+		7F58BE041BB1F12500086384 /* Build configuration list for PBXNativeTarget "FluppyChat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A932A9A51B69761600291FCF /* Debug */,
-				A932A9A61B69761600291FCF /* Release */,
+				7F58BE051BB1F12500086384 /* Debug */,
+				7F58BE061BB1F12500086384 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A932A9A71B69761600291FCF /* Build configuration list for PBXNativeTarget "FluppyChatTests" */ = {
+		7F58BE071BB1F12500086384 /* Build configuration list for PBXNativeTarget "FluppyChatTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A932A9A81B69761600291FCF /* Debug */,
-				A932A9A91B69761600291FCF /* Release */,
+				7F58BE081BB1F12500086384 /* Debug */,
+				7F58BE091BB1F12500086384 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F58BE0A1BB1F12500086384 /* Build configuration list for PBXNativeTarget "FluppyChatUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F58BE0B1BB1F12500086384 /* Debug */,
+				7F58BE0C1BB1F12500086384 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A932A97D1B69761600291FCF /* Project object */;
+	rootObject = 7F58BDD41BB1F12400086384 /* Project object */;
 }

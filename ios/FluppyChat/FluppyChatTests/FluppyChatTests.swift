@@ -2,12 +2,12 @@
 //  FluppyChatTests.swift
 //  FluppyChatTests
 //
-//  Created by Dmytro Bohachevskyi on 29.07.15.
-//  Copyright (c) 2015 Dmytro Bohachevskyi. All rights reserved.
+//  Created by Dmytro Bohachevskyy on 9/22/15.
+//  Copyright © 2015 Dmytro Bohachevskyy. All rights reserved.
 //
 
-import UIKit
 import XCTest
+@testable import FluppyChat
 
 class FluppyChatTests: XCTestCase {
     
@@ -23,12 +23,12 @@ class FluppyChatTests: XCTestCase {
     
     func testExample() {
         // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measureBlock {
             // Put the code you want to measure the time of here.
         }
     }

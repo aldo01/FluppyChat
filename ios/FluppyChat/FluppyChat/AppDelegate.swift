@@ -2,41 +2,24 @@
 //  AppDelegate.swift
 //  FluppyChat
 //
-//  Created by Dmytro Bohachevskyi on 29.07.15.
-//  Copyright (c) 2015 Dmytro Bohachevskyi. All rights reserved.
+//  Created by Dmytro Bohachevskyy on 9/22/15.
+//  Copyright © 2015 Dmytro Bohachevskyy. All rights reserved.
 //
 
 import UIKit
-import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         
+        // init parse application
         Parse.setApplicationId("fYiaMJQcSGKjQB3AwhpGmpFoBvE8UiLJAAQMGKjh", clientKey: "t5lfmPcRZjfRHnBGlPYS984ahstd1nHriMdirpA9")
         
-        let userNotificationTypes = (UIUserNotificationType.Alert |  UIUserNotificationType.Badge |  UIUserNotificationType.Sound);
-        
-        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
-        
         return true
-    }
-    
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        // Store the deviceToken in the current Installation and save it to Parse
-        let installation = PFInstallation.currentInstallation()
-        installation.setDeviceTokenFromData(deviceToken)
-        installation.saveInBackgroundWithBlock { ( res : Bool, err : NSError?) -> Void in
-            if ( nil != err ) {
-                println("An error ocqurence when register device")
-            }
-        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
