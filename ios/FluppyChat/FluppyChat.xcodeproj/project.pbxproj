@@ -20,6 +20,13 @@
 		7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */; settings = {ASSET_TAGS = (); }; };
 		7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		7F92ADD81BBDC63A00E0B807 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		7F92ADDA1BBDC6C300E0B807 /* MessagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD91BBDC6C300E0B807 /* MessagingTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		7F92ADE51BBDD17D00E0B807 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADE41BBDD17D00E0B807 /* Decoder.swift */; settings = {ASSET_TAGS = (); }; };
+		7F92ADFB1BBDD33400E0B807 /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF41BBDD33400E0B807 /* AESCrypt.m */; settings = {ASSET_TAGS = (); }; };
+		7F92ADFC1BBDD33400E0B807 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF61BBDD33400E0B807 /* NSData+Base64.m */; settings = {ASSET_TAGS = (); }; };
+		7F92ADFD1BBDD33400E0B807 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF81BBDD33400E0B807 /* NSData+CommonCrypto.m */; settings = {ASSET_TAGS = (); }; };
+		7F92ADFE1BBDD33400E0B807 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADFA1BBDD33400E0B807 /* NSString+Base64.m */; settings = {ASSET_TAGS = (); }; };
 		B62D1D2DB8F7B0D17DD808A4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD66D8AD79EEE91C76B4F66 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +70,17 @@
 		7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmedRoomTableViewCell.swift; path = Cells/ConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
 		7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoContainer.swift; path = Util/PhotoContainer.swift; sourceTree = "<group>"; };
 		7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomCellTableViewCell.swift; path = Cells/RoomCellTableViewCell.swift; sourceTree = "<group>"; };
+		7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTableViewCell.swift; path = Cells/MessageTableViewCell.swift; sourceTree = "<group>"; };
+		7F92ADD91BBDC6C300E0B807 /* MessagingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagingTableViewController.swift; path = Controllers/MessagingTableViewController.swift; sourceTree = "<group>"; };
+		7F92ADE41BBDD17D00E0B807 /* Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Decoder.swift; path = Util/Decoder.swift; sourceTree = "<group>"; };
+		7F92ADF31BBDD33400E0B807 /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AESCrypt.h; path = Framework/AESCrypt/AESCrypt.h; sourceTree = "<group>"; };
+		7F92ADF41BBDD33400E0B807 /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AESCrypt.m; path = Framework/AESCrypt/AESCrypt.m; sourceTree = "<group>"; };
+		7F92ADF51BBDD33400E0B807 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Framework/AESCrypt/NSData+Base64.h"; sourceTree = "<group>"; };
+		7F92ADF61BBDD33400E0B807 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Framework/AESCrypt/NSData+Base64.m"; sourceTree = "<group>"; };
+		7F92ADF71BBDD33400E0B807 /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+CommonCrypto.h"; path = "Framework/AESCrypt/NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		7F92ADF81BBDD33400E0B807 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+CommonCrypto.m"; path = "Framework/AESCrypt/NSData+CommonCrypto.m"; sourceTree = "<group>"; };
+		7F92ADF91BBDD33400E0B807 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Framework/AESCrypt/NSString+Base64.h"; sourceTree = "<group>"; };
+		7F92ADFA1BBDD33400E0B807 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Framework/AESCrypt/NSString+Base64.m"; sourceTree = "<group>"; };
 		8B37774411AF1F04C132F993 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +145,7 @@
 		7F58BDDE1BB1F12400086384 /* FluppyChat */ = {
 			isa = PBXGroup;
 			children = (
+				7F92ADDB1BBDD04100E0B807 /* Framework */,
 				7F58BE1C1BB1FCF600086384 /* Cell */,
 				7F58BE171BB1F78C00086384 /* Util */,
 				7F58BE161BB1F72C00086384 /* SupportedFiles */,
@@ -169,6 +188,7 @@
 			children = (
 				7F58BE141BB1F51300086384 /* LoginViewController.swift */,
 				7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */,
+				7F92ADD91BBDC6C300E0B807 /* MessagingTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -188,6 +208,7 @@
 			children = (
 				7F58BE181BB1F7B700086384 /* MessageAlert.swift */,
 				7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */,
+				7F92ADE41BBDD17D00E0B807 /* Decoder.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -197,8 +218,32 @@
 			children = (
 				7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */,
 				7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */,
+				7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		7F92ADDB1BBDD04100E0B807 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				7F92ADE61BBDD1EE00E0B807 /* AESCrypt */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		7F92ADE61BBDD1EE00E0B807 /* AESCrypt */ = {
+			isa = PBXGroup;
+			children = (
+				7F92ADF31BBDD33400E0B807 /* AESCrypt.h */,
+				7F92ADF41BBDD33400E0B807 /* AESCrypt.m */,
+				7F92ADF51BBDD33400E0B807 /* NSData+Base64.h */,
+				7F92ADF61BBDD33400E0B807 /* NSData+Base64.m */,
+				7F92ADF71BBDD33400E0B807 /* NSData+CommonCrypto.h */,
+				7F92ADF81BBDD33400E0B807 /* NSData+CommonCrypto.m */,
+				7F92ADF91BBDD33400E0B807 /* NSString+Base64.h */,
+				7F92ADFA1BBDD33400E0B807 /* NSString+Base64.m */,
+			);
+			name = AESCrypt;
 			sourceTree = "<group>";
 		};
 		C22DBEB1BD4A3F3F71790123 /* Frameworks */ = {
@@ -379,9 +424,16 @@
 				7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */,
 				7F58BE191BB1F7B700086384 /* MessageAlert.swift in Sources */,
 				7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */,
+				7F92ADFD1BBDD33400E0B807 /* NSData+CommonCrypto.m in Sources */,
+				7F92ADFB1BBDD33400E0B807 /* AESCrypt.m in Sources */,
 				7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */,
+				7F92ADFE1BBDD33400E0B807 /* NSString+Base64.m in Sources */,
+				7F92ADFC1BBDD33400E0B807 /* NSData+Base64.m in Sources */,
+				7F92ADDA1BBDC6C300E0B807 /* MessagingTableViewController.swift in Sources */,
 				7F58BE151BB1F51300086384 /* LoginViewController.swift in Sources */,
+				7F92ADD81BBDC63A00E0B807 /* MessageTableViewCell.swift in Sources */,
 				7F58BDE01BB1F12400086384 /* AppDelegate.swift in Sources */,
+				7F92ADE51BBDD17D00E0B807 /* Decoder.swift in Sources */,
 				7F58BE1B1BB1FA7A00086384 /* RoomListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

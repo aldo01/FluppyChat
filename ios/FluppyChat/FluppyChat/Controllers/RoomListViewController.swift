@@ -9,6 +9,8 @@
 import UIKit
 
 class RoomListViewController: UITableViewController {
+    let OPEN_MESSAGE_SEGUE = "room2message"
+    
     /* DATA FIELDS */
     var tableData : [PFObject] = [] { // field that contain people in room object
         didSet {
@@ -18,7 +20,6 @@ class RoomListViewController: UITableViewController {
     }
     
     var roomData : [PFObject] = [] // array that contain all rooms
-    var otherUsers : [PFUser] = [] // array that contain other users
         
 
     /* DATA FIELDS */
@@ -51,6 +52,7 @@ class RoomListViewController: UITableViewController {
         
         return UITableViewCell()
     }
+
     
     /**
     Get the list of room where is our user
@@ -77,5 +79,29 @@ class RoomListViewController: UITableViewController {
             }
         }
     }
+    
+    // click at some room
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        roomForOpen = tableData[indexPath.row]["room"] as! PFObject
+        peoplesForOpening = []
+        for obj in ConfirmedRoomTableViewCell.otherPeopleInRoom {
+            if obj["room"].objectId! == roomForOpen.objectId! {
+                peoplesForOpening.append(obj["people"] as! PFUser)
+            }
+        }
+        
+        self.performSegueWithIdentifier(OPEN_MESSAGE_SEGUE, sender: self)
+    }
 
+    var roomForOpen : PFObject!
+    var peoplesForOpening : [PFUser]!
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if OPEN_MESSAGE_SEGUE == segue.identifier! {
+            let controller = segue.destinationViewController as! MessagingTableViewController
+
+            print("push: \(roomForOpen)")
+            controller.userHere = peoplesForOpening
+            controller.room = roomForOpen
+        }
+    }
 }
