@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
@@ -76,6 +77,15 @@ public class SearchFrindsActivity extends Activity implements CreateRoom {
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> objects, ParseException e) {
                 if (e == null) {
+                    // remove me from list (If I am here)
+                    String myId = ParseUser.getCurrentUser().getObjectId();
+                    for ( ParseUser u : objects ) {
+                        if ( myId.equals( u.getObjectId() ) ) {
+                            objects.remove(u);
+                            break;
+                        }
+                    }
+
                     cellAdapter = new FriendCellAdapter( SearchFrindsActivity.this, objects );
                     recList.setAdapter(cellAdapter);
                 } else {

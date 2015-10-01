@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.Settings;
 import android.util.Log;
 
+import com.parse.Parse;
 import com.parse.ParsePushBroadcastReceiver;
+import com.parse.ParseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,18 +64,32 @@ public class Receiver extends ParsePushBroadcastReceiver {
                 }
             }
 
+            final String msg = pushData.getString("Alert");
+            final String authId = pushData.getString("Author");
+            final String authName = pushData.getString("AuthorName");
+            final String androidId = pushData.getString("AndroidId");
+
+            // check if it's push from my device
+            final String currentDeviceId = Settings.Secure.getString( context.getContentResolver(), Settings.Secure.ANDROID_ID);
+            if ( androidId.equals( currentDeviceId ) ) {
+                // this message send from your device
+                return;
+            }
+
             if ( isAppForground(context) ) {
                 Log.d( "PUSH_DATA", pushData.toString() );
-                final String msg = pushData.getString("Alert");
-                final String authId = pushData.getString("Author");
-                final String authName = pushData.getString("AuthorName");
-                final String androidId = pushData.getString("AndroidId");
 
                 Log.d(TAG, String.format("MESSAGE: %s", msg));
                 Log.d(TAG, String.format("CHANEL: %s", chanel));
 
-                ChatActivity.receiveMessage(msg, chanel, authId, authName, androidId);
+                ChatActivity.receiveMessage(msg, chanel, authId, authName);
             } else {
+                // check if it's not from me
+                if ( authId.equals(ParseUser.getCurrentUser().getObjectId()) ) {
+                    Log.d( "PUSH_DATA", "it's your message" );
+                    return;
+                }
+
                 // check value
                 boolean showNotification = sharedPref.getBoolean(context.getString(R.string.notificationKey) + chanel, true);
 

@@ -275,20 +275,16 @@ public class ChatActivity extends Activity implements AddPeopleToRoom, View.OnCl
     static public void receiveMessage( final String msg,
                                        final String chanel,
                                        final String authorId,
-                                       final String authorName,
-                                       final String androidId ) {
+                                       final String authorName ) {
         if ( null != thisActivity ) {
             if ( (thisActivity.getString(R.string.chanelPrefix) + room.getObjectId()).equals(chanel)) {
-                // if message not from me
-                if ( !androidId.equals( currentDeviceId ) ) {
-                    Log.d( TAG, "Show received message" );
-                    Message m = new Message();
-                    m.text = msg;
-                    m.userId = authorId;
-                    m.userName = authorName;
-                    thisActivity.messageList.add(m);
-                    thisActivity.showMessage();
-                }
+                Log.d( TAG, "Show received message" );
+                Message m = new Message();
+                m.text = msg;
+                m.userId = authorId;
+                m.userName = authorName;
+                thisActivity.messageList.add(m);
+                thisActivity.showMessage();
             } else {
                 Log.d( TAG, String.format("chanel is not the same %s:%s", chanel, room.getObjectId() ) );
             }

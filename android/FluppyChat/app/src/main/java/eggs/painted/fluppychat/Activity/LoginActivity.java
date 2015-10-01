@@ -22,6 +22,7 @@ import com.parse.SignUpCallback;
 import java.io.ByteArrayOutputStream;
 
 import eggs.painted.fluppychat.R;
+import eggs.painted.fluppychat.Util.Toaster;
 
 public class LoginActivity extends Activity {
     private EditText usernameField;
@@ -62,6 +63,12 @@ public class LoginActivity extends Activity {
                 username = usernameField.getText().toString();
                 password = passwordField.getText().toString();
 
+                // check if fields is not empty
+                if ( username.isEmpty() || password.isEmpty() ) {
+                    Toaster.showText( getApplicationContext(), "Some fields is empty" );
+                    return;
+                }
+
                 // check withespace in username
                 if ( containsWhiteSpace(username) ) {
                     Toast.makeText(getApplicationContext(),
@@ -89,6 +96,12 @@ public class LoginActivity extends Activity {
             public void onClick(View view) {
                 username = usernameField.getText().toString();
                 password = passwordField.getText().toString();
+
+                // check if fields is not empty
+                if ( username.isEmpty() || password.isEmpty() ) {
+                    Toaster.showText( getApplicationContext(), "Some fields is empty" );
+                    return;
+                }
 
                 // check withespace in username
                 if ( containsWhiteSpace(username) ) {
