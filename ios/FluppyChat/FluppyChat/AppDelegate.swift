@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // init parse application
         Parse.setApplicationId("fYiaMJQcSGKjQB3AwhpGmpFoBvE8UiLJAAQMGKjh", clientKey: "t5lfmPcRZjfRHnBGlPYS984ahstd1nHriMdirpA9")
         
+        PhotoContainer.photosDic = [:]
+        
         return true
     }
 

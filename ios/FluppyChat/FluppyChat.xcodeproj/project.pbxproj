@@ -19,6 +19,7 @@
 		7F58BE1B1BB1FA7A00086384 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */; settings = {ASSET_TAGS = (); }; };
+		7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		B62D1D2DB8F7B0D17DD808A4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD66D8AD79EEE91C76B4F66 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomListViewController.swift; path = Controllers/RoomListViewController.swift; sourceTree = "<group>"; };
 		7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmedRoomTableViewCell.swift; path = Cells/ConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
 		7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoContainer.swift; path = Util/PhotoContainer.swift; sourceTree = "<group>"; };
+		7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomCellTableViewCell.swift; path = Cells/RoomCellTableViewCell.swift; sourceTree = "<group>"; };
 		8B37774411AF1F04C132F993 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */,
+				7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 			files = (
 				7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */,
 				7F58BE191BB1F7B700086384 /* MessageAlert.swift in Sources */,
+				7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */,
 				7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */,
 				7F58BE151BB1F51300086384 /* LoginViewController.swift in Sources */,
 				7F58BDE01BB1F12400086384 /* AppDelegate.swift in Sources */,

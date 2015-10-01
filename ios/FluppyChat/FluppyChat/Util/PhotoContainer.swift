@@ -14,7 +14,7 @@
 class PhotoContainer {
     static var photosDic : [ PFUser : UIImage ]!
     
-    func getImageForUser( user : PFUser, imageView : UIImageView ) {
+    static func getImageForUser( user : PFUser, imageView : UIImageView ) {
         if ( nil != PhotoContainer.photosDic[user] ) {
             imageView.image = PhotoContainer.photosDic[user]!
         } else {
