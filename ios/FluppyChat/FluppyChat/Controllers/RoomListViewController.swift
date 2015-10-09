@@ -23,6 +23,9 @@ class RoomListViewController: UITableViewController {
         
 
     /* DATA FIELDS */
+    
+    // ui elemnts
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +99,10 @@ class RoomListViewController: UITableViewController {
     var roomForOpen : PFObject!
     var peoplesForOpening : [PFUser]!
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if nil == segue.identifier {
+            return
+        }
+        
         if OPEN_MESSAGE_SEGUE == segue.identifier! {
             let controller = segue.destinationViewController as! MessagingTableViewController
 
@@ -104,4 +111,10 @@ class RoomListViewController: UITableViewController {
             controller.room = roomForOpen
         }
     }
+    
+    @IBAction func logoutAction(sender: AnyObject) {
+        PFUser.logOut()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }

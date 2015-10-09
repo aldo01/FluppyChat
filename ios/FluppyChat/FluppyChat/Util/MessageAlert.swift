@@ -13,6 +13,7 @@ class MessageAlert {
     }
     
     static func showMessageForUser( text : String ) {
+   //     UIAlertController(title: nil, message: text, preferredStyle: UIAlertControllerStyle.Alert).presentedViewController
         UIAlertView(title: nil, message: text, delegate: nil, cancelButtonTitle: "Ok").show()
     }
 }

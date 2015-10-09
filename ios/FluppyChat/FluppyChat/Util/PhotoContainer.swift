@@ -17,6 +17,7 @@ class PhotoContainer {
     static func getImageForUser( user : PFUser, imageView : UIImageView ) {
         if ( nil != PhotoContainer.photosDic[user] ) {
             imageView.image = PhotoContainer.photosDic[user]!
+            setLayoutParamsForImage(imageView)
         } else {
             // download photo in background
             let file = user["profilepic"] as! PFFile
@@ -28,9 +29,16 @@ class PhotoContainer {
                     PhotoContainer.photosDic[user] = image
                     
                     imageView.image = image
+                    setLayoutParamsForImage(imageView)
                 }
             })
         }
+    }
+    
+    static private func setLayoutParamsForImage( image : UIImageView ) {
+        image.layer.cornerRadius = image.frame.size.width / 2
+        image.clipsToBounds = true
+        image.contentMode = UIViewContentMode.ScaleAspectFill
     }
     
 }

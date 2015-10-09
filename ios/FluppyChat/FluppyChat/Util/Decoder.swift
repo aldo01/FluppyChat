@@ -12,5 +12,9 @@ class Decoder {
     func decode(text : String) -> String {
         return AESCrypt.decrypt(text, password: PASSWORD)
     }
+    
+    func encode(text : String) -> String {
+        return AESCrypt.encrypt(text, password: PASSWORD)
+    }
 
 }

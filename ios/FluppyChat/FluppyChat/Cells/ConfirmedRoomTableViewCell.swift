@@ -53,9 +53,6 @@ class ConfirmedRoomTableViewCell: RoomCellTableViewCell {
         
         // set layout params
         image.frame = CGRect( x: LEFT_MARGING + IMAGE_SIZE * pictureCount, y: 0, width: IMAGE_SIZE, height: IMAGE_SIZE )
-        image.layer.cornerRadius = image.frame.size.width / 2
-        image.clipsToBounds = true
-        image.contentMode = UIViewContentMode.ScaleAspectFill
         
         self.baseView.addSubview(image)
         pictureCount++

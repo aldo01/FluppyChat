@@ -5,10 +5,16 @@
 //  Created by Dmytro Bohachevskyy on 10/1/15.
 //  Copyright © 2015 Dmytro Bohachevskyy. All rights reserved.
 //
+//  This view controller allow user to see all messages and send new
+//
 
 import UIKit
 
-class MessagingTableViewController: UITableViewController {
+class MessagingTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    // constants
+    let KEYBOARD_SIZE : CGFloat = 236
+    let ROOM_HEADER = "ROOM_"
+    
     // data for showing
     var room : PFObject! {
         didSet {
@@ -19,55 +25,72 @@ class MessagingTableViewController: UITableViewController {
     var messageList : [PFObject] = [] {
         didSet {
             self.tableView.reloadData()
+            self.showBottomTable()
         }
     }
     
     // utils
     var decoder = Decoder()
+    
+    // ui
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageTextField: UITextField!
+    
+    // data
+    var keyboardIsShowen  = false
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
 
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         print("message count: \(messageList.count)")
         return messageList.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as! MessageTableViewCell
         
         let message = messageList[indexPath.row]
         let user = message["User"] as! PFUser
         
         cell.userName.text = user.username!
-        cell.dateLabel.text = "\(message.createdAt!)"
+        if (message.createdAt != nil) {
+            cell.dateLabel.text = "\(message.createdAt!)"
+        } else {
+            cell.dateLabel.text = "\(NSDate())"
+        }
         cell.messageLabel.text = decoder.decode( (message["Text"] as? String)! )
         PhotoContainer.getImageForUser(user, imageView: cell.userImage)
 
         return cell
     }
     
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // hide keyboard if she showen
+        if keyboardIsShowen {
+            messageTextField.endEditing(true)
+        }
+    }
+    
     /**
     Ask in parse message history for current room
     */
     private func obtainMessageHistory() {
-        
         let query = PFQuery(className: "Message")
         query.whereKey("Room", equalTo: room)
-        query.orderByDescending("createdAt")
+        query.orderByAscending("createdAt")
         query.includeKey("User")
         query.limit = 50
         query.findObjectsInBackgroundWithBlock { (list : [PFObject]?, err : NSError?) -> Void in
@@ -81,50 +104,85 @@ class MessagingTableViewController: UITableViewController {
         }
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
+    /**
+    Send message to the other user
     */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    @IBAction func sendAction(sender: AnyObject) {
+        let messageText = messageTextField.text!
+        
+        if messageText.isEmpty {
+            MessageAlert.showMessageForUser("Message is blank")
+            return
+        }
+        
+        // encrypt message
+        let encryptMessage = decoder.encode( messageText )
+        
+        // save message in parse
+        let obj = PFObject(className: "Message")
+        obj["User"] = PFUser.currentUser()!
+        obj["Room"] = room
+        obj["Text"] = encryptMessage
+        obj.saveInBackgroundWithBlock { (saved : Bool, err : NSError?) -> Void in
+            if nil != err || !saved {
+                MessageAlert.showMessageForUser("Message is not sent")
+            }
+        }
+        
+        // send push notification
+        let push = PFPush()
+        push.setChannel( ROOM_HEADER + room.objectId! )
+        // create data for message
+        var data : [ String : String ] = ["Alert" : encryptMessage]
+        data["Author"] = PFUser.currentUser()!.objectId!
+        data["AuthorName"] = PFUser.currentUser()!.username!
+        data["AndroidId"] = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        push.setData(data)
+        push.sendPushInBackground()
+        
+        messageList.append(obj)
+        showBottomTable()
+        messageTextField.text = ""
     }
+    
+    /**
+    Up all screen when keyboard is appear
     */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    func keyboardWillShow(notification: NSNotification) {
+        keyboardIsShowen = true
+        // set default keyboard size
+        var size : CGFloat = KEYBOARD_SIZE
+        // get keyboard size
+        if let userInfo = notification.userInfo {
+            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+                size = keyboardSize.height
+            }
+        }
+        
+        self.view.frame.origin.y -= size
     }
+    
+    /**
+    Down all screen when keyboard is disappear
     */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    func keyboardWillHide(notification: NSNotification) {
+        keyboardIsShowen = false
+                // set default keyboard size
+        var size : CGFloat = KEYBOARD_SIZE
+         // get keyboard size
+        if let userInfo = notification.userInfo {
+            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+                size = keyboardSize.height
+            }
+        }
+        
+        self.view.frame.origin.y += size
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    private func showBottomTable() {
+        if tableView.contentSize.height > tableView.bounds.size.height {
+            let offset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height)
+            tableView.setContentOffset(offset, animated: false)
+        }
     }
-    */
-
 }
