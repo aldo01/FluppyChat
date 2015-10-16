@@ -11,7 +11,8 @@ import UIKit
 class RoomListViewController: UITableViewController {
     let OPEN_MESSAGE_SEGUE = "room2message"
     
-    /* DATA FIELDS */
+    // MARK: data fields
+    
     var tableData : [PFObject] = [] { // field that contain people in room object
         didSet {
             RoomCellTableViewCell.obtainFriendsList( roomData )
@@ -20,12 +21,6 @@ class RoomListViewController: UITableViewController {
     }
     
     var roomData : [PFObject] = [] // array that contain all rooms
-        
-
-    /* DATA FIELDS */
-    
-    // ui elemnts
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +28,14 @@ class RoomListViewController: UITableViewController {
         obtainRoomList()
     }
     
-    internal override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // MARK: table view
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print( "Room count = \(tableData.count)" )
         return tableData.count
     }
     
-
-    internal override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let obj = tableData[indexPath.row]
         if nil == obj["room"] {
             return UITableViewCell()
@@ -95,6 +91,13 @@ class RoomListViewController: UITableViewController {
         
         self.performSegueWithIdentifier(OPEN_MESSAGE_SEGUE, sender: self)
     }
+    
+    // MARK: click actions
+    
+    @IBAction func logoutAction(sender: AnyObject) {
+        PFUser.logOut()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
     var roomForOpen : PFObject!
     var peoplesForOpening : [PFUser]!
@@ -112,9 +115,5 @@ class RoomListViewController: UITableViewController {
         }
     }
     
-    @IBAction func logoutAction(sender: AnyObject) {
-        PFUser.logOut()
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
 }

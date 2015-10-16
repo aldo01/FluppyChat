@@ -65,10 +65,16 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         let user = message["User"] as! PFUser
         
         cell.userName.text = user.username!
+        
+        // create date fromat
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        formatter.timeStyle = .ShortStyle
         if (message.createdAt != nil) {
-            cell.dateLabel.text = "\(message.createdAt!)"
+            cell.dateLabel.text = formatter.stringFromDate(message.createdAt!)
         } else {
-            cell.dateLabel.text = "\(NSDate())"
+            // show current time and date
+            cell.dateLabel.text = formatter.stringFromDate(NSDate())
         }
         cell.messageLabel.text = decoder.decode( (message["Text"] as? String)! )
         PhotoContainer.getImageForUser(user, imageView: cell.userImage)
@@ -76,9 +82,8 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         return cell
     }
     
-    
+    // hide keyboard
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // hide keyboard if she showen
         if keyboardIsShowen {
             messageTextField.endEditing(true)
         }
@@ -179,6 +184,8 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         self.view.frame.origin.y += size
     }
     
+    // scroll table view to the bottom
+    // show last messages
     private func showBottomTable() {
         if tableView.contentSize.height > tableView.bounds.size.height {
             let offset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height)

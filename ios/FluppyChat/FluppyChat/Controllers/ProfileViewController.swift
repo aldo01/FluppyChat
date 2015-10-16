@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,5 +19,6 @@ class ProfileViewController: UIViewController {
         userImage.layer.cornerRadius = userImage.frame.size.height / 2
         userImage.clipsToBounds = true
         userImage.contentMode = UIViewContentMode.ScaleAspectFill
+        userName.text = PFUser.currentUser()!.username!
     }
 }

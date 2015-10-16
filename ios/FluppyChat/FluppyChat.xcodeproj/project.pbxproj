@@ -620,7 +620,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DE4593AEC4BA184817F76A3 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = fluppy_icon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FluppyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -635,7 +635,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B37774411AF1F04C132F993 /* Pods.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = fluppy_icon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FluppyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

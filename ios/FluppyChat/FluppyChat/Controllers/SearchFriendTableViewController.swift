@@ -9,31 +9,27 @@
 import UIKit
 
 class SearchFriendTableViewController: UITableViewController, SearchFriendDelegate {
+    let NEW_ROOM_HEADER = "NEW_ROOM_"
+    
+    // the result list from parse
     var friendList : [ PFUser ] = [] {
         didSet {
             self.tableView.reloadData()
         }
     }
+    let decoder = Decoder()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return friendList.count + 1
     }
 
@@ -52,16 +48,69 @@ class SearchFriendTableViewController: UITableViewController, SearchFriendDelega
         }
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("Select row \(indexPath.row)")
+        createRoom(friendList[indexPath.row - 1])
+    }
+    
+    // this method calling for room creating
+    private func createRoom( u : PFUser ) {
+        let meUser = PFUser.currentUser()! // get current user
+        
+        // create and save room
+        let room = PFObject(className: "Room")
+        room["Name"] = "\(meUser.username!), \(u.username!)"
+        room["Creator"] = meUser
+        room.saveInBackground()
+        
+        // sign me to room
+        let obj1 = PFObject(className: "PeopleInRoom")
+        obj1["people"] = meUser
+        obj1["confirm"] = true
+        obj1["room"] = room
+        obj1.saveInBackgroundWithBlock { (res : Bool, err : NSError?) -> Void in
+            if res && nil == err {
+                self.navigationController!.popToRootViewControllerAnimated(true)
+            } else {
+                print("We have an problem res = \(res) err = \(err)")
+            }
+        }
+        
+        // sign user to room
+        let obj2 = PFObject(className: "PeopleInRoom")
+        obj2["people"] = u
+        obj2["confirm"] = false
+        obj2["room"] = room
+        obj2.saveInBackground()
+        
+        // create and send push notification with invitation to room
+        let push = PFPush()
+        push.setChannel( NEW_ROOM_HEADER + u.objectId! )
+        let data = [
+            "Alert" : decoder.encode("You receive invite to new room"),
+            "AuthorName" : meUser.username!
+        ]
+        
+        push.setData(data)
+        push.sendPushInBackground()
+    }
+    
+    // MARK: - Buttons action
+    
+    // action for searching friends
     func searchFrind(name: String) {
-/*
         let query = PFUser.query()
-        query!.whereKey("username", equalTo: name)
-        query!.findObjectsInBackgroundWithBlock({ (list : [PFUser]?, err : NSError?) -> Void in
-            if nil == err && nil != list {
-                friendList = list
+        query?.whereKey("username", equalTo: name)
+        view.endEditing(true)
+        query?.findObjectsInBackgroundWithBlock({ (list : [PFObject]?, err : NSError?) -> Void in
+            if nil != list && nil == err {
+                self.friendList = list as! [PFUser]
+            } else {
+                MessageAlert.showMessageForUser("An error ocurence")
             }
         })
-  */
+
+  
         print("SEARCH FRIEND")
     }
 }
