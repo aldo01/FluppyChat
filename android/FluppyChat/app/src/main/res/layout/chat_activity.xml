@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_messaging_toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="@color/sinch_purple" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/ic_arrow_back"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:id="@+id/roomsTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="Rooms"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:textSize="24sp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.0"/>
+
+                <ImageButton
+                    android:id="@+id/deleteButton"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/ic_trash"
+                    android:background="@android:color/transparent"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cardMessageList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/sendLayout"/>
+
+            <LinearLayout
+                android:id="@+id/sendLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="64dp"
+                android:layout_alignParentBottom="true">
+
+                <EditText
+                    android:id="@+id/messageTextET"
+                    android:layout_weight="0.8"
+                    android:layout_width="0dp"
+                    android:layout_height="64dp"
+                    android:hint="Message..."/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/sendMessageButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:src="@mipmap/ic_send"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/messagingNavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"/>
+
+</android.support.v4.widget.DrawerLayout>
