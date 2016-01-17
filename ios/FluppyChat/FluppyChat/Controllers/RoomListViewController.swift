@@ -57,6 +57,8 @@ class RoomListViewController: UITableViewController {
     Get the list of room where is our user
     */
     private func obtainRoomList() {
+       
+        
         let query = PFQuery(className: "PeopleInRoom")
         query.whereKey("people", equalTo: PFUser.currentUser()! )
         query.includeKey("people")
@@ -66,13 +68,30 @@ class RoomListViewController: UITableViewController {
                 var rList : [PFObject] = []
                 var uList : [PFObject] = []
                 
+                let currentInstallation = PFInstallation.currentInstallation()
+                let subscribedChannels = (currentInstallation.channels!) as NSArray
+                print("Subscribe list: \(currentInstallation.channels!)")
                 for obj in list! {
                     if nil != obj["room"] {
                         uList.append( obj )
-                        rList.append( obj["room"] as! PFObject )
+                        let room = obj["room"] as! PFObject
+                        rList.append( room )
+                        
+                        // subscribe to th chanel
+                        let chanelId = "ROOM_\(room.objectId!)"
+                        if !subscribedChannels.containsObject(chanelId)  {
+                            currentInstallation.addUniqueObject(chanelId, forKey: "channels")
+                            print("Subscribe to the chanel: \(chanelId)")
+                        }
                     }
                 }
 
+                do {
+                    try currentInstallation.save()
+                    print("Subscribe list: \(currentInstallation.channels!)")
+                } catch (_) {
+                    print("Error ocqurence when save installation")
+                }
                 self.roomData = rList
                 self.tableData = uList
             }

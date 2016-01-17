@@ -7,34 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F2579431BBF2092001BA157 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2579421BBF2092001BA157 /* user.png */; settings = {ASSET_TAGS = (); }; };
-		7F2579451BBF22A2001BA157 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2579441BBF22A2001BA157 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		7206F6F272811C0029BE5BDF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB474A93A63674F4169A1C8 /* libPods.a */; };
+		7F2579431BBF2092001BA157 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2579421BBF2092001BA157 /* user.png */; };
+		7F2579451BBF22A2001BA157 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2579441BBF22A2001BA157 /* ProfileViewController.swift */; };
 		7F58BDE01BB1F12400086384 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BDDF1BB1F12400086384 /* AppDelegate.swift */; };
 		7F58BDE51BB1F12400086384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F58BDE31BB1F12400086384 /* Main.storyboard */; };
 		7F58BDE71BB1F12400086384 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F58BDE61BB1F12400086384 /* Assets.xcassets */; };
 		7F58BDEA1BB1F12400086384 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F58BDE81BB1F12400086384 /* LaunchScreen.storyboard */; };
 		7F58BDF51BB1F12500086384 /* FluppyChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BDF41BB1F12500086384 /* FluppyChatTests.swift */; };
 		7F58BE001BB1F12500086384 /* FluppyChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BDFF1BB1F12500086384 /* FluppyChatUITests.swift */; };
-		7F58BE0E1BB1F14C00086384 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 7F58BE0D1BB1F14C00086384 /* PodFile */; settings = {ASSET_TAGS = (); }; };
-		7F58BE151BB1F51300086384 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE141BB1F51300086384 /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		7F58BE191BB1F7B700086384 /* MessageAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE181BB1F7B700086384 /* MessageAlert.swift */; settings = {ASSET_TAGS = (); }; };
-		7F58BE1B1BB1FA7A00086384 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */; settings = {ASSET_TAGS = (); }; };
-		7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		7F92ADD81BBDC63A00E0B807 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		7F92ADDA1BBDC6C300E0B807 /* MessagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD91BBDC6C300E0B807 /* MessagingTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		7F92ADE51BBDD17D00E0B807 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADE41BBDD17D00E0B807 /* Decoder.swift */; settings = {ASSET_TAGS = (); }; };
-		7F92ADFB1BBDD33400E0B807 /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF41BBDD33400E0B807 /* AESCrypt.m */; settings = {ASSET_TAGS = (); }; };
-		7F92ADFC1BBDD33400E0B807 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF61BBDD33400E0B807 /* NSData+Base64.m */; settings = {ASSET_TAGS = (); }; };
-		7F92ADFD1BBDD33400E0B807 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF81BBDD33400E0B807 /* NSData+CommonCrypto.m */; settings = {ASSET_TAGS = (); }; };
-		7F92ADFE1BBDD33400E0B807 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADFA1BBDD33400E0B807 /* NSString+Base64.m */; settings = {ASSET_TAGS = (); }; };
-		7F92AE001BBDE30000E0B807 /* MakeMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADFF1BBDE30000E0B807 /* MakeMessageTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		7FF7BC4A1BC0019D00D0B2D8 /* SearchFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC491BC0019D00D0B2D8 /* SearchFriendTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		7FF7BC4C1BC0021900D0B2D8 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC4B1BC0021900D0B2D8 /* SearchTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		7FF7BC4E1BC0023000D0B2D8 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC4D1BC0023000D0B2D8 /* FriendTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		7FF7BC511BC002DC00D0B2D8 /* SearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC501BC002DC00D0B2D8 /* SearchProtocol.swift */; settings = {ASSET_TAGS = (); }; };
-		B62D1D2DB8F7B0D17DD808A4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD66D8AD79EEE91C76B4F66 /* libPods.a */; };
+		7F58BE0E1BB1F14C00086384 /* PodFile in Resources */ = {isa = PBXBuildFile; fileRef = 7F58BE0D1BB1F14C00086384 /* PodFile */; };
+		7F58BE151BB1F51300086384 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE141BB1F51300086384 /* LoginViewController.swift */; };
+		7F58BE191BB1F7B700086384 /* MessageAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE181BB1F7B700086384 /* MessageAlert.swift */; };
+		7F58BE1B1BB1FA7A00086384 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */; };
+		7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */; };
+		7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */; };
+		7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */; };
+		7F92ADD81BBDC63A00E0B807 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */; };
+		7F92ADDA1BBDC6C300E0B807 /* MessagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD91BBDC6C300E0B807 /* MessagingTableViewController.swift */; };
+		7F92ADE51BBDD17D00E0B807 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADE41BBDD17D00E0B807 /* Decoder.swift */; };
+		7F92ADFB1BBDD33400E0B807 /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF41BBDD33400E0B807 /* AESCrypt.m */; };
+		7F92ADFC1BBDD33400E0B807 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF61BBDD33400E0B807 /* NSData+Base64.m */; };
+		7F92ADFD1BBDD33400E0B807 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF81BBDD33400E0B807 /* NSData+CommonCrypto.m */; };
+		7F92ADFE1BBDD33400E0B807 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADFA1BBDD33400E0B807 /* NSString+Base64.m */; };
+		7F92AE001BBDE30000E0B807 /* MakeMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADFF1BBDE30000E0B807 /* MakeMessageTableViewCell.swift */; };
+		7FF7BC4A1BC0019D00D0B2D8 /* SearchFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC491BC0019D00D0B2D8 /* SearchFriendTableViewController.swift */; };
+		7FF7BC4C1BC0021900D0B2D8 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC4B1BC0021900D0B2D8 /* SearchTableViewCell.swift */; };
+		7FF7BC4E1BC0023000D0B2D8 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC4D1BC0023000D0B2D8 /* FriendTableViewCell.swift */; };
+		7FF7BC511BC002DC00D0B2D8 /* SearchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC501BC002DC00D0B2D8 /* SearchProtocol.swift */; };
+		7FFF248F1C4C0B88000DCE13 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFF248E1C4C0B88000DCE13 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +56,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1DD66D8AD79EEE91C76B4F66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE4593AEC4BA184817F76A3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7F2579421BBF2092001BA157 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = user.png; path = Resource/user.png; sourceTree = "<group>"; };
 		7F2579441BBF22A2001BA157 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Controllers/ProfileViewController.swift; sourceTree = "<group>"; };
@@ -95,7 +95,9 @@
 		7FF7BC4B1BC0021900D0B2D8 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTableViewCell.swift; path = Cells/SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7FF7BC4D1BC0023000D0B2D8 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendTableViewCell.swift; path = Cells/FriendTableViewCell.swift; sourceTree = "<group>"; };
 		7FF7BC501BC002DC00D0B2D8 /* SearchProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchProtocol.swift; path = Protocol/SearchProtocol.swift; sourceTree = "<group>"; };
+		7FFF248E1C4C0B88000DCE13 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Framework/SwiftyJSON.swift; sourceTree = "<group>"; };
 		8B37774411AF1F04C132F993 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		ECB474A93A63674F4169A1C8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B62D1D2DB8F7B0D17DD808A4 /* libPods.a in Frameworks */,
+				7206F6F272811C0029BE5BDF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				7F92ADE61BBDD1EE00E0B807 /* AESCrypt */,
+				7FFF248E1C4C0B88000DCE13 /* SwiftyJSON.swift */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -286,7 +289,7 @@
 		C22DBEB1BD4A3F3F71790123 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1DD66D8AD79EEE91C76B4F66 /* libPods.a */,
+				ECB474A93A63674F4169A1C8 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				7F58BDD91BB1F12400086384 /* Frameworks */,
 				7F58BDDA1BB1F12400086384 /* Resources */,
 				9DB63497C9C9216EC1711DFF /* Copy Pods Resources */,
+				489AF41EB663A50F078627B7 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -361,6 +365,7 @@
 				TargetAttributes = {
 					7F58BDDB1BB1F12400086384 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = VHRZVCF7HV;
 					};
 					7F58BDEF1BB1F12500086384 = {
 						CreatedOnToolsVersion = 7.0;
@@ -422,6 +427,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		489AF41EB663A50F078627B7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		81D26B2ECB05F987A37D4FC2 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -471,6 +491,7 @@
 				7FF7BC4C1BC0021900D0B2D8 /* SearchTableViewCell.swift in Sources */,
 				7F92ADFC1BBDD33400E0B807 /* NSData+Base64.m in Sources */,
 				7FF7BC511BC002DC00D0B2D8 /* SearchProtocol.swift in Sources */,
+				7FFF248F1C4C0B88000DCE13 /* SwiftyJSON.swift in Sources */,
 				7F92ADDA1BBDC6C300E0B807 /* MessagingTableViewController.swift in Sources */,
 				7F58BE151BB1F51300086384 /* LoginViewController.swift in Sources */,
 				7F92ADD81BBDC63A00E0B807 /* MessageTableViewCell.swift in Sources */,
@@ -550,7 +571,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = FluppyChatPushProfile;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -595,7 +617,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = FluppyChatPushProfile;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -622,10 +645,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = fluppy_icon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmytro Bohachevskyi (SP2NM42UL6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmytro Bohachevskyi (SP2NM42UL6)";
 				INFOPLIST_FILE = FluppyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = painted.eggs.FluppyChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "cfed7d37-93e8-4809-b32a-803fe95f70e4";
 				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -637,10 +663,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = fluppy_icon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dmytro Bohachevskyi (SP2NM42UL6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmytro Bohachevskyi (SP2NM42UL6)";
 				INFOPLIST_FILE = FluppyChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = painted.eggs.FluppyChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "cfed7d37-93e8-4809-b32a-803fe95f70e4";
 				SWIFT_OBJC_BRIDGING_HEADER = "FluppyChat/FluppyChat-Bridging-Header.h";
 			};
 			name = Release;

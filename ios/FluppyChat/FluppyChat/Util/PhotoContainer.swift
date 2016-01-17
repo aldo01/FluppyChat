@@ -35,6 +35,15 @@ class PhotoContainer {
         }
     }
     
+    static func getImageForUser( userId : String, imageView : UIImageView ) {
+        for (user, photo) in photosDic {
+            if userId == user.objectId! {
+                imageView.image = photo
+                setLayoutParamsForImage(imageView)
+            }
+        }
+    }
+    
     static private func setLayoutParamsForImage( image : UIImageView ) {
         image.layer.cornerRadius = image.frame.size.width / 2
         image.clipsToBounds = true

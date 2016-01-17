@@ -57,6 +57,7 @@ class LoginViewController: UIViewController {
             } else {
                 // motify user about error
                 MessageAlert.errorAlert("Login failed")
+                MessageAlert.errorAlert(error?.description ?? "")
                 MessageAlert.showMessageForUser("Incorrect username or password")
             }
         }

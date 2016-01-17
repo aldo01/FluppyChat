@@ -14,6 +14,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
     // constants
     let KEYBOARD_SIZE : CGFloat = 236
     let ROOM_HEADER = "ROOM_"
+    static let INCOMMING_MESSAGE = "incomming_message"
     
     // data for showing
     var room : PFObject! {
@@ -39,9 +40,12 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
     // data
     var keyboardIsShowen  = false
     
+    static var messageController : MessagingTableViewController?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        MessagingTableViewController.messageController = self
         
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -60,8 +64,20 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as! MessageTableViewCell
-        
         let message = messageList[indexPath.row]
+        
+        if nil != message["State"] {
+            return getIncommingDefault(message, cell: cell)
+        } else {
+            return getCellDefault(message, cell: cell)
+        }
+    }
+    
+    /**
+     * return cell for object from parse
+    */
+    func getCellDefault( message : PFObject, cell : MessageTableViewCell ) -> MessageTableViewCell {
+        
         let user = message["User"] as! PFUser
         
         cell.userName.text = user.username!
@@ -78,7 +94,25 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         }
         cell.messageLabel.text = decoder.decode( (message["Text"] as? String)! )
         PhotoContainer.getImageForUser(user, imageView: cell.userImage)
+        
+        return cell
+    }
+    
+    /**
+     * return cell for object from push
+     */
+    func getIncommingDefault( message : PFObject, cell : MessageTableViewCell ) -> MessageTableViewCell {
+        cell.userName.text = message["UserName"] as? String
+        
+        // create date fromat
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        formatter.timeStyle = .ShortStyle
+        cell.dateLabel.text = formatter.stringFromDate( NSDate() )
 
+        cell.messageLabel.text = decoder.decode( (message["Text"] as? String)! )
+        PhotoContainer.getImageForUser(message["UserId"] as! String, imageView: cell.userImage)
+        
         return cell
     }
     
@@ -95,7 +129,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
     private func obtainMessageHistory() {
         let query = PFQuery(className: "Message")
         query.whereKey("Room", equalTo: room)
-        query.orderByAscending("createdAt")
+        query.orderByDescending("createdAt")
         query.includeKey("User")
         query.limit = 50
         query.findObjectsInBackgroundWithBlock { (list : [PFObject]?, err : NSError?) -> Void in
@@ -164,7 +198,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
             }
         }
         
-        self.view.frame.origin.y -= size
+        // self.view.frame.origin.y -= size
     }
     
     /**
@@ -181,7 +215,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
             }
         }
         
-        self.view.frame.origin.y += size
+        // self.view.frame.origin.y += size
     }
     
     // scroll table view to the bottom
@@ -191,5 +225,21 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
             let offset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height)
             tableView.setContentOffset(offset, animated: false)
         }
+    }
+    
+    static func receiveMessage( data : JSON ) -> Bool {
+        if nil == messageController {
+            return false
+        }
+        
+        print("show message")
+        let messageObject = PFObject(className: "Message")
+        messageObject["State"] = INCOMMING_MESSAGE
+        messageObject["UserName"] = data["AuthorName"].stringValue
+        messageObject["Text"] = data["Alert"].stringValue
+        messageObject["UserId"] = data["Author"].stringValue
+        
+        messageController!.messageList.append(messageObject)
+        return true
     }
 }

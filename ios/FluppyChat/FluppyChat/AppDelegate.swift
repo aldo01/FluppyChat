@@ -10,16 +10,21 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // init parse application
-        Parse.setApplicationId("***", clientKey: "***")
+        Parse.setApplicationId("fYiaMJQcSGKjQB3AwhpGmpFoBvE8UiLJAAQMGKjh", clientKey: "t5lfmPcRZjfRHnBGlPYS984ahstd1nHriMdirpA9")
         
         PhotoContainer.photosDic = [:]
+        
+        let type : UIUserNotificationType = [.Alert, .Badge, .Sound]
+        
+        let setting = UIUserNotificationSettings(forTypes: type, categories: nil)
+        
+        application.registerUserNotificationSettings(setting)
+        application.registerForRemoteNotifications()
         
         return true
     }
@@ -45,7 +50,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let currInstalation = PFInstallation.currentInstallation()
+        currInstalation.setDeviceTokenFromData(deviceToken)
+        currInstalation.channels = [ "global" ]
+        currInstalation.saveInBackground()
+        
+        print("didRegisterForRemoteNotificationsWithDeviceToken \(deviceToken)")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("push received")
+        print(userInfo)
+        
+        MessagingTableViewController.receiveMessage( JSON(userInfo) )
+    }
 }
 
