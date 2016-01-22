@@ -10,117 +10,89 @@
 
 import UIKit
 
-class MessagingTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MessagingTableViewController: SLKTextViewController {
     // constants
     let KEYBOARD_SIZE : CGFloat = 236
     let ROOM_HEADER = "ROOM_"
     static let INCOMMING_MESSAGE = "incomming_message"
+    let deviceId = UIDevice.currentDevice().identifierForVendor!.UUIDString
     
     // data for showing
     var room : PFObject! {
         didSet {
-            obtainMessageHistory()
+           obtainMessageHistory()
         }
     }
     var userHere : [PFObject]!
-    var messageList : [PFObject] = [] {
-        didSet {
-            self.tableView.reloadData()
-            self.showBottomTable()
-        }
-    }
+    var messageList : [PFObject] = []
     
     // utils
     var decoder = Decoder()
     
-    // ui
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var messageTextField: UITextField!
-    
     // data
     var keyboardIsShowen  = false
+    
+    // ui
+    @IBOutlet weak var oldTableView: UITableView!
+    
     
     static var messageController : MessagingTableViewController?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        MessagingTableViewController.messageController = self
         
-        tableView.estimatedRowHeight = 44.0
+        MessagingTableViewController.messageController = self
+  
+        tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override class func tableViewStyleForCoder(decoder: NSCoder) -> UITableViewStyle {
+        return UITableViewStyle.Plain;
     }
 
     // MARK: - Table view data source
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         print("message count: \(messageList.count)")
         return messageList.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as! MessageTableViewCell
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = oldTableView.dequeueReusableCellWithIdentifier("MessageCell") as! MessageTableViewCell
         let message = messageList[indexPath.row]
+        print("Get message for row: \(indexPath.row)")
         
-        if nil != message["State"] {
-            return getIncommingDefault(message, cell: cell)
-        } else {
-            return getCellDefault(message, cell: cell)
-        }
+        return getIncommingDefault(message, cell: cell)
     }
     
-    /**
-     * return cell for object from parse
-    */
-    func getCellDefault( message : PFObject, cell : MessageTableViewCell ) -> MessageTableViewCell {
-        
-        let user = message["User"] as! PFUser
-        
-        cell.userName.text = user.username!
-        
-        // create date fromat
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        formatter.timeStyle = .ShortStyle
-        if (message.createdAt != nil) {
-            cell.dateLabel.text = formatter.stringFromDate(message.createdAt!)
-        } else {
-            // show current time and date
-            cell.dateLabel.text = formatter.stringFromDate(NSDate())
-        }
-        cell.messageLabel.text = decoder.decode( (message["Text"] as? String)! )
-        PhotoContainer.getImageForUser(user, imageView: cell.userImage)
-        
-        return cell
-    }
     
     /**
      * return cell for object from push
      */
     func getIncommingDefault( message : PFObject, cell : MessageTableViewCell ) -> MessageTableViewCell {
-        cell.userName.text = message["UserName"] as? String
-        
         // create date fromat
         let formatter = NSDateFormatter()
         formatter.dateStyle = NSDateFormatterStyle.MediumStyle
         formatter.timeStyle = .ShortStyle
         cell.dateLabel.text = formatter.stringFromDate( NSDate() )
 
-        cell.messageLabel.text = decoder.decode( (message["Text"] as? String)! )
-        PhotoContainer.getImageForUser(message["UserId"] as! String, imageView: cell.userImage)
+        let messageText = decoder.decode( (message["Text"] as? String)! )
+        cell.messageLabel.text = "" == messageText ? " " : messageText
+
+        if nil != message["State"] {
+            PhotoContainer.getImageForUser(message["UserId"] as! String, imageView: cell.userImage)
+            cell.userName.text = message["UserName"] as? String
+        } else {
+            PhotoContainer.getImageForUser(message["User"] as! PFUser, imageView: cell.userImage)
+            cell.userName.text = (message["User"] as! PFUser).username!
+        }
+        cell.transform = tableView.transform
         
         return cell
-    }
-    
-    // hide keyboard
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if keyboardIsShowen {
-            messageTextField.endEditing(true)
-        }
     }
     
     /**
@@ -136,6 +108,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
             if nil == err && nil != list {
                 // all ok!
                 self.messageList = list!
+                self.tableView.reloadData()
             } else {
                 print(err)
                 print(list)
@@ -143,11 +116,24 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         }
     }
     
+    private func showNewMessage(messageObject : PFObject) {
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let rowAnimation = UITableViewRowAnimation.Top
+        let scrollPostion = UITableViewScrollPosition.Top
+        
+        tableView.beginUpdates()
+        messageList.insert(messageObject, atIndex: 0)
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: rowAnimation)
+        tableView.endUpdates()
+        
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: scrollPostion, animated: true)
+    }
+    
     /**
     Send message to the other user
     */
-    @IBAction func sendAction(sender: AnyObject) {
-        let messageText = messageTextField.text!
+    override func didPressRightButton(sender: AnyObject!) {
+        let messageText = self.textView.text!
         
         if messageText.isEmpty {
             MessageAlert.showMessageForUser("Message is blank")
@@ -159,7 +145,7 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         
         // save message in parse
         let obj = PFObject(className: "Message")
-        obj["User"] = PFUser.currentUser()!
+        obj["User"] = PFUser.currentUser()
         obj["Room"] = room
         obj["Text"] = encryptMessage
         obj.saveInBackgroundWithBlock { (saved : Bool, err : NSError?) -> Void in
@@ -175,63 +161,25 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         var data : [ String : String ] = ["Alert" : encryptMessage]
         data["Author"] = PFUser.currentUser()!.objectId!
         data["AuthorName"] = PFUser.currentUser()!.username!
-        data["AndroidId"] = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        data["AndroidId"] = deviceId
         push.setData(data)
         push.sendPushInBackground()
         
-        messageList.append(obj)
-        showBottomTable()
-        messageTextField.text = ""
-    }
-    
-    /**
-    Up all screen when keyboard is appear
-    */
-    func keyboardWillShow(notification: NSNotification) {
-        keyboardIsShowen = true
-        // set default keyboard size
-        var size : CGFloat = KEYBOARD_SIZE
-        // get keyboard size
-        if let userInfo = notification.userInfo {
-            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-                size = keyboardSize.height
-            }
-        }
-        
-        // self.view.frame.origin.y -= size
-    }
-    
-    /**
-    Down all screen when keyboard is disappear
-    */
-    func keyboardWillHide(notification: NSNotification) {
-        keyboardIsShowen = false
-                // set default keyboard size
-        var size : CGFloat = KEYBOARD_SIZE
-         // get keyboard size
-        if let userInfo = notification.userInfo {
-            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-                size = keyboardSize.height
-            }
-        }
-        
-        // self.view.frame.origin.y += size
-    }
-    
-    // scroll table view to the bottom
-    // show last messages
-    private func showBottomTable() {
-        if tableView.contentSize.height > tableView.bounds.size.height {
-            let offset = CGPointMake(0, tableView.contentSize.height - tableView.bounds.size.height)
-            tableView.setContentOffset(offset, animated: false)
-        }
+        showNewMessage(obj)
+        self.textView.text = ""
     }
     
     static func receiveMessage( data : JSON ) -> Bool {
         if nil == messageController {
             return false
         }
+
+        if ((messageController?.deviceId)!).isEqualToString(data["AndroidID"].stringValue) {
+            return false
+        }
         
+        print(UIDevice.currentDevice().identifierForVendor!.UUIDString)
+        print(data["AndroidId"].stringValue)
         print("show message")
         let messageObject = PFObject(className: "Message")
         messageObject["State"] = INCOMMING_MESSAGE
@@ -239,7 +187,13 @@ class MessagingTableViewController: UIViewController, UITableViewDataSource, UIT
         messageObject["Text"] = data["Alert"].stringValue
         messageObject["UserId"] = data["Author"].stringValue
         
-        messageController!.messageList.append(messageObject)
+        messageController?.showNewMessage(messageObject)
         return true
+    }
+}
+
+extension String {
+    func isEqualToString(find: String) -> Bool {
+        return String(format: self) == find
     }
 }

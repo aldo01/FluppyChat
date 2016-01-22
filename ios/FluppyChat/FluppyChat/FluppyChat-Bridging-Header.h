@@ -4,3 +4,4 @@
 
 #import <Parse.h>
 #import "AESCrypt.h"
+#import <SlackTextViewController/SLKTextViewController.h>

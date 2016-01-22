@@ -10,6 +10,7 @@ import UIKit
 
 class RoomListViewController: UITableViewController {
     let OPEN_MESSAGE_SEGUE = "room2message"
+    let NEW_ROOM_HEADER = "NEW_ROOM_"
     
     // MARK: data fields
     
@@ -57,8 +58,6 @@ class RoomListViewController: UITableViewController {
     Get the list of room where is our user
     */
     private func obtainRoomList() {
-       
-        
         let query = PFQuery(className: "PeopleInRoom")
         query.whereKey("people", equalTo: PFUser.currentUser()! )
         query.includeKey("people")
@@ -68,9 +67,15 @@ class RoomListViewController: UITableViewController {
                 var rList : [PFObject] = []
                 var uList : [PFObject] = []
                 
+                var subscribedChannels = []
                 let currentInstallation = PFInstallation.currentInstallation()
-                let subscribedChannels = (currentInstallation.channels!) as NSArray
-                print("Subscribe list: \(currentInstallation.channels!)")
+                if nil != currentInstallation.channels {
+                    subscribedChannels = (currentInstallation.channels!) as NSArray
+                } else {
+                    subscribedChannels = NSArray()
+                }
+                
+                print("Subscribe list: \(subscribedChannels)")
                 for obj in list! {
                     if nil != obj["room"] {
                         uList.append( obj )
@@ -84,6 +89,10 @@ class RoomListViewController: UITableViewController {
                             print("Subscribe to the chanel: \(chanelId)")
                         }
                     }
+                }
+                
+                if !subscribedChannels.containsObject(self.NEW_ROOM_HEADER + PFUser.currentUser()!.objectId!) {
+                    currentInstallation.addUniqueObject(self.NEW_ROOM_HEADER, forKey: "channels")
                 }
 
                 do {
@@ -129,7 +138,7 @@ class RoomListViewController: UITableViewController {
             let controller = segue.destinationViewController as! MessagingTableViewController
 
             print("push: \(roomForOpen)")
-            controller.userHere = peoplesForOpening
+//            controller.userHere = peoplesForOpening
             controller.room = roomForOpen
         }
     }

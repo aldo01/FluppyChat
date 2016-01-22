@@ -19,19 +19,7 @@ class PhotoContainer {
             imageView.image = PhotoContainer.photosDic[user]!
             setLayoutParamsForImage(imageView)
         } else {
-            // download photo in background
-            let file = user["profilepic"] as! PFFile
-            file.getDataInBackgroundWithBlock({ ( image : NSData?, err : NSError?) -> Void in
-                if ( nil == err ) {
-                    let image = UIImage(data: image!)
-                    
-                    // add image to the dictionary
-                    PhotoContainer.photosDic[user] = image
-                    
-                    imageView.image = image
-                    setLayoutParamsForImage(imageView)
-                }
-            })
+            downloadPhotoInBackground(user, imageView : imageView)
         }
     }
     
@@ -40,14 +28,39 @@ class PhotoContainer {
             if userId == user.objectId! {
                 imageView.image = photo
                 setLayoutParamsForImage(imageView)
+                return
             }
         }
+        
+        let query = PFUser.query()
+        query?.whereKey("objectId", equalTo: userId)
+        query?.findObjectsInBackgroundWithBlock({ (objects : [PFObject]?, err : NSError?) -> Void in
+            if nil == err && 0 != objects?.count {
+                downloadPhotoInBackground(objects![0] as! PFUser, imageView : imageView)
+            }
+        })
     }
     
     static private func setLayoutParamsForImage( image : UIImageView ) {
         image.layer.cornerRadius = image.frame.size.width / 2
         image.clipsToBounds = true
         image.contentMode = UIViewContentMode.ScaleAspectFill
+    }
+    
+    static func downloadPhotoInBackground(user : PFUser, imageView : UIImageView) {
+        // download photo in background
+        let file = user["profilepic"] as! PFFile
+        file.getDataInBackgroundWithBlock({ ( image : NSData?, err : NSError?) -> Void in
+            if ( nil == err ) {
+                let image = UIImage(data: image!)
+                
+                // add image to the dictionary
+                PhotoContainer.photosDic[user] = image
+                
+                imageView.image = image
+                setLayoutParamsForImage(imageView)
+            }
+        })
     }
     
 }

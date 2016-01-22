@@ -109,7 +109,6 @@ class SearchFriendTableViewController: UITableViewController, SearchFriendDelega
                 MessageAlert.showMessageForUser("An error ocurence")
             }
         })
-
   
         print("SEARCH FRIEND")
     }
