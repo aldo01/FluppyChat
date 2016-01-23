@@ -17,7 +17,7 @@ class RoomCellTableViewCell: UITableViewCell {
         query.includeKey("people")
         query.includeKey("room")
         do {
-        otherPeopleInRoom = try query.findObjects()
+            otherPeopleInRoom = try query.findObjects()
         } catch _ {
             MessageAlert.errorAlert("Error ocqurence when obtain other user list")
         }
