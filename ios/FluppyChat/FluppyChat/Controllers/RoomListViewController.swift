@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoomListViewController: UITableViewController {
+class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
     let OPEN_MESSAGE_SEGUE = "room2message"
     let NEW_ROOM_HEADER = "NEW_ROOM_"
     
@@ -22,12 +22,22 @@ class RoomListViewController: UITableViewController {
     }
     
     var roomData : [PFObject] = [] // array that contain all rooms
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let data = NSUserDefaults.standardUserDefaults().valueForKey("123")
+        print("Value for key 123: \(data)")
         obtainRoomList()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: UIApplicationWillEnterForegroundNotification, object: nil)
     }
+    
+    func reloadTableView() {
+        tableView.reloadData()
+    }
+    
     
     // MARK: table view
     
@@ -46,7 +56,23 @@ class RoomListViewController: UITableViewController {
         if ( obj["confirm"] as! Bool ) {
             let cell = tableView.dequeueReusableCellWithIdentifier("ConfirmedRoomCell") as! ConfirmedRoomTableViewCell
             
+            NSUserDefaults.standardUserDefaults()
+            
             cell.showPeoples( room )
+            cell.roomLabel.text = room["Name"] as?String
+            if nil != NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TEXT_KEY ) {
+                cell.messageLabel?.text = NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TEXT_KEY ) as? String
+            }
+            
+            if nil != NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TIME_KEY ) {
+                let time = NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TIME_KEY ) as! NSDate
+                
+                let formatter = NSDateFormatter()
+                formatter.dateStyle = NSDateFormatterStyle.NoStyle
+                formatter.timeStyle = .ShortStyle
+                cell.timeLabel.text = formatter.stringFromDate(time)
+            }
+
             return cell
         }
         
@@ -138,10 +164,15 @@ class RoomListViewController: UITableViewController {
             let controller = segue.destinationViewController as! MessagingTableViewController
 
             print("push: \(roomForOpen)")
-//            controller.userHere = peoplesForOpening
+            controller.delegate = self
             controller.room = roomForOpen
         }
     }
     
-    
+    func updateFriendsList(val : Bool) {
+        print("updateFriendsList \(val)")
+        if val {
+            tableView.reloadData()
+        }
+    }
 }

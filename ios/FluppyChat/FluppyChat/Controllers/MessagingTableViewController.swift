@@ -10,6 +10,10 @@
 
 import UIKit
 
+let TIME_KEY = "_TIME"
+let TEXT_KEY = "_TEXT"
+let COUNT_KEY = "_COUNT"
+
 class MessagingTableViewController: SLKTextViewController {
     // constants
     let KEYBOARD_SIZE : CGFloat = 236
@@ -20,17 +24,18 @@ class MessagingTableViewController: SLKTextViewController {
     // data for showing
     var room : PFObject! {
         didSet {
-           obtainMessageHistory()
+            obtainMessageHistory()
         }
     }
-    var userHere : [PFObject]!
     var messageList : [PFObject] = []
     
     // utils
     var decoder = Decoder()
+    var delegate : UpdateRoomListProtocol!
     
     // data
     var keyboardIsShowen  = false
+    var newMessage = false // get new message during controller work
     
     // ui
     @IBOutlet weak var oldTableView: UITableView!
@@ -38,12 +43,12 @@ class MessagingTableViewController: SLKTextViewController {
     
     static var messageController : MessagingTableViewController?
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         MessagingTableViewController.messageController = self
-  
+        
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -52,23 +57,28 @@ class MessagingTableViewController: SLKTextViewController {
     override class func tableViewStyleForCoder(decoder: NSCoder) -> UITableViewStyle {
         return UITableViewStyle.Plain;
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        print("message count: \(messageList.count)")
         return messageList.count
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = oldTableView.dequeueReusableCellWithIdentifier("MessageCell") as! MessageTableViewCell
         let message = messageList[indexPath.row]
-        print("Get message for row: \(indexPath.row)")
+        
+        if 0 == indexPath.row {
+            let messageText = decoder.decode( (message["Text"] as? String)! )
+            
+            // save last message
+            NSUserDefaults.standardUserDefaults().setValue("" == messageText ? " " : messageText, forKey: room.objectId! + TEXT_KEY)
+            NSUserDefaults.standardUserDefaults().setValue(nil == message.createdAt ? NSDate() : message.createdAt, forKey: room.objectId! + TIME_KEY)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
         
         return getIncommingDefault(message, cell: cell)
     }
-    
     
     /**
      * return cell for object from push
@@ -79,10 +89,11 @@ class MessagingTableViewController: SLKTextViewController {
         formatter.dateStyle = NSDateFormatterStyle.MediumStyle
         formatter.timeStyle = .ShortStyle
         cell.dateLabel.text = formatter.stringFromDate( NSDate() )
-
+        
         let messageText = decoder.decode( (message["Text"] as? String)! )
         cell.messageLabel.text = "" == messageText ? " " : messageText
-
+        cell.dateLabel.text = nil == message.createdAt ? formatter.stringFromDate( NSDate() ) : formatter.stringFromDate(message.createdAt!)
+        
         if nil != message["State"] {
             PhotoContainer.getImageForUser(message["UserId"] as! String, imageView: cell.userImage)
             cell.userName.text = message["UserName"] as? String
@@ -96,8 +107,8 @@ class MessagingTableViewController: SLKTextViewController {
     }
     
     /**
-    Ask in parse message history for current room
-    */
+     Ask in parse message history for current room
+     */
     private func obtainMessageHistory() {
         let query = PFQuery(className: "Message")
         query.whereKey("Room", equalTo: room)
@@ -117,6 +128,8 @@ class MessagingTableViewController: SLKTextViewController {
     }
     
     private func showNewMessage(messageObject : PFObject) {
+        newMessage = true
+        
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         let rowAnimation = UITableViewRowAnimation.Top
         let scrollPostion = UITableViewScrollPosition.Top
@@ -130,8 +143,8 @@ class MessagingTableViewController: SLKTextViewController {
     }
     
     /**
-    Send message to the other user
-    */
+     Send message to the other user
+     */
     override func didPressRightButton(sender: AnyObject!) {
         let messageText = self.textView.text!
         
@@ -158,10 +171,14 @@ class MessagingTableViewController: SLKTextViewController {
         let push = PFPush()
         push.setChannel( ROOM_HEADER + room.objectId! )
         // create data for message
-        var data : [ String : String ] = ["Alert" : encryptMessage]
+        var data : [ String : AnyObject ] = ["Alert" : encryptMessage]
         data["Author"] = PFUser.currentUser()!.objectId!
         data["AuthorName"] = PFUser.currentUser()!.username!
         data["AndroidId"] = deviceId
+        data["RoomId"] = room.objectId!
+        let username = PFUser.currentUser()!.username!
+        data["aps"] = ["alert" : ["body" : "\(username): \(messageText)"], "sound" : "default", "content-available" : 1]
+        print("Data for sending: \(data)")
         push.setData(data)
         push.sendPushInBackground()
         
@@ -173,13 +190,15 @@ class MessagingTableViewController: SLKTextViewController {
         if nil == messageController {
             return false
         }
-
-        if ((messageController?.deviceId)!).isEqualToString(data["AndroidID"].stringValue) {
-            return false
-        }
         
-        print(UIDevice.currentDevice().identifierForVendor!.UUIDString)
-        print(data["AndroidId"].stringValue)
+        if ((messageController?.deviceId)!) == data["AndroidId"].stringValue {
+            print("Is equal")
+            return true
+        }
+
+        print("Is not equal")
+        print("1" + (messageController?.deviceId)! + "1")
+        print("1" + data["AndroidId"].stringValue + "1")
         print("show message")
         let messageObject = PFObject(className: "Message")
         messageObject["State"] = INCOMMING_MESSAGE
@@ -189,6 +208,15 @@ class MessagingTableViewController: SLKTextViewController {
         
         messageController?.showNewMessage(messageObject)
         return true
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        MessagingTableViewController.messageController = nil
+        if nil != delegate {
+            delegate.updateFriendsList(newMessage)
+        }
     }
 }
 

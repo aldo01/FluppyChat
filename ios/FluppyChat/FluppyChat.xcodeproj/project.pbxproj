@@ -23,6 +23,7 @@
 		7F58BE1B1BB1FA7A00086384 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */; };
 		7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */; };
 		7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */; };
+		7F5940251C5AA29800A506C1 /* UpdateRoomsListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5940241C5AA29800A506C1 /* UpdateRoomsListProtocol.swift */; };
 		7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */; };
 		7F92ADD81BBDC63A00E0B807 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */; };
 		7F92ADDA1BBDC6C300E0B807 /* MessagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD91BBDC6C300E0B807 /* MessagingTableViewController.swift */; };
@@ -80,6 +81,7 @@
 		7F58BE1A1BB1FA7A00086384 /* RoomListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomListViewController.swift; path = Controllers/RoomListViewController.swift; sourceTree = "<group>"; };
 		7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmedRoomTableViewCell.swift; path = Cells/ConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
 		7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoContainer.swift; path = Util/PhotoContainer.swift; sourceTree = "<group>"; };
+		7F5940241C5AA29800A506C1 /* UpdateRoomsListProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateRoomsListProtocol.swift; path = Protocol/UpdateRoomsListProtocol.swift; sourceTree = "<group>"; };
 		7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomCellTableViewCell.swift; path = Cells/RoomCellTableViewCell.swift; sourceTree = "<group>"; };
 		7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTableViewCell.swift; path = Cells/MessageTableViewCell.swift; sourceTree = "<group>"; };
 		7F92ADD91BBDC6C300E0B807 /* MessagingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagingTableViewController.swift; path = Controllers/MessagingTableViewController.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				7FF7BC501BC002DC00D0B2D8 /* SearchProtocol.swift */,
+				7F5940241C5AA29800A506C1 /* UpdateRoomsListProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F92AE001BBDE30000E0B807 /* MakeMessageTableViewCell.swift in Sources */,
+				7F5940251C5AA29800A506C1 /* UpdateRoomsListProtocol.swift in Sources */,
 				7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */,
 				7F58BE191BB1F7B700086384 /* MessageAlert.swift in Sources */,
 				7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */,

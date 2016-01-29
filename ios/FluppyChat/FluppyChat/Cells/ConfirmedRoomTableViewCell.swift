@@ -43,7 +43,6 @@ class ConfirmedRoomTableViewCell: RoomCellTableViewCell {
         }
         
         peopleShowed = true
-        roomLabel.text = room["Name"] as?String
         for obj in ConfirmedRoomTableViewCell.otherPeopleInRoom {
             if obj["room"].objectId! == room.objectId! {
                 let u = obj["people"] as! PFUser

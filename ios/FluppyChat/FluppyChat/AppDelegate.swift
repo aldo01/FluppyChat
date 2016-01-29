@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        print("didFinishLaunchingWithOptions")
         
         // init parse application
         Parse.setApplicationId("fYiaMJQcSGKjQB3AwhpGmpFoBvE8UiLJAAQMGKjh", clientKey: "t5lfmPcRZjfRHnBGlPYS984ahstd1nHriMdirpA9")
@@ -25,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.registerUserNotificationSettings(setting)
         application.registerForRemoteNotifications()
+        
+        let pushedData = launchOptions?.indexForKey(UIApplicationLaunchOptionsRemoteNotificationKey)
+        print("Push data = \(pushedData)")
         
         return true
     }
@@ -52,19 +56,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let currInstalation = PFInstallation.currentInstallation()
-        currInstalation.setDeviceTokenFromData(deviceToken)
-        currInstalation.channels = [ "global" ]
-        currInstalation.saveInBackground()
         
-        print("didRegisterForRemoteNotificationsWithDeviceToken \(deviceToken)")
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         print("push received")
         print(userInfo)
         
-        MessagingTableViewController.receiveMessage( JSON(userInfo) )
+        let data = JSON(userInfo)
+        if MessagingTableViewController.receiveMessage( data ) {
+            return
+        }
+        
+        saveData(data)
+    }
+    
+    func application(application: UIApplication,
+        didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+        fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+     
+        saveData(JSON(userInfo))
+        completionHandler(UIBackgroundFetchResult.NewData)
+    }
+    
+    private func saveData( data : JSON ) {
+        print("push saved")
+        let countMessageKey = data["RoomId"].stringValue + COUNT_KEY
+        let countIncommingMessage = NSUserDefaults.standardUserDefaults().valueForKey(countMessageKey) as? Int ?? 0
+        
+        NSUserDefaults.standardUserDefaults().setValue(data["aps"]["alert"]["body"].stringValue, forKey: data["RoomId"].stringValue + TEXT_KEY)
+        NSUserDefaults.standardUserDefaults().setValue(NSDate(), forKey: data["RoomId"].stringValue + TIME_KEY)
+        NSUserDefaults.standardUserDefaults().setValue(countIncommingMessage + 1, forKey: countMessageKey)
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
 }
 
