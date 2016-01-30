@@ -21,6 +21,8 @@ class SearchFriendTableViewController: UITableViewController, SearchFriendDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationItem.title = "Search Friends"
     }
 
     // MARK: - Table view data source

@@ -86,8 +86,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSUserDefaults.standardUserDefaults().setValue(data["aps"]["alert"]["body"].stringValue, forKey: data["RoomId"].stringValue + TEXT_KEY)
         NSUserDefaults.standardUserDefaults().setValue(NSDate(), forKey: data["RoomId"].stringValue + TIME_KEY)
-        NSUserDefaults.standardUserDefaults().setValue(countIncommingMessage + 1, forKey: countMessageKey)
+        NSUserDefaults.standardUserDefaults().setValue(Int(countIncommingMessage + 1), forKey: countMessageKey)
         NSUserDefaults.standardUserDefaults().synchronize()
+        
+        print("Application state = \(UIApplication.sharedApplication().applicationState)")
+        if UIApplicationState.Active == UIApplication.sharedApplication().applicationState {
+            if nil != RoomListViewController.this {
+                RoomListViewController.this?.reloadTableView()
+            }
+        }
     }
 }
 

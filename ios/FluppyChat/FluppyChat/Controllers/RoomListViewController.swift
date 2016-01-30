@@ -8,22 +8,28 @@
 
 import UIKit
 
+
 class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
     let OPEN_MESSAGE_SEGUE = "room2message"
     let NEW_ROOM_HEADER = "NEW_ROOM_"
+    
+    static var this : RoomListViewController?
     
     // MARK: data fields
     
     var tableData : [PFObject] = [] { // field that contain people in room object
         didSet {
-            RoomCellTableViewCell.obtainFriendsList( roomData )
+            obtainFriendsList( roomData )
             self.tableView.reloadData()
+            SVProgressHUD.dismiss()
         }
     }
+    var otherPeopleInRoom : [PFObject] = []
     
     var roomData : [PFObject] = [] // array that contain all rooms
     override func viewDidLoad() {
         super.viewDidLoad()
+        RoomListViewController.this = self
 
         let data = NSUserDefaults.standardUserDefaults().valueForKey("123")
         print("Value for key 123: \(data)")
@@ -32,6 +38,12 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: UIApplicationWillEnterForegroundNotification, object: nil)
+        
+        // set navigation controller color
+        self.navigationController?.navigationBar.barTintColor = ACTION_BAR_COLOR
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ]
     }
     
     func reloadTableView() {
@@ -58,7 +70,7 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
             
             NSUserDefaults.standardUserDefaults()
             
-            cell.showPeoples( room )
+            cell.showPeoples( room, friendList: otherPeopleInRoom )
             cell.roomLabel.text = room["Name"] as?String
             if nil != NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TEXT_KEY ) {
                 cell.messageLabel?.text = NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TEXT_KEY ) as? String
@@ -72,6 +84,14 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
                 formatter.timeStyle = .ShortStyle
                 cell.timeLabel.text = formatter.stringFromDate(time)
             }
+            
+            if nil != NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + COUNT_KEY ) {
+                cell.incommingMessageCount?.hidden = false
+                print("Unread message count = \(NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + COUNT_KEY ))")
+                cell.incommingMessageCount?.text = "\(NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + COUNT_KEY ) as! Int)"
+            } else {
+                cell.incommingMessageCount?.hidden = true
+            }
 
             return cell
         }
@@ -79,11 +99,23 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
         return UITableViewCell()
     }
 
+    func obtainFriendsList( roomData : [PFObject] ) {
+        let query = PFQuery(className: "PeopleInRoom")
+        query.whereKey("room", containedIn: roomData)
+        query.includeKey("people")
+        query.includeKey("room")
+        do {
+            otherPeopleInRoom = try query.findObjects()
+        } catch _ {
+            MessageAlert.errorAlert("Error ocqurence when obtain other user list")
+        }
+    }
     
     /**
     Get the list of room where is our user
     */
     private func obtainRoomList() {
+        SVProgressHUD.showWithStatus(LOADING_WORD)
         let query = PFQuery(className: "PeopleInRoom")
         query.whereKey("people", equalTo: PFUser.currentUser()! )
         query.includeKey("people")
@@ -137,7 +169,7 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         roomForOpen = tableData[indexPath.row]["room"] as! PFObject
         peoplesForOpening = []
-        for obj in ConfirmedRoomTableViewCell.otherPeopleInRoom {
+        for obj in otherPeopleInRoom {
             if obj["room"].objectId! == roomForOpen.objectId! {
                 peoplesForOpening.append(obj["people"] as! PFUser)
             }

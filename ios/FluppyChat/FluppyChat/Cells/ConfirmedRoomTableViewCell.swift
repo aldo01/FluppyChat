@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConfirmedRoomTableViewCell: RoomCellTableViewCell {
+class ConfirmedRoomTableViewCell: UITableViewCell {
     let IMAGE_SIZE = 50
     let LEFT_MARGING = 20
     let IMAGE_MARGIN = 10
@@ -22,6 +22,7 @@ class ConfirmedRoomTableViewCell: RoomCellTableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var roomLabel: UILabel!
+    @IBOutlet weak var incommingMessageCount: UITextField!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,13 +38,13 @@ class ConfirmedRoomTableViewCell: RoomCellTableViewCell {
     /**
     Show the list of images
     */
-    func showPeoples( room : PFObject ) {
+    func showPeoples( room : PFObject, friendList : [PFObject] ) {
         if peopleShowed {
             return;
         }
         
         peopleShowed = true
-        for obj in ConfirmedRoomTableViewCell.otherPeopleInRoom {
+        for obj in friendList {
             if obj["room"].objectId! == room.objectId! {
                 let u = obj["people"] as! PFUser
                 if u.objectId! != PFUser.currentUser()?.objectId! {

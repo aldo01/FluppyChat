@@ -52,6 +52,14 @@ class MessagingTableViewController: SLKTextViewController {
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        // clear unread message
+        if nil != NSUserDefaults.standardUserDefaults().objectForKey(room.objectId! + COUNT_KEY) {
+            NSUserDefaults.standardUserDefaults().setValue(nil, forKey: room.objectId! + COUNT_KEY)
+            NSUserDefaults.standardUserDefaults().synchronize()
+            newMessage = true
+            print("Value not is nil")
+        }
+        print("Value is nil")
     }
     
     override class func tableViewStyleForCoder(decoder: NSCoder) -> UITableViewStyle {
