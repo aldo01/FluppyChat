@@ -8,16 +8,8 @@
 
 import UIKit
 
-class ConfirmedRoomTableViewCell: UITableViewCell {
-    let IMAGE_SIZE = 50
-    let LEFT_MARGING = 20
-    let IMAGE_MARGIN = 10
-    let Y_POSITION = 7
-    var pictureCount = 0
-    var peopleShowed = false
-    
+class ConfirmedRoomTableViewCell: BaseRoomTableViewCell {
     @IBOutlet weak var baseView: UIView!
-    var pictures : [UIImageView] = []
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -27,51 +19,7 @@ class ConfirmedRoomTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        rootView = baseView
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
-    /**
-    Show the list of images
-    */
-    func showPeoples( room : PFObject, friendList : [PFObject] ) {
-        if peopleShowed {
-            return;
-        }
-        
-        peopleShowed = true
-        for obj in friendList {
-            if obj["room"].objectId! == room.objectId! {
-                let u = obj["people"] as! PFUser
-                if u.objectId! != PFUser.currentUser()?.objectId! {
-                    addPicture(u)
-                }
-            }
-            
-            if 2 <= pictureCount {
-                break
-            }
-        }
-    }
-    
-    /**
-    Add picture to the layout
-    */
-    func addPicture( user : PFUser ) {
-        let image = UIImageView()
-        
-        // set image resource
-        PhotoContainer.getImageForUser(user, imageView: image)
-        
-        // set layout params
-        image.frame = CGRect( x: LEFT_MARGING + (IMAGE_MARGIN) * pictureCount, y: Y_POSITION, width: IMAGE_SIZE, height: IMAGE_SIZE )
-        
-        self.baseView.addSubview(image)
-        pictureCount++
-        pictures.append(image)
-    }
 }

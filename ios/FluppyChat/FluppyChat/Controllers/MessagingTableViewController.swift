@@ -79,6 +79,10 @@ class MessagingTableViewController: SLKTextViewController {
         if 0 == indexPath.row {
             let messageText = decoder.decode( (message["Text"] as? String)! )
             
+            if nil != NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TEXT_KEY ) {
+                newMessage = true
+            }
+            
             // save last message
             NSUserDefaults.standardUserDefaults().setValue("" == messageText ? " " : messageText, forKey: room.objectId! + TEXT_KEY)
             NSUserDefaults.standardUserDefaults().setValue(nil == message.createdAt ? NSDate() : message.createdAt, forKey: room.objectId! + TIME_KEY)

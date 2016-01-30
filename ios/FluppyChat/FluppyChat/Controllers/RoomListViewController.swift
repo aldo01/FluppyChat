@@ -9,7 +9,7 @@
 import UIKit
 
 
-class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
+class RoomListViewController: UITableViewController, UpdateRoomListProtocol, AcceptDeclineRoomProtocol {
     let OPEN_MESSAGE_SEGUE = "room2message"
     let NEW_ROOM_HEADER = "NEW_ROOM_"
     
@@ -17,13 +17,7 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
     
     // MARK: data fields
     
-    var tableData : [PFObject] = [] { // field that contain people in room object
-        didSet {
-            obtainFriendsList( roomData )
-            self.tableView.reloadData()
-            SVProgressHUD.dismiss()
-        }
-    }
+    var tableData : [PFObject] = [] // field that contain people in room object
     var otherPeopleInRoom : [PFObject] = []
     
     var roomData : [PFObject] = [] // array that contain all rooms
@@ -71,9 +65,11 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
             NSUserDefaults.standardUserDefaults()
             
             cell.showPeoples( room, friendList: otherPeopleInRoom )
-            cell.roomLabel.text = room["Name"] as?String
+            cell.roomLabel.text = room["Name"] as? String
             if nil != NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TEXT_KEY ) {
                 cell.messageLabel?.text = NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TEXT_KEY ) as? String
+            } else {
+                cell.messageLabel.text = ""
             }
             
             if nil != NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TIME_KEY ) {
@@ -83,6 +79,8 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
                 formatter.dateStyle = NSDateFormatterStyle.NoStyle
                 formatter.timeStyle = .ShortStyle
                 cell.timeLabel.text = formatter.stringFromDate(time)
+            } else {
+                cell.timeLabel.text = ""
             }
             
             if nil != NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + COUNT_KEY ) {
@@ -94,9 +92,39 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
             }
 
             return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("NotConfirmedRoomCell") as! NotConfirmedTableViewCell
+            
+            cell.showPeoples( room, friendList: otherPeopleInRoom )
+            cell.roomName.text = room["Name"] as? String
+            cell.setDelegate(obj, delegate: self)
+            
+            return cell
+        }
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        print("Delete line: \(indexPath.row)")
+        
+        tableView.beginUpdates()
+        let obj = tableData[indexPath.row]
+        tableData.removeAtIndex(indexPath.row)
+        obj.deleteInBackground()
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        tableView.endUpdates()
+    }
+    
+    // click at some room
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        roomForOpen = tableData[indexPath.row]["room"] as! PFObject
+        peoplesForOpening = []
+        for obj in otherPeopleInRoom {
+            if obj["room"].objectId! == roomForOpen.objectId! {
+                peoplesForOpening.append(obj["people"] as! PFUser)
+            }
         }
         
-        return UITableViewCell()
+        self.performSegueWithIdentifier(OPEN_MESSAGE_SEGUE, sender: self)
     }
 
     func obtainFriendsList( roomData : [PFObject] ) {
@@ -161,22 +189,15 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
                 }
                 self.roomData = rList
                 self.tableData = uList
+                
+                self.obtainFriendsList( self.roomData )
+                self.tableView.reloadData()
+                SVProgressHUD.dismiss()
             }
         }
     }
     
-    // click at some room
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        roomForOpen = tableData[indexPath.row]["room"] as! PFObject
-        peoplesForOpening = []
-        for obj in otherPeopleInRoom {
-            if obj["room"].objectId! == roomForOpen.objectId! {
-                peoplesForOpening.append(obj["people"] as! PFUser)
-            }
-        }
-        
-        self.performSegueWithIdentifier(OPEN_MESSAGE_SEGUE, sender: self)
-    }
+    
     
     // MARK: click actions
     
@@ -201,10 +222,31 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol {
         }
     }
     
+    // MARK: update table view when if data changed in room
+    
     func updateFriendsList(val : Bool) {
         print("updateFriendsList \(val)")
         if val {
             tableView.reloadData()
         }
+    }
+    
+    // MARK: accept or decline room
+    
+    func acceptRoom( peopleInRoom : PFObject ) {
+        peopleInRoom["confirm"] = true
+        peopleInRoom.saveInBackground()
+        tableView.reloadData()
+    }
+    
+    func declineRoom( peopleInRoom : PFObject ) {
+        peopleInRoom.deleteInBackground()
+        
+        let index = tableData.indexOf(peopleInRoom)
+        tableData.removeAtIndex(index!)
+        tableView.beginUpdates()
+        let indexPath = NSIndexPath(forRow: index!, inSection: 0)
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        tableView.endUpdates()
     }
 }
