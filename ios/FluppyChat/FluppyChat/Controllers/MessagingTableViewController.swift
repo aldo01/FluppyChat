@@ -13,6 +13,7 @@ import UIKit
 let TIME_KEY = "_TIME"
 let TEXT_KEY = "_TEXT"
 let COUNT_KEY = "_COUNT"
+let PUSH_ID_KEY = "_PUSH"
 
 class MessagingTableViewController: SLKTextViewController {
     // constants
@@ -77,7 +78,8 @@ class MessagingTableViewController: SLKTextViewController {
         let message = messageList[indexPath.row]
         
         if 0 == indexPath.row {
-            let messageText = decoder.decode( (message["Text"] as? String)! )
+            // let messageText = decoder.decode( (message["Text"] as? String)! )
+            let messageText = (message["Text"] as? String)!
             
             if nil != NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + TEXT_KEY ) {
                 newMessage = true
@@ -102,7 +104,8 @@ class MessagingTableViewController: SLKTextViewController {
         formatter.timeStyle = .ShortStyle
         cell.dateLabel.text = formatter.stringFromDate( NSDate() )
         
-        let messageText = decoder.decode( (message["Text"] as? String)! )
+        // let messageText = decoder.decode( (message["Text"] as? String)! )
+        let messageText = (message["Text"] as? String)!
         cell.messageLabel.text = "" == messageText ? " " : messageText
         cell.dateLabel.text = nil == message.createdAt ? formatter.stringFromDate( NSDate() ) : formatter.stringFromDate(message.createdAt!)
         
@@ -166,7 +169,8 @@ class MessagingTableViewController: SLKTextViewController {
         }
         
         // encrypt message
-        let encryptMessage = decoder.encode( messageText )
+        // let encryptMessage = decoder.encode( messageText )
+        let encryptMessage = messageText
         
         // save message in parse
         let obj = PFObject(className: "Message")
@@ -187,6 +191,7 @@ class MessagingTableViewController: SLKTextViewController {
         data["Author"] = PFUser.currentUser()!.objectId!
         data["AuthorName"] = PFUser.currentUser()!.username!
         data["AndroidId"] = deviceId
+        data["Status"] = "MESSAGE"
         data["RoomId"] = room.objectId!
         let username = PFUser.currentUser()!.username!
         data["aps"] = ["alert" : ["body" : "\(username): \(messageText)"], "sound" : "default", "content-available" : 1]

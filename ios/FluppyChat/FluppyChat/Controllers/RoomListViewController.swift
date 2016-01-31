@@ -47,7 +47,6 @@ UpdateFriendListProtocol{
         tableView.reloadData()
     }
     
-    
     // MARK: table view
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -89,7 +88,12 @@ UpdateFriendListProtocol{
                 print("Unread message count = \(NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + COUNT_KEY ))")
                 cell.incommingMessageCount?.text = "\(NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + COUNT_KEY ) as! Int)"
             } else {
+                
                 cell.incommingMessageCount?.hidden = true
+                
+                if 0 == arc4random() % 2 {
+                    cell.incommingMessageCount?.hidden = false
+                }
             }
 
             return cell
@@ -143,7 +147,7 @@ UpdateFriendListProtocol{
     /**
     Get the list of room where is our user
     */
-    private func obtainRoomList() {
+    func obtainRoomList() {
         SVProgressHUD.showWithStatus(LOADING_WORD)
         let query = PFQuery(className: "PeopleInRoom")
         query.whereKey("people", equalTo: PFUser.currentUser()! )
@@ -178,8 +182,9 @@ UpdateFriendListProtocol{
                     }
                 }
                 
-                if !subscribedChannels.containsObject(self.NEW_ROOM_HEADER + PFUser.currentUser()!.objectId!) {
-                    currentInstallation.addUniqueObject(self.NEW_ROOM_HEADER, forKey: "channels")
+                let newRoomKey = self.NEW_ROOM_HEADER + PFUser.currentUser()!.objectId!
+                if !subscribedChannels.containsObject(newRoomKey) {
+                    currentInstallation.addUniqueObject(newRoomKey, forKey: "channels")
                 }
 
                 do {
@@ -198,11 +203,13 @@ UpdateFriendListProtocol{
         }
     }
     
-    
-    
     // MARK: click actions
     
     @IBAction func logoutAction(sender: AnyObject) {
+        let currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.channels = []
+        currentInstallation.saveInBackground()
+        
         PFUser.logOut()
         self.dismissViewControllerAnimated(true, completion: nil)
     }

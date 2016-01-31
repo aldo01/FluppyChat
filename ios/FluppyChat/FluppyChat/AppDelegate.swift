@@ -71,33 +71,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         saveData(data)
     }
     
-    func application(application: UIApplication,
-        didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
-        fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-     
-        let data = JSON(userInfo)
-        if MessagingTableViewController.receiveMessage( data ) {
-            return
-        }
-            
-        saveData(data)
-        completionHandler(UIBackgroundFetchResult.NewData)
-    }
-    
     private func saveData( data : JSON ) {
+        let pushPrevId = NSUserDefaults.standardUserDefaults().valueForKey(data["RoomId"].stringValue + PUSH_ID_KEY)
+        if nil != pushPrevId {
+            if data["parsePushId"].stringValue == pushPrevId as! String {
+                return
+            }
+        }
+        
         print("push saved")
         let countMessageKey = data["RoomId"].stringValue + COUNT_KEY
         let countIncommingMessage = NSUserDefaults.standardUserDefaults().valueForKey(countMessageKey) as? Int ?? 0
+        print("incomming message count = \(countIncommingMessage)")
         
-        NSUserDefaults.standardUserDefaults().setValue(data["aps"]["alert"]["body"].stringValue, forKey: data["RoomId"].stringValue + TEXT_KEY)
+        NSUserDefaults.standardUserDefaults().setValue(data["Alert"].stringValue, forKey: data["RoomId"].stringValue + TEXT_KEY)
         NSUserDefaults.standardUserDefaults().setValue(NSDate(), forKey: data["RoomId"].stringValue + TIME_KEY)
         NSUserDefaults.standardUserDefaults().setValue(Int(countIncommingMessage + 1), forKey: countMessageKey)
+        NSUserDefaults.standardUserDefaults().setValue(data["parsePushId"].stringValue, forKey: data["RoomId"].stringValue + PUSH_ID_KEY)
         NSUserDefaults.standardUserDefaults().synchronize()
         
         print("Application state = \(UIApplication.sharedApplication().applicationState)")
         if UIApplicationState.Active == UIApplication.sharedApplication().applicationState {
+            
             if nil != RoomListViewController.this {
-                RoomListViewController.this?.reloadTableView()
+                print("Status: \(data["Status"].stringValue)")
+                
+                if "MESSAGE" == data["Status"].stringValue {
+                    RoomListViewController.this?.tableView.reloadData()
+                } else {
+                    RoomListViewController.this?.obtainRoomList()
+                }
             }
         }
     }

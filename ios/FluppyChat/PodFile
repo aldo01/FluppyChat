@@ -1,1 +1,3 @@
 pod 'Parse', '~> 1.8'
+pod "SlackTextViewController"
+pod 'SVProgressHUD'

@@ -24,7 +24,11 @@
 		7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */; };
 		7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */; };
 		7F5940251C5AA29800A506C1 /* UpdateRoomsListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5940241C5AA29800A506C1 /* UpdateRoomsListProtocol.swift */; };
-		7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */; };
+		7F8D4D671C5CD98F0072319C /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8D4D661C5CD98F0072319C /* Consts.swift */; };
+		7F8D4D6B1C5D2ADF0072319C /* NotConfirmedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8D4D6A1C5D2ADF0072319C /* NotConfirmedTableViewCell.swift */; };
+		7F8D4D6D1C5D335A0072319C /* BaseRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8D4D6C1C5D335A0072319C /* BaseRoomTableViewCell.swift */; };
+		7F8D4D6F1C5D34AB0072319C /* AcceptDeclineRoomProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8D4D6E1C5D34AB0072319C /* AcceptDeclineRoomProtocol.swift */; };
+		7F8D4D711C5E2DAC0072319C /* UpdateFriendListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8D4D701C5E2DAC0072319C /* UpdateFriendListProtocol.swift */; };
 		7F92ADD81BBDC63A00E0B807 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */; };
 		7F92ADDA1BBDC6C300E0B807 /* MessagingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADD91BBDC6C300E0B807 /* MessagingTableViewController.swift */; };
 		7F92ADE51BBDD17D00E0B807 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADE41BBDD17D00E0B807 /* Decoder.swift */; };
@@ -32,7 +36,6 @@
 		7F92ADFC1BBDD33400E0B807 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF61BBDD33400E0B807 /* NSData+Base64.m */; };
 		7F92ADFD1BBDD33400E0B807 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADF81BBDD33400E0B807 /* NSData+CommonCrypto.m */; };
 		7F92ADFE1BBDD33400E0B807 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADFA1BBDD33400E0B807 /* NSString+Base64.m */; };
-		7F92AE001BBDE30000E0B807 /* MakeMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F92ADFF1BBDE30000E0B807 /* MakeMessageTableViewCell.swift */; };
 		7FF7BC4A1BC0019D00D0B2D8 /* SearchFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC491BC0019D00D0B2D8 /* SearchFriendTableViewController.swift */; };
 		7FF7BC4C1BC0021900D0B2D8 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC4B1BC0021900D0B2D8 /* SearchTableViewCell.swift */; };
 		7FF7BC4E1BC0023000D0B2D8 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF7BC4D1BC0023000D0B2D8 /* FriendTableViewCell.swift */; };
@@ -82,7 +85,11 @@
 		7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmedRoomTableViewCell.swift; path = Cells/ConfirmedRoomTableViewCell.swift; sourceTree = "<group>"; };
 		7F58BE1F1BB2012F00086384 /* PhotoContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoContainer.swift; path = Util/PhotoContainer.swift; sourceTree = "<group>"; };
 		7F5940241C5AA29800A506C1 /* UpdateRoomsListProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateRoomsListProtocol.swift; path = Protocol/UpdateRoomsListProtocol.swift; sourceTree = "<group>"; };
-		7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoomCellTableViewCell.swift; path = Cells/RoomCellTableViewCell.swift; sourceTree = "<group>"; };
+		7F8D4D661C5CD98F0072319C /* Consts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Consts.swift; path = Consts/Consts.swift; sourceTree = "<group>"; };
+		7F8D4D6A1C5D2ADF0072319C /* NotConfirmedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotConfirmedTableViewCell.swift; path = Cells/NotConfirmedTableViewCell.swift; sourceTree = "<group>"; };
+		7F8D4D6C1C5D335A0072319C /* BaseRoomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseRoomTableViewCell.swift; path = Cells/BaseRoomTableViewCell.swift; sourceTree = "<group>"; };
+		7F8D4D6E1C5D34AB0072319C /* AcceptDeclineRoomProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AcceptDeclineRoomProtocol.swift; path = Protocol/AcceptDeclineRoomProtocol.swift; sourceTree = "<group>"; };
+		7F8D4D701C5E2DAC0072319C /* UpdateFriendListProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateFriendListProtocol.swift; path = Protocol/UpdateFriendListProtocol.swift; sourceTree = "<group>"; };
 		7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTableViewCell.swift; path = Cells/MessageTableViewCell.swift; sourceTree = "<group>"; };
 		7F92ADD91BBDC6C300E0B807 /* MessagingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagingTableViewController.swift; path = Controllers/MessagingTableViewController.swift; sourceTree = "<group>"; };
 		7F92ADE41BBDD17D00E0B807 /* Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Decoder.swift; path = Util/Decoder.swift; sourceTree = "<group>"; };
@@ -94,7 +101,6 @@
 		7F92ADF81BBDD33400E0B807 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+CommonCrypto.m"; path = "Framework/AESCrypt/NSData+CommonCrypto.m"; sourceTree = "<group>"; };
 		7F92ADF91BBDD33400E0B807 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64.h"; path = "Framework/AESCrypt/NSString+Base64.h"; sourceTree = "<group>"; };
 		7F92ADFA1BBDD33400E0B807 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64.m"; path = "Framework/AESCrypt/NSString+Base64.m"; sourceTree = "<group>"; };
-		7F92ADFF1BBDE30000E0B807 /* MakeMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MakeMessageTableViewCell.swift; path = Cells/MakeMessageTableViewCell.swift; sourceTree = "<group>"; };
 		7FF7BC491BC0019D00D0B2D8 /* SearchFriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFriendTableViewController.swift; path = Controllers/SearchFriendTableViewController.swift; sourceTree = "<group>"; };
 		7FF7BC4B1BC0021900D0B2D8 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchTableViewCell.swift; path = Cells/SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7FF7BC4D1BC0023000D0B2D8 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendTableViewCell.swift; path = Cells/FriendTableViewCell.swift; sourceTree = "<group>"; };
@@ -173,6 +179,7 @@
 		7F58BDDE1BB1F12400086384 /* FluppyChat */ = {
 			isa = PBXGroup;
 			children = (
+				7F8D4D651C5CD97A0072319C /* Consts */,
 				7FF7BC4F1BC002C000D0B2D8 /* Protocols */,
 				7F2579411BBF2017001BA157 /* Resources */,
 				7F92ADDB1BBDD04100E0B807 /* Framework */,
@@ -249,14 +256,22 @@
 		7F58BE1C1BB1FCF600086384 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				7F8D4D6C1C5D335A0072319C /* BaseRoomTableViewCell.swift */,
 				7F58BE1D1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift */,
-				7F92ADD51BBDB25B00E0B807 /* RoomCellTableViewCell.swift */,
+				7F8D4D6A1C5D2ADF0072319C /* NotConfirmedTableViewCell.swift */,
 				7F92ADD71BBDC63A00E0B807 /* MessageTableViewCell.swift */,
-				7F92ADFF1BBDE30000E0B807 /* MakeMessageTableViewCell.swift */,
 				7FF7BC4B1BC0021900D0B2D8 /* SearchTableViewCell.swift */,
 				7FF7BC4D1BC0023000D0B2D8 /* FriendTableViewCell.swift */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		7F8D4D651C5CD97A0072319C /* Consts */ = {
+			isa = PBXGroup;
+			children = (
+				7F8D4D661C5CD98F0072319C /* Consts.swift */,
+			);
+			name = Consts;
 			sourceTree = "<group>";
 		};
 		7F92ADDB1BBDD04100E0B807 /* Framework */ = {
@@ -288,6 +303,8 @@
 			children = (
 				7FF7BC501BC002DC00D0B2D8 /* SearchProtocol.swift */,
 				7F5940241C5AA29800A506C1 /* UpdateRoomsListProtocol.swift */,
+				7F8D4D6E1C5D34AB0072319C /* AcceptDeclineRoomProtocol.swift */,
+				7F8D4D701C5E2DAC0072319C /* UpdateFriendListProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -372,6 +389,14 @@
 					7F58BDDB1BB1F12400086384 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = VHRZVCF7HV;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					7F58BDEF1BB1F12500086384 = {
 						CreatedOnToolsVersion = 7.0;
@@ -485,29 +510,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F92AE001BBDE30000E0B807 /* MakeMessageTableViewCell.swift in Sources */,
+				7F8D4D671C5CD98F0072319C /* Consts.swift in Sources */,
 				7F5940251C5AA29800A506C1 /* UpdateRoomsListProtocol.swift in Sources */,
 				7F58BE201BB2012F00086384 /* PhotoContainer.swift in Sources */,
 				7F58BE191BB1F7B700086384 /* MessageAlert.swift in Sources */,
-				7F92ADD61BBDB25B00E0B807 /* RoomCellTableViewCell.swift in Sources */,
 				7F92ADFD1BBDD33400E0B807 /* NSData+CommonCrypto.m in Sources */,
 				7F025BFB1C5117EA006E4C18 /* NewMessageViewController.swift in Sources */,
 				7F92ADFB1BBDD33400E0B807 /* AESCrypt.m in Sources */,
 				7F2579451BBF22A2001BA157 /* ProfileViewController.swift in Sources */,
 				7F58BE1E1BB1FD3300086384 /* ConfirmedRoomTableViewCell.swift in Sources */,
+				7F8D4D6D1C5D335A0072319C /* BaseRoomTableViewCell.swift in Sources */,
 				7F92ADFE1BBDD33400E0B807 /* NSString+Base64.m in Sources */,
 				7FF7BC4C1BC0021900D0B2D8 /* SearchTableViewCell.swift in Sources */,
 				7F92ADFC1BBDD33400E0B807 /* NSData+Base64.m in Sources */,
 				7FF7BC511BC002DC00D0B2D8 /* SearchProtocol.swift in Sources */,
+				7F8D4D6F1C5D34AB0072319C /* AcceptDeclineRoomProtocol.swift in Sources */,
 				7FFF248F1C4C0B88000DCE13 /* SwiftyJSON.swift in Sources */,
 				7F92ADDA1BBDC6C300E0B807 /* MessagingTableViewController.swift in Sources */,
 				7F58BE151BB1F51300086384 /* LoginViewController.swift in Sources */,
 				7F92ADD81BBDC63A00E0B807 /* MessageTableViewCell.swift in Sources */,
 				7F58BDE01BB1F12400086384 /* AppDelegate.swift in Sources */,
+				7F8D4D711C5E2DAC0072319C /* UpdateFriendListProtocol.swift in Sources */,
 				7F92ADE51BBDD17D00E0B807 /* Decoder.swift in Sources */,
 				7F58BE1B1BB1FA7A00086384 /* RoomListViewController.swift in Sources */,
 				7FF7BC4E1BC0023000D0B2D8 /* FriendTableViewCell.swift in Sources */,
 				7FF7BC4A1BC0019D00D0B2D8 /* SearchFriendTableViewController.swift in Sources */,
+				7F8D4D6B1C5D2ADF0072319C /* NotConfirmedTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,7 +679,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DE4593AEC4BA184817F76A3 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = fluppy_icon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Dmytro Bohachevskyi (SP2NM42UL6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmytro Bohachevskyi (SP2NM42UL6)";
@@ -669,7 +697,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8B37774411AF1F04C132F993 /* Pods.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = fluppy_icon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Dmytro Bohachevskyi (SP2NM42UL6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmytro Bohachevskyi (SP2NM42UL6)";

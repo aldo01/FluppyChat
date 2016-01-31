@@ -92,11 +92,14 @@ class SearchFriendTableViewController: UITableViewController, SearchFriendDelega
         let push = PFPush()
         push.setChannel( NEW_ROOM_HEADER + u.objectId! )
         let data = [
-            "Alert" : decoder.encode("You receive invite to new room"),
-            "AuthorName" : meUser.username!
+            "Alert" : "You receive invite to new room",
+            "AuthorName" : meUser.username!,
+            "Status" : "INVITE",
+            "aps" : ["alert" : ["body" : "You receive invite to new room"], "sound" : "default", "content-available" : 1]
         ]
         
-        push.setData(data)
+        print("Send push to the chanel: \(NEW_ROOM_HEADER + u.objectId!) with data: \(data)")
+        push.setData(data as [NSObject : AnyObject])
         push.sendPushInBackground()
     }
     

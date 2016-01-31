@@ -60,7 +60,7 @@ class LoginViewController: UIViewController {
             } else {
                 // notify user about error
                 if nil != error {
-                    MessageAlert.showMessageForUser((error?.description)!)
+                    MessageAlert.showMessageForUser((error?.localizedDescription)!)
                 } else {
                     MessageAlert.showMessageForUser("Sign In fail")
                 }
