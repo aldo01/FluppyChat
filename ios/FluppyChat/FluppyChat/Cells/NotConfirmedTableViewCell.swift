@@ -35,6 +35,7 @@ class NotConfirmedTableViewCell: BaseRoomTableViewCell {
     
     @IBAction func acceptAction(sender: AnyObject) {
         if nil != delegate {
+            peopleShowed = false
             delegate!.acceptRoom(room!)
         }
     }

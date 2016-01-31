@@ -341,12 +341,12 @@ with your friends</string>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="search" id="xED-yE-1rX">
                                 <connections>
-                                    <segue destination="1zD-je-hzj" kind="show" id="pCx-KC-fLe"/>
+                                    <segue destination="1zD-je-hzj" kind="show" identifier="roomList2SearchFriends" id="pCx-KC-fLe"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Profile" id="9bM-8j-1Yd">
                                 <connections>
-                                    <segue destination="nvu-H5-i81" kind="show" id="bhz-L5-aN3"/>
+                                    <segue destination="nvu-H5-i81" kind="show" identifier="roomController2ProfileController" id="bhz-L5-aN3"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

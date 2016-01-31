@@ -18,6 +18,8 @@ class SearchFriendTableViewController: UITableViewController, SearchFriendDelega
         }
     }
     let decoder = Decoder()
+    var delegate : UpdateFriendListProtocol?
+    var newRoomCreated : Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +59,7 @@ class SearchFriendTableViewController: UITableViewController, SearchFriendDelega
     
     // this method calling for room creating
     private func createRoom( u : PFUser ) {
+        newRoomCreated = true
         let meUser = PFUser.currentUser()! // get current user
         
         // create and save room
@@ -113,5 +116,12 @@ class SearchFriendTableViewController: UITableViewController, SearchFriendDelega
         })
   
         print("SEARCH FRIEND")
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        if newRoomCreated && nil != delegate {
+            delegate?.updateFriendListWithCloud()
+        }
     }
 }

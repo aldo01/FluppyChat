@@ -9,8 +9,11 @@
 import UIKit
 
 
-class RoomListViewController: UITableViewController, UpdateRoomListProtocol, AcceptDeclineRoomProtocol {
+class RoomListViewController: UITableViewController, UpdateRoomListProtocol, AcceptDeclineRoomProtocol,
+UpdateFriendListProtocol{
     let OPEN_MESSAGE_SEGUE = "room2message"
+    let OPEN_PROFILE_SEGUE = "roomController2ProfileController"
+    let OPEN_SEARCH_SEGUE = "roomList2SearchFriends"
     let NEW_ROOM_HEADER = "NEW_ROOM_"
     
     static var this : RoomListViewController?
@@ -61,8 +64,6 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol, Acc
         
         if ( obj["confirm"] as! Bool ) {
             let cell = tableView.dequeueReusableCellWithIdentifier("ConfirmedRoomCell") as! ConfirmedRoomTableViewCell
-            
-            NSUserDefaults.standardUserDefaults()
             
             cell.showPeoples( room, friendList: otherPeopleInRoom )
             cell.roomLabel.text = room["Name"] as? String
@@ -213,12 +214,24 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol, Acc
             return
         }
         
+        // open messanger controller
         if OPEN_MESSAGE_SEGUE == segue.identifier! {
             let controller = segue.destinationViewController as! MessagingTableViewController
 
             print("push: \(roomForOpen)")
             controller.delegate = self
             controller.room = roomForOpen
+        }
+        
+        // open profile controller
+        if OPEN_PROFILE_SEGUE == segue.identifier! {
+            let controller = segue.destinationViewController as! ProfileViewController
+            controller.delegate = self
+        }
+        
+        if OPEN_SEARCH_SEGUE == segue.identifier! {
+            let controller = segue.destinationViewController as! SearchFriendTableViewController
+            controller.delegate = self
         }
     }
     
@@ -248,5 +261,10 @@ class RoomListViewController: UITableViewController, UpdateRoomListProtocol, Acc
         let indexPath = NSIndexPath(forRow: index!, inSection: 0)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         tableView.endUpdates()
+    }
+    
+    // update room list when user back from search friend controller
+    func updateFriendListWithCloud() {
+        obtainRoomList()
     }
 }

@@ -231,9 +231,3 @@ class MessagingTableViewController: SLKTextViewController {
         }
     }
 }
-
-extension String {
-    func isEqualToString(find: String) -> Bool {
-        return String(format: self) == find
-    }
-}

@@ -75,7 +75,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
         fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
      
-        saveData(JSON(userInfo))
+        let data = JSON(userInfo)
+        if MessagingTableViewController.receiveMessage( data ) {
+            return
+        }
+            
+        saveData(data)
         completionHandler(UIBackgroundFetchResult.NewData)
     }
     

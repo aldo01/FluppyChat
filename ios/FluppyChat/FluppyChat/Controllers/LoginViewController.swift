@@ -48,22 +48,46 @@ class LoginViewController: UIViewController {
         let username = loginTextField.text!
         let password = passwordTextField.text!
     
+        self.view.userInteractionEnabled = false
         // perform login action
         PFUser.logInWithUsernameInBackground(username, password : password) {
             (user: PFUser?, error: NSError?) -> Void in
+            self.view.userInteractionEnabled = true
+            
             if user != nil {
                 // show room list
                 self.performLoginAction()
             } else {
-                // motify user about error
-                MessageAlert.errorAlert("Login failed")
-                MessageAlert.errorAlert(error?.description ?? "")
-                MessageAlert.showMessageForUser("Incorrect username or password")
+                // notify user about error
+                if nil != error {
+                    MessageAlert.showMessageForUser((error?.description)!)
+                } else {
+                    MessageAlert.showMessageForUser("Sign In fail")
+                }
             }
         }
     }
     
     @IBAction func signUpAction(sender: AnyObject) {
+        let user = PFUser()
+        user.username = loginTextField.text!
+        user.password = passwordTextField.text!
+        
+        self.view.userInteractionEnabled = false
+        user.signUpInBackgroundWithBlock { (succeeded : Bool, err : NSError?) -> Void in
+            self.view.userInteractionEnabled = true
+            
+            if succeeded && nil == err {
+                self.performLoginAction()
+            } else {
+                // notify user about error
+                if nil != err {
+                    MessageAlert.showMessageForUser((err?.localizedDescription)!)
+                } else {
+                    MessageAlert.showMessageForUser("Sign Up fail")
+                }
+            }
+        }
     }
     
     private func performLoginAction() {

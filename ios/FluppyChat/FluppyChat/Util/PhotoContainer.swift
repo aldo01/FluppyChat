@@ -49,18 +49,32 @@ class PhotoContainer {
     
     static func downloadPhotoInBackground(user : PFUser, imageView : UIImageView) {
         // download photo in background
-        let file = user["profilepic"] as! PFFile
-        file.getDataInBackgroundWithBlock({ ( image : NSData?, err : NSError?) -> Void in
-            if ( nil == err ) {
-                let image = UIImage(data: image!)
-                
-                // add image to the dictionary
-                PhotoContainer.photosDic[user] = image
-                
-                imageView.image = image
-                setLayoutParamsForImage(imageView)
-            }
-        })
+        if nil != user["profilepic"] {
+            let file = user["profilepic"] as! PFFile
+            file.getDataInBackgroundWithBlock({ ( image : NSData?, err : NSError?) -> Void in
+                if ( nil == err ) {
+                    let image = UIImage(data: image!)
+                    
+                    // add image to the dictionary
+                    PhotoContainer.photosDic[user] = image
+                    
+                    imageView.image = image
+                    setLayoutParamsForImage(imageView)
+                }
+            })
+        } else {
+            // if user don't have photo use standart
+            let image = UIImage(named: "user_photo")
+            
+            // add image to the dictionary
+            PhotoContainer.photosDic[user] = image
+            
+            imageView.image = image
+            setLayoutParamsForImage(imageView)
+        }
     }
     
+    static func replacePhotoForUser( user : PFUser, image : UIImage ) {
+        photosDic[user] = image
+    }
 }
