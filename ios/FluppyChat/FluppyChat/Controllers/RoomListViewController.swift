@@ -88,12 +88,7 @@ UpdateFriendListProtocol{
                 print("Unread message count = \(NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + COUNT_KEY ))")
                 cell.incommingMessageCount?.text = "\(NSUserDefaults.standardUserDefaults().objectForKey( room.objectId! + COUNT_KEY ) as! Int)"
             } else {
-                
                 cell.incommingMessageCount?.hidden = true
-                
-                if 0 == arc4random() % 2 {
-                    cell.incommingMessageCount?.hidden = false
-                }
             }
 
             return cell
