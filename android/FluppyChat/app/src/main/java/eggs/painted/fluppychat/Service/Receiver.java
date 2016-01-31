@@ -56,11 +56,20 @@ public class Receiver extends ParsePushBroadcastReceiver {
 
             Log.d(TAG, String.format("Channel: %s %s %s", chanel, String.valueOf(chanel.contains("ROOM")),
                     String.valueOf( isAppForground(context)) ));
-            if ( chanel.contains("ROOM") && isAppForground(context) ) {
-                Log.d(TAG, "Update room list1");
-                if ( null != RoomActivity.self ) {
-                    Log.d(TAG, "Update room list2");
-                    RoomActivity.self.loadConversationsList();
+            if ( chanel.contains("NEW_ROOM") ) {
+                if ( isAppForground(context) ) {
+                    Log.d(TAG, "Update room list1");
+                    if (null != RoomActivity.self) {
+                        Log.d(TAG, "Update room list2");
+                        RoomActivity.self.loadConversationsList();
+                    }
+                } else {
+                    Log.d(TAG, "Update room list3");
+                    final String author = pushData.getString("AuthorName");
+                    pushData.put("alert", String.format("You receive invite to new room from %s", author));
+                    intent.putExtra(KEY_PUSH_DATA, pushData.toString());
+
+                    super.onPushReceive(context, intent);
                 }
             }
 
