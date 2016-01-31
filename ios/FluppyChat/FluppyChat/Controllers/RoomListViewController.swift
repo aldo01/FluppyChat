@@ -27,9 +27,6 @@ UpdateFriendListProtocol{
     override func viewDidLoad() {
         super.viewDidLoad()
         RoomListViewController.this = self
-
-        let data = NSUserDefaults.standardUserDefaults().valueForKey("123")
-        print("Value for key 123: \(data)")
         obtainRoomList()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: UIApplicationDidBecomeActiveNotification, object: nil)
@@ -50,7 +47,6 @@ UpdateFriendListProtocol{
     // MARK: table view
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print( "Room count = \(tableData.count)" )
         return tableData.count
     }
     
@@ -220,7 +216,6 @@ UpdateFriendListProtocol{
         if OPEN_MESSAGE_SEGUE == segue.identifier! {
             let controller = segue.destinationViewController as! MessagingTableViewController
 
-            print("push: \(roomForOpen)")
             controller.delegate = self
             controller.room = roomForOpen
         }

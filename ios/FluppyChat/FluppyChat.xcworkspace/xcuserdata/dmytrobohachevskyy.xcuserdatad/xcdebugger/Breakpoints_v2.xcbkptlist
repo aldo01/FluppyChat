@@ -121,11 +121,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FluppyChat/Controllers/RoomListViewController.swift"
-            timestampString = "475948340.083031"
+            timestampString = "475952551.581832"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "obtainFriendsList(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -137,11 +137,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FluppyChat/AppDelegate.swift"
-            timestampString = "475947627.318957"
+            timestampString = "475953871.525772"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "saveData(_:)"
             landmarkType = "5">
          </BreakpointContent>

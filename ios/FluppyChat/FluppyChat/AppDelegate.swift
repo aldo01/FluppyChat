@@ -27,9 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(setting)
         application.registerForRemoteNotifications()
         
-        let pushedData = launchOptions?.indexForKey(UIApplicationLaunchOptionsRemoteNotificationKey)
-        print("Push data = \(pushedData)")
-        
         return true
     }
 
@@ -56,7 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        
+        let currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation.addUniqueObject("", forKey: "channels")
+        currentInstallation.saveInBackground()
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
@@ -69,6 +69,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         saveData(data)
+    }
+    
+    func application(application: UIApplication,
+        didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+        fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+            print("push received")
+            
+            let data = JSON(userInfo)
+            if MessagingTableViewController.receiveMessage( data ) {
+                return
+            }
+            
+            saveData(data)
+            completionHandler(UIBackgroundFetchResult.NewData)
     }
     
     private func saveData( data : JSON ) {
